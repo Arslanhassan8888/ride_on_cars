@@ -1,0 +1,92 @@
+/* HERO */
+.login-hero {
+    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    color: white;
+    text-align: center;
+    padding: 40px 1px;
+}
+
+.login-hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+/* CONTAINER */
+.login-container {
+    display: flex;
+    justify-content: center;
+    margin-top: -40px; /* lift card slightly */
+}
+
+main {
+    min-height: 80vh;   /* makes middle stretch */
+    display: flex;
+    flex-direction: column;
+}
+
+/* FORM CARD */
+form {
+    background: #f1f5f9;
+    padding: 30px;
+    border-radius: 15px;
+    width: 350px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    margin-top: 80px;
+}
+
+/* LABEL */
+label {
+    font-weight: bold;
+}
+
+/* INPUT */
+input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+/* BUTTON */
+button {
+    margin-top: 10px;
+    padding: 12px;
+    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* LINK */
+form a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    form {
+        width: 90%;
+    }
+
+    .login-hero h1 {
+        font-size: 28px;
+    }
+}
