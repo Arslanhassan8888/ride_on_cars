@@ -104,6 +104,7 @@ $totalWithShipping = $total + $shipping;
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Your Cart</title>
@@ -114,107 +115,107 @@ $totalWithShipping = $total + $shipping;
 
 <body>
 
-<?php include 'header.php'; ?>
+    <?php include 'header.php'; ?>
 
-<main>
+    <main>
 
-<section class="cart-container">
+        <section class="cart-container">
 
-    <!-- CART ITEMS -->
-    <section class="cart-items">
+            <!-- CART ITEMS -->
+            <section class="cart-items">
 
-        <h1>Your Cart</h1>
+                <h1>Your Cart</h1>
 
-        <?php if (empty($cartItems)): ?>
+                <?php if (empty($cartItems)): ?>
 
-            <p>Your cart is empty.</p>
-            <a href="products.php">Go to products</a>
+                    <p>Your cart is empty.</p>
+                    <a href="products.php">Go to products</a>
 
-        <?php else: ?>
+                <?php else: ?>
 
-            <?php foreach ($cartItems as $product): ?>
+                    <?php foreach ($cartItems as $product): ?>
 
-                <?php
-                $qty = $_SESSION['cart'][$product['id']] ?? 0;
+                        <?php
+                        $qty = $_SESSION['cart'][$product['id']] ?? 0;
 
-                if (!is_numeric($qty)) {
-                    $qty = 0;
-                }
+                        if (!is_numeric($qty)) {
+                            $qty = 0;
+                        }
 
-                $subtotal = (float)$product['price'] * (int)$qty;
-                ?>
+                        $subtotal = (float)$product['price'] * (int)$qty;
+                        ?>
 
-                <article class="cart-row">
+                        <article class="cart-row">
 
-                    <figure>
-                        <img src="images/<?= htmlspecialchars($product['image']) ?>"
-                             alt="<?= htmlspecialchars($product['name']) ?>">
-                    </figure>
+                            <figure>
+                                <img src="images/<?= htmlspecialchars($product['image']) ?>"
+                                    alt="<?= htmlspecialchars($product['name']) ?>">
+                            </figure>
 
-                    <h2><?= htmlspecialchars($product['name']) ?></h2>
+                            <h2><?= htmlspecialchars($product['name']) ?></h2>
 
-                    <p class="price">
-                        £<?= number_format((float)$product['price'], 2) ?>
-                    </p>
+                            <p class="price">
+                                £<?= number_format((float)$product['price'], 2) ?>
+                            </p>
 
-                    <!-- QTY -->
-                    <section class="qty">
-                        <a href="cart.php?action=decrease&id=<?= (int)$product['id'] ?>">−</a>
-                        <span><?= (int)$qty ?></span>
-                        <a href="cart.php?action=increase&id=<?= (int)$product['id'] ?>">+</a>
-                    </section>
+                            <!-- QTY -->
+                            <section class="qty">
+                                <a href="cart.php?action=decrease&id=<?= (int)$product['id'] ?>">−</a>
+                                <span><?= (int)$qty ?></span>
+                                <a href="cart.php?action=increase&id=<?= (int)$product['id'] ?>">+</a>
+                            </section>
 
-                    <!-- SUBTOTAL -->
-                    <p class="subtotal">
-                        £<?= number_format($subtotal, 2) ?>
-                    </p>
+                            <!-- SUBTOTAL -->
+                            <p class="subtotal">
+                                £<?= number_format($subtotal, 2) ?>
+                            </p>
 
-                    <!-- REMOVE -->
-                    <a href="cart.php?action=remove&id=<?= (int)$product['id'] ?>" class="remove">
-                        🗑
-                    </a>
+                            <!-- REMOVE -->
+                            <a href="cart.php?action=remove&id=<?= (int)$product['id'] ?>" class="btn-delete">
+                                Delete
+                            </a>
+                        </article>
 
-                </article>
+                    <?php endforeach; ?>
 
-            <?php endforeach; ?>
+                <?php endif; ?>
 
-        <?php endif; ?>
+            </section>
 
-    </section>
+            <!-- SUMMARY -->
+            <section class="summary">
 
-    <!-- SUMMARY -->
-    <section class="summary">
+                <h2>Order Summary</h2>
 
-        <h2>Order Summary</h2>
+                <p>
+                    Subtotal
+                    <span>£<?= number_format($total, 2) ?></span>
+                </p>
 
-        <p>
-            Subtotal
-            <span>£<?= number_format($total, 2) ?></span>
-        </p>
+                <p>
+                    Shipping
+                    <span>£<?= number_format($shipping, 2) ?></span>
+                </p>
 
-        <p>
-            Shipping
-            <span>£<?= number_format($shipping, 2) ?></span>
-        </p>
+                <hr>
 
-        <hr>
+                <p class="total">
+                    Total
+                    <span>£<?= number_format($totalWithShipping, 2) ?></span>
+                </p>
 
-        <p class="total">
-            Total
-            <span>£<?= number_format($totalWithShipping, 2) ?></span>
-        </p>
+                <button <?= empty($cartItems) ? 'disabled' : '' ?>>
+                    Proceed to Checkout
+                </button>
 
-        <button <?= empty($cartItems) ? 'disabled' : '' ?>>
-            Proceed to Checkout
-        </button>
+            </section>
 
-    </section>
+        </section>
 
-</section>
+    </main>
 
-</main>
-
-<?php include 'footer.php'; ?>
+    <?php include 'footer.php'; ?>
 
 </body>
+
 </html>

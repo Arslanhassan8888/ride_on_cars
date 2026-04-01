@@ -5,7 +5,7 @@
     <title>Ride On Cars</title>
 
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index.css?v=2">
 </head>
 <body>
 

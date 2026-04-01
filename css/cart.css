@@ -3,11 +3,25 @@
     display: flex;
     gap: 30px;
     padding: 50px;
+    
+}
+
+.summary {
+    flex: 1;
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+    height: fit-content;       
 }
 
 /* LEFT SIDE */
 .cart-items {
     flex: 2;
+    margin-right: 100px;
+    padding-right: -60px;
 }
 
 /* TITLE */
@@ -129,6 +143,33 @@
     transform: scale(1.05);
 }
 
+/* DELETE BUTTON */
+.btn-delete {
+    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    color: white;
+
+    padding: 8px 14px;
+    border-radius: 8px;
+
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+
+    display: inline-block;
+
+    transition: all 0.3s ease;
+}
+
+/* HOVER EFFECT */
+.btn-delete:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #1e40af, #1e3a8a);
+}
+
+/* ACTIVE CLICK */
+.btn-delete:active {
+    transform: scale(0.95);
+}
 /* RESPONSIVE */
 @media (max-width: 768px) {
 
