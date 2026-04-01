@@ -17,16 +17,28 @@ if (!isset($_SESSION['cart'])) {
 $action = $_GET['action'] ?? '';
 $id = (int)($_GET['id'] ?? 0);
 
-// ADD TO CART
-if ($action === 'add' && $id > 0) {
+// INCREASE
+if ($action === 'increase' && $id > 0) {
+    $_SESSION['cart'][$id]++;
+    header("Location: cart.php");
+    exit();
+}
 
-    if (isset($_SESSION['cart'][$id])) {
-        $_SESSION['cart'][$id]++; // increase quantity
-    } else {
-        $_SESSION['cart'][$id] = 1; // add new item
+// DECREASE
+if ($action === 'decrease' && $id > 0) {
+    $_SESSION['cart'][$id]--;
+
+    if ($_SESSION['cart'][$id] <= 0) {
+        unset($_SESSION['cart'][$id]);
     }
 
-    // Redirect back to products
-    header("Location: products.php");
+    header("Location: cart.php");
+    exit();
+}
+
+// REMOVE
+if ($action === 'remove' && $id > 0) {
+    unset($_SESSION['cart'][$id]);
+    header("Location: cart.php");
     exit();
 }
