@@ -1,37 +1,84 @@
 <?php
 session_start();
 
+require 'db.php';
+
 $error = "";
 $success = "";
 
+/* ================= FUNCTIONS ================= */
+
+/* Clean input */
+function sanitizeInput($data) {
+    return htmlspecialchars(trim($data));
+}
+
+/* Validate register form */
+function validateRegister($name, $email, $password, $confirm) {
+
+    if (empty($name) || empty($email) || empty($password) || empty($confirm)) {
+        return "All fields are required.";
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return "Invalid email format.";
+    }
+
+    if (strlen($password) < 6) {
+        return "Password must be at least 6 characters.";
+    }
+
+    if ($password !== $confirm) {
+        return "Passwords do not match.";
+    }
+
+    return "";
+}
+
+/* Create user in DB */
+function createUser($pdo, $name, $email, $password) {
+
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    try {
+        $stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
+        $stmt->execute([$name, $email, $hashedPassword]);
+        return "success";
+
+    } catch (PDOException $e) {
+        return "Email already exists.";
+    }
+}
+
+/* ================= MAIN LOGIC ================= */
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $name = trim($_POST['name']);
-    $email = trim($_POST['email']);
+    $name = sanitizeInput($_POST['name']);
+    $email = sanitizeInput($_POST['email']);
     $password = trim($_POST['password']);
     $confirm = trim($_POST['confirm']);
 
-    /* ================= VALIDATION ================= */
-    if (empty($name) || empty($email) || empty($password) || empty($confirm)) {
-        $error = "All fields are required.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = "Invalid email format (must contain @ and .)";
-    } elseif ($password !== $confirm) {
-        $error = "Passwords do not match.";
+    $validationError = validateRegister($name, $email, $password, $confirm);
+
+    if (!empty($validationError)) {
+        $error = $validationError;
     } else {
 
-        /* SUCCESS */
-        $success = "Account created successfully! Redirecting to login...";
+        $result = createUser($pdo, $name, $email, $password);
 
-        /* WAIT 2 SECONDS THEN REDIRECT */
-        header("refresh:2;url=login.php");
+        if ($result === "success") {
+            $success = "Account created successfully! Redirecting...";
+            header("refresh:2;url=login.php");
+        } else {
+            $error = $result;
+        }
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
@@ -39,59 +86,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/register.css">
 </head>
-
 <body>
 
-    <?php include 'header.php'; ?>
+<?php include 'header.php'; ?>
 
-    <main>
+<main>
 
-        <!-- HERO -->
-        <section class="register-hero">
-            <h1>Create Account</h1>
-            <p>Join Ride On Cars today</p>
-        </section>
+    <section class="register-hero">
+        <h1>Create Account</h1>
+        <p>Join Ride On Cars today</p>
+    </section>
 
-        <!-- FORM -->
-        <section class="register-container">
+    <section class="register-container">
 
-            <form method="POST">
+        <form method="POST">
 
-                <?php if (!empty($error)): ?>
-                    <p class="error"><?= $error ?></p>
-                <?php endif; ?>
+            <?php if (!empty($error)): ?>
+                <p class="error"><?= htmlspecialchars($error) ?></p>
+            <?php endif; ?>
 
-                <?php if (!empty($success)): ?>
-                    <p class="success"><?= $success ?></p>
-                <?php endif; ?>
+            <?php if (!empty($success)): ?>
+                <p class="success"><?= htmlspecialchars($success) ?></p>
+            <?php endif; ?>
 
-                <label for="name">Full Name *</label>
-                <input id="name" type="text" name="name" required>
+            <label for="name">Full Name *</label>
+            <input id="name" type="text" name="name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" required>
 
-                <label for="email">Email Address *</label>
-                <input id="email" type="email" name="email" required>
+            <label for="email">Email Address *</label>
+            <input id="email" type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
 
-                <label for="password">Password *</label>
-                <input id="password" type="password" name="password" required>
+            <label for="password">Password *</label>
+            <input id="password" type="password" name="password" required>
 
-                <label for="confirm">Confirm Password *</label>
-                <input id="confirm" type="password" name="confirm" required>
+            <label for="confirm">Confirm Password *</label>
+            <input id="confirm" type="password" name="confirm" required>
 
-                <button type="submit">Register</button>
+            <button type="submit">Register</button>
 
-                <p>
-                    Already have an account?
-                    <a href="login.php">Login here</a>
-                </p>
+            <p>
+                Already have an account?
+                <a href="login.php">Login here</a>
+            </p>
 
-            </form>
+        </form>
 
-        </section>
+    </section>
 
-    </main>
+</main>
 
-    <?php include 'footer.php'; ?>
+<?php include 'footer.php'; ?>
 
 </body>
-
 </html>
