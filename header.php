@@ -40,7 +40,15 @@ if (session_status() === PHP_SESSION_NONE) {
 
             <?php endif; ?>
 
-            <a href="#" class="cart">Cart</a>
+            <?php if (isset($_SESSION['user'])): ?>
+
+                <a href="cart.php" class="cart">Cart</a>
+
+            <?php else: ?>
+
+                <a href="login.php" class="cart disabled">Cart</a>
+
+            <?php endif; ?>
 
         </aside>
     </nav>
