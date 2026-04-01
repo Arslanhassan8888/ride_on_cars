@@ -2,7 +2,7 @@
 session_start();
 require 'db.php';
 
-// Protect cart (must be logged in)
+// Protect cart
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
@@ -17,52 +17,71 @@ if (!isset($_SESSION['cart'])) {
 $action = $_GET['action'] ?? '';
 $id = (int)($_GET['id'] ?? 0);
 
-// INCREASE
-if ($action === 'increase' && $id > 0) {
-    $_SESSION['cart'][$id]++;
-    header("Location: cart.php");
-    exit();
-}
+// HANDLE CART ACTIONS
+function handleCartAction($action, $id) {
 
-// DECREASE
-if ($action === 'decrease' && $id > 0) {
-    $_SESSION['cart'][$id]--;
+    if ($id <= 0) return;
 
-    if ($_SESSION['cart'][$id] <= 0) {
+    // Increase
+    if ($action === 'increase' && isset($_SESSION['cart'][$id])) {
+        $_SESSION['cart'][$id]++;
+    }
+
+    // Decrease
+    if ($action === 'decrease' && isset($_SESSION['cart'][$id])) {
+        $_SESSION['cart'][$id]--;
+
+        if ($_SESSION['cart'][$id] <= 0) {
+            unset($_SESSION['cart'][$id]);
+        }
+    }
+
+    // Remove
+    if ($action === 'remove' && isset($_SESSION['cart'][$id])) {
         unset($_SESSION['cart'][$id]);
     }
 
-    header("Location: cart.php");
-    exit();
+    // Redirect after action
+    if ($action === 'increase' || $action === 'decrease' || $action === 'remove') {
+        header("Location: cart.php");
+        exit();
+    }
 }
 
-// REMOVE
-if ($action === 'remove' && $id > 0) {
-    unset($_SESSION['cart'][$id]);
-    header("Location: cart.php");
-    exit();
-}
+// FETCH PRODUCTS
+function getCartItems($pdo, $cart) {
 
-// Fetch cart products
-$cartItems = [];
+    if (empty($cart)) return [];
 
-if (!empty($_SESSION['cart'])){
-    $ids = array_keys($_SESSION['cart']);
+    $ids = array_keys($cart);
     $placeholders = implode(',', array_fill(0, count($ids), '?'));
 
     $stmt = $pdo->prepare("SELECT * FROM products WHERE id IN ($placeholders)");
     $stmt->execute($ids);
 
-    $cartItems = $stmt->fetchAll();
+    return $stmt->fetchAll();
 }
 
-//Calculate total
-$total = 0;
+// CALCULATE TOTAL
+function calculateTotal($cartItems, $cart) {
 
-foreach ($cartItems as $product) {
-    $total += $product['price'] * $_SESSION['cart'][$product['id']];
+    $total = 0;
+
+    foreach ($cartItems as $product) {
+        $total += $product['price'] * $cart[$product['id']];
+    }
+
+    return $total;
 }
 
-$shipping = 10; // Flat shipping rate
+// RUN ACTION
+handleCartAction($action, $id);
+
+// GET ITEMS
+$cartItems = getCartItems($pdo, $_SESSION['cart']);
+
+// CALCULATE
+$total = calculateTotal($cartItems, $_SESSION['cart']);
+$shipping = 10;
 $totalWithShipping = $total + $shipping;
 ?>
