@@ -1,0 +1,144 @@
+/* MAIN LAYOUT */
+.cart-container {
+    display: flex;
+    gap: 30px;
+    padding: 50px;
+}
+
+/* LEFT SIDE */
+.cart-items {
+    flex: 2;
+}
+
+/* TITLE */
+.cart-items h1 {
+    margin-bottom: 20px;
+}
+
+/* ITEM ROW */
+.cart-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* IMAGE */
+.cart-row img {
+    width: 90px;
+}
+
+/* NAME */
+.cart-row h2 {
+    font-size: 18px;
+}
+
+/* PRICE */
+.price {
+    color: #2563eb;
+    font-weight: bold;
+}
+
+/* QUANTITY */
+.qty {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qty a {
+    background: #eee;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+
+    transition: 0.3s;
+}
+
+.qty a:hover {
+    background: #2563eb;
+    color: white;
+}
+
+/* SUBTOTAL */
+.subtotal {
+    font-weight: bold;
+}
+
+/* REMOVE */
+.remove {
+    color: red;
+    text-decoration: none;
+    font-size: 18px;
+
+    transition: 0.3s;
+}
+
+.remove:hover {
+    transform: scale(1.2);
+}
+
+/* RIGHT SIDE */
+.summary {
+    flex: 1;
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* SUMMARY TEXT */
+.summary p {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+/* TOTAL */
+.total {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* BUTTON */
+.summary button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.summary button:hover {
+    transform: scale(1.05);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    .cart-container {
+        flex-direction: column;
+    }
+
+    .cart-row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+}

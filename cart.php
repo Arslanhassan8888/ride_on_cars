@@ -18,7 +18,8 @@ $action = $_GET['action'] ?? '';
 $id = (int)($_GET['id'] ?? 0);
 
 // HANDLE CART ACTIONS
-function handleCartAction($action, $id) {
+function handleCartAction($action, $id)
+{
 
     if ($id <= 0) return;
 
@@ -49,7 +50,8 @@ function handleCartAction($action, $id) {
 }
 
 // FETCH PRODUCTS
-function getCartItems($pdo, $cart) {
+function getCartItems($pdo, $cart)
+{
 
     if (empty($cart)) return [];
 
@@ -63,12 +65,18 @@ function getCartItems($pdo, $cart) {
 }
 
 // CALCULATE TOTAL
-function calculateTotal($cartItems, $cart) {
+function calculateTotal($cartItems, $cart)
+{
 
     $total = 0;
 
     foreach ($cartItems as $product) {
-        $total += $product['price'] * $cart[$product['id']];
+
+        $qty = $cart[$product['id']] ?? 0;
+
+        if (is_numeric($qty)) {
+            $total += $product['price'] * $qty;
+        }
     }
 
     return $total;
@@ -85,3 +93,116 @@ $total = calculateTotal($cartItems, $_SESSION['cart']);
 $shipping = 10;
 $totalWithShipping = $total + $shipping;
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+
+<body>
+
+    <?php include 'header.php'; ?>
+
+    <main>
+
+        <!-- CART CONTAINER -->
+        <section class="cart-container">
+
+            <!-- LEFT: ITEMS -->
+            <section class="cart-items">
+
+                <h1>Your Cart</h1>
+
+                <!-- ITEM 1 -->
+                <article class="cart-row">
+
+                    <figure>
+                        <img src="images/car1.png" alt="Car">
+                    </figure>
+
+                    <h2>BMW X5 Ride-On</h2>
+
+                    <p class="price">£120.00</p>
+
+                    <!-- QUANTITY -->
+                    <section class="qty">
+                        <a href="#">−</a>
+                        <span>1</span>
+                        <a href="#">+</a>
+                    </section>
+
+                    <!-- SUBTOTAL -->
+                    <p class="subtotal">£120.00</p>
+
+                    <!-- REMOVE -->
+                    <a href="#" class="remove">🗑</a>
+
+                </article>
+
+                <!-- ITEM 2 -->
+                <article class="cart-row">
+
+                    <figure>
+                        <img src="images/car2.png" alt="Car">
+                    </figure>
+
+                    <h2>Audi RS Ride-On</h2>
+
+                    <p class="price">£150.00</p>
+
+                    <section class="qty">
+                        <a href="#">−</a>
+                        <span>2</span>
+                        <a href="#">+</a>
+                    </section>
+
+                    <p class="subtotal">£300.00</p>
+
+                    <a href="#" class="remove">🗑</a>
+
+                </article>
+
+            </section>
+
+            <!-- RIGHT: SUMMARY -->
+            <section class="summary">
+
+                <h2>Order Summary</h2>
+
+                <p>
+                    Subtotal
+                    <span>£420.00</span>
+                </p>
+
+                <p>
+                    Shipping
+                    <span>£10.00</span>
+                </p>
+
+                <hr>
+
+                <p class="total">
+                    Total
+                    <span>£430.00</span>
+                </p>
+
+                <button>Proceed to Checkout</button>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    <?php include 'footer.php'; ?>
+
+</body>
+
+</html>
