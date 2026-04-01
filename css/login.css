@@ -3,28 +3,40 @@
     background: linear-gradient(135deg, #2563eb, #1e3a8a);
     color: white;
     text-align: center;
-    padding: 40px 1px;
+    padding: 50px 20px;
 }
 
 .login-hero h1 {
-    font-size: 36px;
+    font-size: 46px;
     margin-bottom: 10px;
 }
 
-/* CONTAINER */
-.login-container {
-    display: flex;
-    justify-content: center;
-    margin-top: -40px; /* lift card slightly */
-}
-
-main {
-    min-height: 80vh;   /* makes middle stretch */
+/* PAGE STRUCTURE */
+body {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* FORM CARD */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 100px
+    
+}
+
+/* LOGIN CONTAINER */
+.login-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 80px;
+    margin-top: -40px;
+}
+
+/* FORM */
 form {
     background: #f1f5f9;
     padding: 30px;
@@ -36,7 +48,6 @@ form {
     gap: 15px;
 
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    margin-top: 80px;
 }
 
 /* LABEL */
@@ -49,6 +60,11 @@ input {
     padding: 12px;
     border-radius: 8px;
     border: 1px solid #ccc;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #2563eb;
 }
 
 /* BUTTON */
@@ -69,6 +85,13 @@ button:hover {
     transform: scale(1.05);
 }
 
+/* ERROR */
+.error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
 /* LINK */
 form a {
     color: #2563eb;
@@ -81,7 +104,6 @@ form a:hover {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-
     form {
         width: 90%;
     }
