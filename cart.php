@@ -42,3 +42,27 @@ if ($action === 'remove' && $id > 0) {
     header("Location: cart.php");
     exit();
 }
+
+// Fetch cart products
+$cartItems = [];
+
+if (!empty($_SESSION['cart'])){
+    $ids = array_keys($_SESSION['cart']);
+    $placeholders = implode(',', array_fill(0, count($ids), '?'));
+
+    $stmt = $pdo->prepare("SELECT * FROM products WHERE id IN ($placeholders)");
+    $stmt->execute($ids);
+
+    $cartItems = $stmt->fetchAll();
+}
+
+//Calculate total
+$total = 0;
+
+foreach ($cartItems as $product) {
+    $total += $product['price'] * $_SESSION['cart'][$product['id']];
+}
+
+$shipping = 10; // Flat shipping rate
+$totalWithShipping = $total + $shipping;
+?>
