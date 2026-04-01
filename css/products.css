@@ -1,0 +1,121 @@
+/* HERO (keep same) */
+.products-hero {
+    background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.products-hero h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+/* GRID */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 50px;
+}
+
+/* CARD */
+.product-card {
+    background: white; /* 🔥 STRONG contrast */
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+
+    transition: all 0.3s ease;
+}
+
+/* HOVER */
+.product-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* IMAGE */
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+/* TITLE */
+.product-card h2 {
+    color: #1d4ed8; /* darker blue */
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+/* RATING  */
+.rating {
+    color: #ab6f08; /* darker orange */
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+/* DESC */
+.desc {
+    font-size: 14px;
+    color: #374151; /* darker grey for readability */
+    margin-bottom: 10px;
+}
+
+/* PRICE */
+.price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1d4ed8;
+    margin: 10px 0;
+}
+
+/* BUTTONS */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* ADD TO CART */
+.btn-cart {
+    background: #1d4ed8;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* MORE INFO */
+.btn-info {
+    background: #e5e7eb;
+    color: #111;
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+/* HOVER EFFECTS */
+.btn-cart:hover {
+    background: #1e40af;
+    transform: scale(1.05);
+}
+
+.btn-info:hover {
+    background: #d1d5db;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+}

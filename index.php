@@ -16,7 +16,7 @@
     <section class="hero">
         <h1>Welcome to Ride On Cars</h1>
         <p>Discover fun and safe cars for kids.</p>
-        <a href="#" class="btn">View Products</a>
+        <a href="products.php" class="btn">View Products</a>
     </section>
 
     <section class="features">
