@@ -1,0 +1,82 @@
+/* ================= HERO ================= */
+.hero {
+    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+}
+
+/* BUTTON */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: white;
+    color: #2563eb;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+
+    transition: all 0.3s ease;   /* smooth animation */
+}
+
+.btn:hover {
+    transform: scale(1.1);   /* makes it bigger */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);  /* floating effect */
+    background: #f1f1f1;
+}
+/* ================= FEATURES ================= */
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+    gap: 20px;
+}
+
+/* CARD STYLE */
+.features article {
+    background: linear-gradient(#ffffff, #e2e8f0);
+    padding: 25px;
+    border-radius: 12px;
+    width: 30%;
+    text-align: center;
+
+    transition: all 0.3s ease;
+}
+
+/* HOVER EFFECT */
+.features article:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* TITLE */
+.features h2 {
+    color: #2563eb;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .features article {
+        width: 80%;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+}
