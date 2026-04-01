@@ -165,7 +165,7 @@ $products = getFilteredProducts($pdo, $search, $min, $max, $sort);
                     <?php endif; ?>
 
                     <!-- Info -->
-                    <a href="#" class="btn-info">More Info</a>
+                    <a href="product_details.php?id=<?= $product['id'] ?>" class="btn-info">More Info</a>
 
                 </section>
 
