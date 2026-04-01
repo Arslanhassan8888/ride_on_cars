@@ -2,6 +2,7 @@
 session_start();
 
 $error = "";
+$success = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -10,24 +11,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST['password']);
     $confirm = trim($_POST['confirm']);
 
-    /* VALIDATION */
+    /* ================= VALIDATION ================= */
     if (empty($name) || empty($email) || empty($password) || empty($confirm)) {
         $error = "All fields are required.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Invalid email format (must contain @ and .)";
     } elseif ($password !== $confirm) {
         $error = "Passwords do not match.";
     } else {
 
-        /* TEMP REGISTER */
-        $_SESSION['user'] = $name;
+        /* SUCCESS */
+        $success = "Account created successfully! Redirecting to login...";
 
-        header("Location: index.php");
-        exit();
+        /* WAIT 2 SECONDS THEN REDIRECT */
+        header("refresh:2;url=login.php");
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
@@ -35,53 +39,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/register.css">
 </head>
+
 <body>
 
-<?php include 'header.php'; ?>
+    <?php include 'header.php'; ?>
 
-<main>
+    <main>
 
-    <!-- HERO -->
-    <section class="register-hero">
-        <h1>Create Account</h1>
-        <p>Join Ride On Cars today</p>
-    </section>
+        <!-- HERO -->
+        <section class="register-hero">
+            <h1>Create Account</h1>
+            <p>Join Ride On Cars today</p>
+        </section>
 
-    <!-- FORM -->
-    <section class="register-container">
+        <!-- FORM -->
+        <section class="register-container">
 
-        <form method="POST">
+            <form method="POST">
 
-            <?php if (!empty($error)): ?>
-                <p class="error"><?= $error ?></p>
-            <?php endif; ?>
+                <?php if (!empty($error)): ?>
+                    <p class="error"><?= $error ?></p>
+                <?php endif; ?>
 
-            <label for="name">Full Name *</label>
-            <input id="name" type="text" name="name" required>
+                <?php if (!empty($success)): ?>
+                    <p class="success"><?= $success ?></p>
+                <?php endif; ?>
 
-            <label for="email">Email Address *</label>
-            <input id="email" type="email" name="email" required>
+                <label for="name">Full Name *</label>
+                <input id="name" type="text" name="name" required>
 
-            <label for="password">Password *</label>
-            <input id="password" type="password" name="password" required>
+                <label for="email">Email Address *</label>
+                <input id="email" type="email" name="email" required>
 
-            <label for="confirm">Confirm Password *</label>
-            <input id="confirm" type="password" name="confirm" required>
+                <label for="password">Password *</label>
+                <input id="password" type="password" name="password" required>
 
-            <button type="submit">Register</button>
+                <label for="confirm">Confirm Password *</label>
+                <input id="confirm" type="password" name="confirm" required>
 
-            <p>
-                Already have an account?
-                <a href="login.php">Login here</a>
-            </p>
+                <button type="submit">Register</button>
 
-        </form>
+                <p>
+                    Already have an account?
+                    <a href="login.php">Login here</a>
+                </p>
 
-    </section>
+            </form>
 
-</main>
+        </section>
 
-<?php include 'footer.php'; ?>
+    </main>
+
+    <?php include 'footer.php'; ?>
 
 </body>
+
 </html>
