@@ -113,6 +113,42 @@
     background: #d1d5db;
 }
 
+/* FILTER BOX */
+.filter-box form {
+    background: white;
+    padding: 20px;
+    margin: 30px;
+    border-radius: 12px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.filter-box input,
+.filter-box select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.filter-box button {
+    background: #1d4ed8;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.clear-btn {
+    background: #ddd;
+    padding: 10px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .products-grid {
