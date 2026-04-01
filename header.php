@@ -36,7 +36,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <?php else: ?>
 
                 <a href="login.php">Login</a>
-                <a href="#">Register</a>
+                <a href="register.php">Register</a>
 
             <?php endif; ?>
 

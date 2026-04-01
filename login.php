@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION['blocked_time'] <= time())
 
             <p>
                 Don’t have an account?
-                <a href="#">Register here</a>
+                <a href="register.php">Register here</a>
             </p>
 
         </form>
