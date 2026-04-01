@@ -7,16 +7,13 @@ $error = "";
 
 /* ================= FUNCTIONS ================= */
 
-/* Clean input */
 function sanitizeInput($data)
 {
     return htmlspecialchars(trim($data));
 }
 
-/* Validate login */
 function validateLogin($email, $password)
 {
-
     if (empty($email) || empty($password)) {
         return "All fields are required.";
     }
@@ -28,10 +25,8 @@ function validateLogin($email, $password)
     return "";
 }
 
-/* Check user credentials */
 function loginUser($pdo, $email, $password)
 {
-
     $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
     $stmt->execute([$email]);
 
@@ -54,49 +49,50 @@ if (!isset($_SESSION['blocked_time'])) {
     $_SESSION['blocked_time'] = 0;
 }
 
-/* ================= BLOCK CHECK ================= */
-
-if ($_SESSION['blocked_time'] > time()) {
-    $remaining = $_SESSION['blocked_time'] - time();
-    $error = "Account blocked. Try again in $remaining seconds.";
-}
-
 /* ================= LOGIN ================= */
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION['blocked_time'] <= time()) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $email = sanitizeInput($_POST['email']);
-    $password = trim($_POST['password']);
-
-    $validationError = validateLogin($email, $password);
-
-    if (!empty($validationError)) {
-        $error = $validationError;
+    /* CHECK IF BLOCKED */
+    if ($_SESSION['blocked_time'] > time()) {
+        $remaining = $_SESSION['blocked_time'] - time();
+        $error = "Account blocked. Try again in $remaining seconds.";
     } else {
 
-        $user = loginUser($pdo, $email, $password);
+        $email = sanitizeInput($_POST['email']);
+        $password = trim($_POST['password']);
 
-        if ($user) {
+        $validationError = validateLogin($email, $password);
 
-            /* SUCCESS */
-            session_regenerate_id(true);
-
-            $_SESSION['user'] = $user['name'];
-            $_SESSION['role'] = $user['role'];
-
-            $_SESSION['attempts'] = 0;
-
-            header("Location: index.php");
-            exit();
+        if (!empty($validationError)) {
+            $error = $validationError;
         } else {
 
-            $_SESSION['attempts']++;
+            $user = loginUser($pdo, $email, $password);
 
-            if ($_SESSION['attempts'] >= 3) {
-                $_SESSION['blocked_time'] = time() + (5 * 60);
-                $error = "Too many attempts. Blocked for 5 minutes.";
+            if ($user) {
+
+                /* SUCCESS */
+                session_regenerate_id(true);
+
+                $_SESSION['user'] = $user['name'];
+                $_SESSION['role'] = $user['role'];
+
+                /* RESET ATTEMPTS */
+                $_SESSION['attempts'] = 0;
+
+                header("Location: index.php");
+                exit();
             } else {
-                $error = "Invalid login. Attempts left: " . (3 - $_SESSION['attempts']);
+
+                $_SESSION['attempts']++;
+
+                if ($_SESSION['attempts'] >= 3) {
+                    $_SESSION['blocked_time'] = time() + (5 * 60); // 5 minutes
+                    $error = "Too many attempts. Blocked for 5 minutes.";
+                } else {
+                    $error = "Invalid login. Attempts left: " . (3 - $_SESSION['attempts']);
+                }
             }
         }
     }
