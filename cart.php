@@ -2,34 +2,44 @@
 session_start();
 require 'db.php';
 
-// Protect cart
+/* ================= PROTECT PAGE ================= */
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
 }
 
-// Initialize cart
-if (!isset($_SESSION['cart'])) {
+/* ================= INIT CART ================= */
+if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-// Get action
+/* ================= GET INPUT ================= */
 $action = $_GET['action'] ?? '';
-$id = (int)($_GET['id'] ?? 0);
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-// HANDLE CART ACTIONS
+/* ================= FUNCTIONS ================= */
+
+/* -------- HANDLE CART ACTIONS -------- */
 function handleCartAction($action, $id)
 {
-
     if ($id <= 0) return;
 
-    // Increase
-    if ($action === 'increase' && isset($_SESSION['cart'][$id])) {
+    // Ensure valid structure
+    if (!isset($_SESSION['cart'][$id]) || !is_numeric($_SESSION['cart'][$id])) {
+        $_SESSION['cart'][$id] = 0;
+    }
+
+    if ($action === 'add') {
+        $_SESSION['cart'][$id]++;
+        header("Location: products.php");
+        exit();
+    }
+
+    if ($action === 'increase') {
         $_SESSION['cart'][$id]++;
     }
 
-    // Decrease
-    if ($action === 'decrease' && isset($_SESSION['cart'][$id])) {
+    if ($action === 'decrease') {
         $_SESSION['cart'][$id]--;
 
         if ($_SESSION['cart'][$id] <= 0) {
@@ -37,22 +47,19 @@ function handleCartAction($action, $id)
         }
     }
 
-    // Remove
-    if ($action === 'remove' && isset($_SESSION['cart'][$id])) {
+    if ($action === 'remove') {
         unset($_SESSION['cart'][$id]);
     }
 
-    // Redirect after action
-    if ($action === 'increase' || $action === 'decrease' || $action === 'remove') {
+    if (in_array($action, ['increase', 'decrease', 'remove'])) {
         header("Location: cart.php");
         exit();
     }
 }
 
-// FETCH PRODUCTS
+/* -------- FETCH PRODUCTS -------- */
 function getCartItems($pdo, $cart)
 {
-
     if (empty($cart)) return [];
 
     $ids = array_keys($cart);
@@ -61,46 +68,45 @@ function getCartItems($pdo, $cart)
     $stmt = $pdo->prepare("SELECT * FROM products WHERE id IN ($placeholders)");
     $stmt->execute($ids);
 
-    return $stmt->fetchAll();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// CALCULATE TOTAL
+/* -------- CALCULATE TOTAL -------- */
 function calculateTotal($cartItems, $cart)
 {
-
     $total = 0;
 
     foreach ($cartItems as $product) {
 
         $qty = $cart[$product['id']] ?? 0;
 
-        if (is_numeric($qty)) {
-            $total += $product['price'] * $qty;
+        // Force numeric safety
+        if (!is_numeric($qty)) {
+            $qty = 0;
         }
+
+        $total += (float)$product['price'] * (int)$qty;
     }
 
     return $total;
 }
 
-// RUN ACTION
+/* ================= RUN ACTION ================= */
 handleCartAction($action, $id);
 
-// GET ITEMS
+/* ================= GET DATA ================= */
 $cartItems = getCartItems($pdo, $_SESSION['cart']);
-
-// CALCULATE
 $total = calculateTotal($cartItems, $_SESSION['cart']);
+
 $shipping = 10;
 $totalWithShipping = $total + $shipping;
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Cart</title>
+    <title>Your Cart</title>
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/cart.css">
@@ -108,101 +114,107 @@ $totalWithShipping = $total + $shipping;
 
 <body>
 
-    <?php include 'header.php'; ?>
+<?php include 'header.php'; ?>
 
-    <main>
+<main>
 
-        <!-- CART CONTAINER -->
-        <section class="cart-container">
+<section class="cart-container">
 
-            <!-- LEFT: ITEMS -->
-            <section class="cart-items">
+    <!-- CART ITEMS -->
+    <section class="cart-items">
 
-                <h1>Your Cart</h1>
+        <h1>Your Cart</h1>
 
-                <!-- ITEM 1 -->
+        <?php if (empty($cartItems)): ?>
+
+            <p>Your cart is empty.</p>
+            <a href="products.php">Go to products</a>
+
+        <?php else: ?>
+
+            <?php foreach ($cartItems as $product): ?>
+
+                <?php
+                $qty = $_SESSION['cart'][$product['id']] ?? 0;
+
+                if (!is_numeric($qty)) {
+                    $qty = 0;
+                }
+
+                $subtotal = (float)$product['price'] * (int)$qty;
+                ?>
+
                 <article class="cart-row">
 
                     <figure>
-                        <img src="images/car1.png" alt="Car">
+                        <img src="images/<?= htmlspecialchars($product['image']) ?>"
+                             alt="<?= htmlspecialchars($product['name']) ?>">
                     </figure>
 
-                    <h2>BMW X5 Ride-On</h2>
+                    <h2><?= htmlspecialchars($product['name']) ?></h2>
 
-                    <p class="price">£120.00</p>
+                    <p class="price">
+                        £<?= number_format((float)$product['price'], 2) ?>
+                    </p>
 
-                    <!-- QUANTITY -->
+                    <!-- QTY -->
                     <section class="qty">
-                        <a href="#">−</a>
-                        <span>1</span>
-                        <a href="#">+</a>
+                        <a href="cart.php?action=decrease&id=<?= (int)$product['id'] ?>">−</a>
+                        <span><?= (int)$qty ?></span>
+                        <a href="cart.php?action=increase&id=<?= (int)$product['id'] ?>">+</a>
                     </section>
 
                     <!-- SUBTOTAL -->
-                    <p class="subtotal">£120.00</p>
+                    <p class="subtotal">
+                        £<?= number_format($subtotal, 2) ?>
+                    </p>
 
                     <!-- REMOVE -->
-                    <a href="#" class="remove">🗑</a>
+                    <a href="cart.php?action=remove&id=<?= (int)$product['id'] ?>" class="remove">
+                        🗑
+                    </a>
 
                 </article>
 
-                <!-- ITEM 2 -->
-                <article class="cart-row">
+            <?php endforeach; ?>
 
-                    <figure>
-                        <img src="images/car2.png" alt="Car">
-                    </figure>
+        <?php endif; ?>
 
-                    <h2>Audi RS Ride-On</h2>
+    </section>
 
-                    <p class="price">£150.00</p>
+    <!-- SUMMARY -->
+    <section class="summary">
 
-                    <section class="qty">
-                        <a href="#">−</a>
-                        <span>2</span>
-                        <a href="#">+</a>
-                    </section>
+        <h2>Order Summary</h2>
 
-                    <p class="subtotal">£300.00</p>
+        <p>
+            Subtotal
+            <span>£<?= number_format($total, 2) ?></span>
+        </p>
 
-                    <a href="#" class="remove">🗑</a>
+        <p>
+            Shipping
+            <span>£<?= number_format($shipping, 2) ?></span>
+        </p>
 
-                </article>
+        <hr>
 
-            </section>
+        <p class="total">
+            Total
+            <span>£<?= number_format($totalWithShipping, 2) ?></span>
+        </p>
 
-            <!-- RIGHT: SUMMARY -->
-            <section class="summary">
+        <button <?= empty($cartItems) ? 'disabled' : '' ?>>
+            Proceed to Checkout
+        </button>
 
-                <h2>Order Summary</h2>
+    </section>
 
-                <p>
-                    Subtotal
-                    <span>£420.00</span>
-                </p>
+</section>
 
-                <p>
-                    Shipping
-                    <span>£10.00</span>
-                </p>
+</main>
 
-                <hr>
-
-                <p class="total">
-                    Total
-                    <span>£430.00</span>
-                </p>
-
-                <button>Proceed to Checkout</button>
-
-            </section>
-
-        </section>
-
-    </main>
-
-    <?php include 'footer.php'; ?>
+<?php include 'footer.php'; ?>
 
 </body>
-
 </html>
