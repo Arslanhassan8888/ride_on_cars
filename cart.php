@@ -2,29 +2,26 @@
 session_start();
 require 'db.php';
 
-/* ================= PROTECT PAGE ================= */
+/* PROTECT PAGE */
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
 }
 
-/* ================= INIT CART ================= */
+/* INIT CART */
 if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-/* ================= GET INPUT ================= */
+/* INPUT */
 $action = $_GET['action'] ?? '';
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-/* ================= FUNCTIONS ================= */
-
-/* -------- HANDLE CART ACTIONS -------- */
+/* HANDLE CART */
 function handleCartAction($action, $id)
 {
     if ($id <= 0) return;
 
-    // Ensure valid structure
     if (!isset($_SESSION['cart'][$id]) || !is_numeric($_SESSION['cart'][$id])) {
         $_SESSION['cart'][$id] = 0;
     }
@@ -57,7 +54,7 @@ function handleCartAction($action, $id)
     }
 }
 
-/* -------- FETCH PRODUCTS -------- */
+/* FETCH PRODUCTS */
 function getCartItems($pdo, $cart)
 {
     if (empty($cart)) return [];
@@ -71,19 +68,15 @@ function getCartItems($pdo, $cart)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-/* -------- CALCULATE TOTAL -------- */
+/* TOTAL */
 function calculateTotal($cartItems, $cart)
 {
     $total = 0;
 
     foreach ($cartItems as $product) {
-
         $qty = $cart[$product['id']] ?? 0;
 
-        // Force numeric safety
-        if (!is_numeric($qty)) {
-            $qty = 0;
-        }
+        if (!is_numeric($qty)) $qty = 0;
 
         $total += (float)$product['price'] * (int)$qty;
     }
@@ -91,10 +84,9 @@ function calculateTotal($cartItems, $cart)
     return $total;
 }
 
-/* ================= RUN ACTION ================= */
+/* RUN */
 handleCartAction($action, $id);
 
-/* ================= GET DATA ================= */
 $cartItems = getCartItems($pdo, $_SESSION['cart']);
 $total = calculateTotal($cartItems, $_SESSION['cart']);
 
@@ -104,7 +96,6 @@ $totalWithShipping = $total + $shipping;
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Your Cart</title>
@@ -115,107 +106,110 @@ $totalWithShipping = $total + $shipping;
 
 <body>
 
-    <?php include 'header.php'; ?>
+<?php include 'header.php'; ?>
 
-    <main>
+<main>
 
-        <section class="cart-container">
+<section class="cart-container">
 
-            <!-- CART ITEMS -->
-            <section class="cart-items">
+    <!-- ITEMS -->
+    <section class="cart-items">
 
-                <h1>Your Cart</h1>
+        <h1>Your Cart</h1>
 
-                <?php if (empty($cartItems)): ?>
+        <?php if (empty($cartItems)): ?>
 
-                    <p>Your cart is empty.</p>
-                    <a href="products.php">Go to products</a>
+            <p>Your cart is empty.</p>
+            <a href="products.php">Go to products</a>
 
-                <?php else: ?>
+        <?php else: ?>
 
-                    <?php foreach ($cartItems as $product): ?>
+        <?php foreach ($cartItems as $product): ?>
 
-                        <?php
-                        $qty = $_SESSION['cart'][$product['id']] ?? 0;
+        <?php
+        $qty = $_SESSION['cart'][$product['id']];
+        $subtotal = $product['price'] * $qty;
+        ?>
 
-                        if (!is_numeric($qty)) {
-                            $qty = 0;
-                        }
+        <article class="cart-row">
 
-                        $subtotal = (float)$product['price'] * (int)$qty;
-                        ?>
+            <figure>
+                <img src="images/<?= htmlspecialchars($product['image']) ?>"
+                     alt="<?= htmlspecialchars($product['name']) ?>">
+            </figure>
 
-                        <article class="cart-row">
+            <h2><?= htmlspecialchars($product['name']) ?></h2>
 
-                            <figure>
-                                <img src="images/<?= htmlspecialchars($product['image']) ?>"
-                                    alt="<?= htmlspecialchars($product['name']) ?>">
-                            </figure>
+            <p class="price">£<?= number_format($product['price'], 2) ?></p>
 
-                            <h2><?= htmlspecialchars($product['name']) ?></h2>
+            <!-- QTY -->
+            <section class="qty">
 
-                            <p class="price">
-                                £<?= number_format((float)$product['price'], 2) ?>
-                            </p>
+                <a href="cart.php?action=decrease&id=<?= $product['id'] ?>"
+                   class="btn-decrease"
+                   data-qty="<?= $qty ?>">−</a>
 
-                            <!-- QTY -->
-                            <section class="qty">
-                                <a href="cart.php?action=decrease&id=<?= (int)$product['id'] ?>">−</a>
-                                <span><?= (int)$qty ?></span>
-                                <a href="cart.php?action=increase&id=<?= (int)$product['id'] ?>">+</a>
-                            </section>
+                <span><?= $qty ?></span>
 
-                            <!-- SUBTOTAL -->
-                            <p class="subtotal">
-                                £<?= number_format($subtotal, 2) ?>
-                            </p>
-
-                            <!-- REMOVE -->
-                            <a href="cart.php?action=remove&id=<?= (int)$product['id'] ?>" class="btn-delete">
-                                Delete
-                            </a>
-                        </article>
-
-                    <?php endforeach; ?>
-
-                <?php endif; ?>
+                <a href="cart.php?action=increase&id=<?= $product['id'] ?>">+</a>
 
             </section>
 
-            <!-- SUMMARY -->
-            <section class="summary">
+            <!-- SUBTOTAL -->
+            <p class="subtotal">
+                £<?= number_format($subtotal, 2) ?>
+            </p>
 
-                <h2>Order Summary</h2>
+            <!-- DELETE -->
+            <a href="cart.php?action=remove&id=<?= $product['id'] ?>"
+               class="btn-delete">
+               Delete
+            </a>
 
-                <p>
-                    Subtotal
-                    <span>£<?= number_format($total, 2) ?></span>
-                </p>
+        </article>
 
-                <p>
-                    Shipping
-                    <span>£<?= number_format($shipping, 2) ?></span>
-                </p>
+        <?php endforeach; ?>
 
-                <hr>
+        <?php endif; ?>
 
-                <p class="total">
-                    Total
-                    <span>£<?= number_format($totalWithShipping, 2) ?></span>
-                </p>
+    </section>
 
-                <button <?= empty($cartItems) ? 'disabled' : '' ?>>
-                    Proceed to Checkout
-                </button>
+    <!-- SUMMARY -->
+    <section class="summary">
 
-            </section>
+        <h2>Order Summary</h2>
 
-        </section>
+        <p>
+            Subtotal
+            <span>£<?= number_format($total, 2) ?></span>
+        </p>
 
-    </main>
+        <p>
+            Shipping
+            <span>£<?= number_format($shipping, 2) ?></span>
+        </p>
 
-    <?php include 'footer.php'; ?>
+        <hr>
+
+        <p class="total">
+            Total
+            <span>£<?= number_format($totalWithShipping, 2) ?></span>
+        </p>
+
+        <button <?= empty($cartItems) ? 'disabled' : '' ?>>
+            Proceed to Checkout
+        </button>
+
+    </section>
+
+</section>
+
+</main>
+
+<?php include 'footer.php'; ?>
+
+<!-- JS FILE -->
+<script src="js/cart.js"></script>
 
 </body>
-
 </html>
