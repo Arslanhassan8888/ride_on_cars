@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <header class="site-header">
 
     <nav class="nav-bar">
@@ -18,15 +20,25 @@
             <li><a href="products.php" class="<?= $page == 'products.php' ? 'active' : '' ?>">Products</a></li>
             <li><a href="contact.php" class="<?= $page == 'contact.php' ? 'active' : '' ?>">Contact</a></li>
             <li><a href="reviews.php" class="<?= $page == 'reviews.php' ? 'active' : '' ?>">Reviews</a></li>
-            </ul>
+        </ul>
 
-            <aside class="user">
-                <a href="#">Login</a>
+        <aside class="user">
+
+            <?php if (isset($_SESSION['user'])): ?>
+
+                <span>Hi, <?= $_SESSION['user']; ?></span>
+                <a href="logout.php">Logout</a>
+
+            <?php else: ?>
+
+                <a href="login.php">Login</a>
                 <a href="#">Register</a>
-                <a href="#">Logout</a>
-                <a href="#" class="cart">Cart</a>
-            </aside>
 
+            <?php endif; ?>
+
+            <a href="#" class="cart">Cart</a>
+
+        </aside>
     </nav>
 
 </header>

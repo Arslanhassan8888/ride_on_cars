@@ -16,6 +16,12 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: all 0.3s ease; 
+}
+
+.site-header.scrolled {
+    background: rgba(255, 255, 255, 0.85); /* transparent */
+    backdrop-filter: blur(6px);            /* smooth glass effect */
 }
 
 .nav-bar {
@@ -72,6 +78,8 @@ body {
 .user {
     display: flex;
     gap: 10px;
+    font-size: 20px;      /* makes everything bigger */
+    font-weight: 600
 }
 
 .user a {
@@ -149,6 +157,26 @@ body {
     background: black;
     color: white;
 }
+
+    /* KEEP USER VISIBLE */
+    .user {
+    display: flex;
+    align-items: center;   /* keeps everything aligned */
+    gap: 10px;
+    white-space: nowrap;   /* prevents line break */
+}
+
+    .user a {
+        font-size: 14px;
+
+    display: inline-block;
+}
+    
+
+    .user span {
+    font-weight: bold;
+    color: #2563eb;
+}
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
 
@@ -171,13 +199,5 @@ body {
         display: block;
     }
 
-    /* KEEP USER VISIBLE */
-    .user {
-        display: flex;
-        gap: 6px;
-    }
 
-    .user a {
-        font-size: 14px;
-    }
 }
