@@ -9,43 +9,44 @@ if (!isset($_SESSION['user'])) {
 }
 
 /* INIT CART */
-if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
+if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-/* INPUT */
+/* GET INPUT */
 $action = $_GET['action'] ?? '';
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$id = (int)($_GET['id'] ?? 0);
 
 /* HANDLE CART */
-function handleCartAction($action, $id)
+function handleCart($action, $id)
 {
     if ($id <= 0) return;
 
-    if (!isset($_SESSION['cart'][$id]) || !is_numeric($_SESSION['cart'][$id])) {
-        $_SESSION['cart'][$id] = 0;
-    }
+    switch ($action) {
 
-    if ($action === 'add') {
-        $_SESSION['cart'][$id]++;
-        header("Location: products.php");
-        exit();
-    }
+        case 'add':
+        case 'increase':
+            $_SESSION['cart'][$id] = ($_SESSION['cart'][$id] ?? 0) + 1;
 
-    if ($action === 'increase') {
-        $_SESSION['cart'][$id]++;
-    }
+            if ($action === 'add') {
+                header("Location: products.php");
+                exit();
+            }
+            break;
 
-    if ($action === 'decrease') {
-        $_SESSION['cart'][$id]--;
+        case 'decrease':
+            if (isset($_SESSION['cart'][$id])) {
+                $_SESSION['cart'][$id]--;
 
-        if ($_SESSION['cart'][$id] <= 0) {
+                if ($_SESSION['cart'][$id] <= 0) {
+                    unset($_SESSION['cart'][$id]);
+                }
+            }
+            break;
+
+        case 'remove':
             unset($_SESSION['cart'][$id]);
-        }
-    }
-
-    if ($action === 'remove') {
-        unset($_SESSION['cart'][$id]);
+            break;
     }
 
     if (in_array($action, ['increase', 'decrease', 'remove'])) {
@@ -54,7 +55,7 @@ function handleCartAction($action, $id)
     }
 }
 
-/* FETCH PRODUCTS */
+/* GET PRODUCTS FROM DB */
 function getCartItems($pdo, $cart)
 {
     if (empty($cart)) return [];
@@ -65,33 +66,30 @@ function getCartItems($pdo, $cart)
     $stmt = $pdo->prepare("SELECT * FROM products WHERE id IN ($placeholders)");
     $stmt->execute($ids);
 
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $stmt->fetchAll();
 }
 
-/* TOTAL */
-function calculateTotal($cartItems, $cart)
+/* CALCULATE TOTAL */
+function getTotal($items, $cart)
 {
     $total = 0;
 
-    foreach ($cartItems as $product) {
-        $qty = $cart[$product['id']] ?? 0;
-
-        if (!is_numeric($qty)) $qty = 0;
-
-        $total += (float)$product['price'] * (int)$qty;
+    foreach ($items as $item) {
+        $qty = $cart[$item['id']] ?? 0;
+        $total += $item['price'] * $qty;
     }
 
     return $total;
 }
 
 /* RUN */
-handleCartAction($action, $id);
+handleCart($action, $id);
 
 $cartItems = getCartItems($pdo, $_SESSION['cart']);
-$total = calculateTotal($cartItems, $_SESSION['cart']);
+$total = getTotal($cartItems, $_SESSION['cart']);
 
 $shipping = 10;
-$totalWithShipping = $total + $shipping;
+$finalTotal = $total + $shipping;
 ?>
 
 <!DOCTYPE html>
@@ -112,7 +110,7 @@ $totalWithShipping = $total + $shipping;
 
 <section class="cart-container">
 
-    <!-- ITEMS -->
+    <!-- CART ITEMS -->
     <section class="cart-items">
 
         <h1>Your Cart</h1>
@@ -124,46 +122,40 @@ $totalWithShipping = $total + $shipping;
 
         <?php else: ?>
 
-        <?php foreach ($cartItems as $product): ?>
+        <?php foreach ($cartItems as $item): ?>
 
         <?php
-        $qty = $_SESSION['cart'][$product['id']];
-        $subtotal = $product['price'] * $qty;
+        $qty = $_SESSION['cart'][$item['id']];
+        $subtotal = $item['price'] * $qty;
         ?>
 
         <article class="cart-row">
 
             <figure>
-                <img src="images/<?= htmlspecialchars($product['image']) ?>"
-                     alt="<?= htmlspecialchars($product['name']) ?>">
+                <img src="images/<?= $item['image'] ?>"
+                     alt="<?= htmlspecialchars($item['name']) ?>">
             </figure>
 
-            <h2><?= htmlspecialchars($product['name']) ?></h2>
+            <h2><?= htmlspecialchars($item['name']) ?></h2>
 
-            <p class="price">£<?= number_format($product['price'], 2) ?></p>
+            <p class="price">£<?= number_format($item['price'], 2) ?></p>
 
-            <!-- QTY -->
             <section class="qty">
 
-                <a href="cart.php?action=decrease&id=<?= $product['id'] ?>"
-                   class="btn-decrease"
-                   data-qty="<?= $qty ?>">−</a>
+                <a href="cart.php?action=decrease&id=<?= $item['id'] ?>">−</a>
 
                 <span><?= $qty ?></span>
 
-                <a href="cart.php?action=increase&id=<?= $product['id'] ?>">+</a>
+                <a href="cart.php?action=increase&id=<?= $item['id'] ?>">+</a>
 
             </section>
 
-            <!-- SUBTOTAL -->
             <p class="subtotal">
                 £<?= number_format($subtotal, 2) ?>
             </p>
 
-            <!-- DELETE -->
-            <a href="cart.php?action=remove&id=<?= $product['id'] ?>"
-               class="btn-delete">
-               Delete
+            <a href="cart.php?action=remove&id=<?= $item['id'] ?>" class="btn-delete">
+                Delete
             </a>
 
         </article>
@@ -193,11 +185,11 @@ $totalWithShipping = $total + $shipping;
 
         <p class="total">
             Total
-            <span>£<?= number_format($totalWithShipping, 2) ?></span>
+            <span>£<?= number_format($finalTotal, 2) ?></span>
         </p>
 
-        <button <?= empty($cartItems) ? 'disabled' : '' ?>>
-            Proceed to Checkout
+        <button type="button" <?= empty($cartItems) ? 'disabled' : '' ?>>
+            Checkout (Coming Soon)
         </button>
 
     </section>
@@ -208,7 +200,6 @@ $totalWithShipping = $total + $shipping;
 
 <?php include 'footer.php'; ?>
 
-<!-- JS FILE -->
 <script src="js/cart.js"></script>
 
 </body>
