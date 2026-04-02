@@ -109,10 +109,11 @@ $finalTotal = $total + $shipping;
 <main>
 
 <section class="cart-container">
+    <h2 class="visually-hidden-heading">Shopping Cart Layout</h2>
 
     <section class="cart-items">
-
-        <h1>Your Cart</h1>
+        <h2 class="visually-hidden-heading">Cart Items</h2>
+        <h2>Your Cart</h2>
 
         <?php if (empty($cartItems)): ?>
 
@@ -131,7 +132,7 @@ $finalTotal = $total + $shipping;
         <article class="cart-row">
 
             <figure>
-                <img src="images/<?= $item['image'] ?>"
+                <img src="images/<?= htmlspecialchars($item['image']) ?>"
                      alt="<?= htmlspecialchars($item['name']) ?>">
             </figure>
 
@@ -140,9 +141,11 @@ $finalTotal = $total + $shipping;
             <p class="price">£<?= number_format($item['price'], 2) ?></p>
 
             <section class="qty">
-                <a href="cart.php?action=decrease&id=<?= $item['id'] ?>">−</a>
+                <h3 class="visually-hidden-heading">Quantity controls</h3>
+
+                <a href="cart.php?action=decrease&id=<?= $item['id'] ?>" aria-label="Decrease quantity of <?= htmlspecialchars($item['name']) ?>">−</a>
                 <span><?= $qty ?></span>
-                <a href="cart.php?action=increase&id=<?= $item['id'] ?>">+</a>
+                <a href="cart.php?action=increase&id=<?= $item['id'] ?>" aria-label="Increase quantity of <?= htmlspecialchars($item['name']) ?>">+</a>
             </section>
 
             <p class="subtotal">
@@ -162,7 +165,6 @@ $finalTotal = $total + $shipping;
     </section>
 
     <section class="summary">
-
         <h2>Order Summary</h2>
 
         <p>
@@ -185,7 +187,6 @@ $finalTotal = $total + $shipping;
         <button type="button" <?= empty($cartItems) ? 'disabled' : '' ?>>
             Checkout (Coming Soon)
         </button>
-
     </section>
 
 </section>

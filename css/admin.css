@@ -131,7 +131,81 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+
+/* ================= EDIT PRODUCT FORM CONTAINER ================= */
+.form-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* FORM */
+.form-container form {
+    background: #f1f5f9;
+    padding: 30px;
+    border-radius: 15px;
+    width: 400px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* LABEL */
+.form-container label {
+    font-weight: bold;
+}
+
+/* INPUT */
+.form-container input,
+.form-container textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* FOCUS */
+.form-container input:focus,
+.form-container textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+/* TEXTAREA */
+.form-container textarea {
+    resize: none;
+    min-height: 80px;
+}
+
+/* BUTTON */
+.form-container button {
+    margin-top: 10px;
+    padding: 12px;
+    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+/* BUTTON HOVER */
+.form-container button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    color: white;   
+    background: linear-gradient(135deg, #2563eb);
+}
+
+
 /* ================= RESPONSIVE ================= */
+/* TABLE RESPONSIVE */
+
 @media (max-width: 768px) {
     .admin-actions {
         flex-direction: column;
@@ -142,5 +216,12 @@
     .admin-table td,
     .admin-table th {
         padding: 10px;
+    }
+}
+
+/* FORM RESPONSIVE  */
+@media (max-width: 768px) {
+    .form-container form {
+        width: 90%;
     }
 }

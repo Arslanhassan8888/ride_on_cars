@@ -1,7 +1,7 @@
 <footer class="site-footer">
 
     <section class="footer-info">
-        <h2 class="visually-hidden">Footer Information</h2>
+        <h2 class="visually-hidden">Additional Info.</h2>
         <p class="footer-title">Ride On Cars</p>
         <p>Safe and fun cars for kids.</p>
     </section>

@@ -22,7 +22,9 @@
         </section>
 
         <section class="features">
-            <h2>Features</h2>
+            <h2>
+                <span class="sr-only">Feauter</span>
+            </h2>
 
             <article>
                 <h3>Safe</h3>

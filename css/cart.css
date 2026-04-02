@@ -1,20 +1,21 @@
+/* =========================================
+   ACCESSIBILITY: Visually Hidden Headings
+   Keeps content available to screen readers
+   without changing page layout or design
+========================================= */
+.visually-hidden-heading {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 /* MAIN LAYOUT */
 .cart-container {
     display: flex;
     gap: 30px;
     padding: 50px;
-    
-}
-
-.summary {
-    flex: 1;
-    background: white;
-    padding: 30px;
-    border-radius: 16px;
-
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-
-    height: fit-content;       
 }
 
 /* LEFT SIDE */
@@ -108,6 +109,8 @@
     border-radius: 16px;
 
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+    height: fit-content;
 }
 
 /* SUMMARY TEXT */
@@ -170,6 +173,7 @@
 .btn-delete:active {
     transform: scale(0.95);
 }
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
 
