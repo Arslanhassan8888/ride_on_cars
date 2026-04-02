@@ -8,16 +8,14 @@
     <nav class="footer-nav">
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Reviews</a></li>
+            <li><a href="about.php">About</a></li>
+            <li><a href="products.php">Products</a></li>
+            <li><a href="contact.php">Contact</a></li>
+            <li><a href="reviews.php">Reviews</a></li>
         </ul>
     </nav>
 
-    <section>
-        <p>&copy; <?php echo date("Y"); ?> Ride On Cars</p>
-    </section>
+    <p>&copy; <?php echo date("Y"); ?> Ride On Cars</p>
 
 </footer>
 <script src="js/main.js"></script>

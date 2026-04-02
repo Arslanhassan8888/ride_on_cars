@@ -42,7 +42,8 @@ document.querySelectorAll('.btn-decrease').forEach(btn => {
     }
 });
 
-// Function to update cart count in header
+// Update cart count in header
+
 function updateCartCount(newCount) {
     const cart = document.getElementById("cart-count");
     if (cart) {

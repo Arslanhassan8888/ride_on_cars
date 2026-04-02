@@ -51,8 +51,8 @@ function handleRegister($pdo)
     // Sanitize inputs
     $name = htmlspecialchars(trim($_POST['name']));
     $email = htmlspecialchars(trim($_POST['email']));
-    $password = htmlspecialchars($_POST['password']);   // added as requested
-    $confirm = htmlspecialchars($_POST['confirm']);     // added as requested
+    $password =($_POST['password']);   
+    $confirm = htmlspecialchars($_POST['confirm']);   
 
     $error = validate($name, $email, $password, $confirm);
 
@@ -80,8 +80,8 @@ list($error, $success) = handleRegister($pdo);
     <meta charset="UTF-8">
     <title>Register</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
+    <link rel="stylesheet" href="css/register.css?v=<?php echo filemtime('css/register.css'); ?>">
 </head>
 <body>
 

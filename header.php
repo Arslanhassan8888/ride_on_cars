@@ -15,10 +15,10 @@ function isActive($file)
     <nav class="nav-bar">
 
         <!-- LOGO / BRAND -->
-        <section class="brand">
+        <a href="index.php" class="brand">
             <span class="logo">🚙</span>
-            <a href="index.php" class="brand-name">Ride On Cars</a>
-        </section>
+            <span class="brand-name">Ride On Cars</span>
+        </a>
 
         <!-- MOBILE MENU TOGGLE -->
         <input type="checkbox" id="menu-toggle">
@@ -36,7 +36,7 @@ function isActive($file)
         <!-- USER SECTION -->
         <aside class="user">
 
-            <?php if (isset($_SESSION['user'])): ?>
+            <?php if (isset($_SESSION['user']) && isset($_SESSION['user_id'])): ?>
 
                 <span class="welcome">
                     Hi, <?php echo htmlspecialchars($_SESSION['user']); ?>
@@ -65,4 +65,3 @@ function isActive($file)
     </nav>
 
 </header>
-```

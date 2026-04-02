@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <title>Ride On Cars</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/index.css?v=3">
+    <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
+    <link rel="stylesheet" href="css/index.css?v=<?php echo filemtime('css/index.css'); ?>">
 </head>
 
 <body>
@@ -39,7 +39,6 @@
                 <p>Kids love our products.</p>
             </article>
         </section>
-    
 
     </main>
 

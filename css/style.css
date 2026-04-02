@@ -33,9 +33,11 @@ body {
 
 /* BRAND */
 .brand {
+    text-decoration: none;
     display: flex;
     align-items: center;
     gap: 10px;
+    
 }
 
 .logo {
@@ -47,6 +49,12 @@ body {
     font-weight: bold;
     color: black;
     text-decoration: none;
+}
+
+.brand:visited,
+.brand:hover,
+.brand:active {
+    text-decoration: none;   /* ensures no underline in all states */
 }
 
 /* ================= MENU ================= */

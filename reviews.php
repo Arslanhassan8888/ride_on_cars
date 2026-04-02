@@ -27,8 +27,8 @@ $reviews = getReviews($pdo);
     <meta charset="UTF-8">
     <title>Reviews</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/reviews.css">
+    <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
+    <link rel="stylesheet" href="css/reviews.css?v=<?php echo filemtime('css/reviews.css'); ?>">
 </head>
 
 <body>
@@ -42,7 +42,7 @@ $reviews = getReviews($pdo);
     <h1>Customer Reviews</h1>
     <p>See what families think about RideOn Kids.</p>
 
-    <?php if (isset($_SESSION['user'])): ?>
+    <?php if (isset($_SESSION['user']) && isset($_SESSION['user_id'])): ?>
         <a href="add_review.php" class="btn-review">Leave a Review</a>
     <?php else: ?>
         <a href="login.php" class="btn-review">Login to Leave Review</a>

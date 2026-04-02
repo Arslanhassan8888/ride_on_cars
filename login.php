@@ -65,6 +65,7 @@ function handleLogin($pdo)
 
         $_SESSION['user'] = $user['name'];
         $_SESSION['role'] = $user['role'];
+        $_SESSION['user_id'] = $user['id'];
         $_SESSION['attempts'] = 0;
         $_SESSION['blocked_time'] = 0;
 
@@ -87,51 +88,53 @@ $error = handleLogin($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
     <link rel="stylesheet" href="css/login.css?v=<?php echo filemtime('css/login.css'); ?>">
 </head>
+
 <body>
 
-<?php include 'header.php'; ?>
+    <?php include 'header.php'; ?>
 
-<main>
-    <section class="login-hero">
-        <h1>Welcome Back!</h1>
-        <p>Login to access your account</p>
-    </section>
+    <main>
+        <section class="login-hero">
+            <h1>Welcome Back!</h1>
+            <p>Login to access your account</p>
+        </section>
 
-    <section class="login-container">
-        <form method="POST" action="login.php">
-            <?php if ($error !== ''): ?>
-                <p class="error"><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></p>
-            <?php endif; ?>
+        <section class="login-container">
+            <form method="POST" action="login.php">
+                <?php if ($error !== ''): ?>
+                    <p class="error"><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></p>
+                <?php endif; ?>
 
-            <label for="email">Email Address *</label>
-            <input
-                id="email"
-                type="email"
-                name="email"
-                value="<?php echo htmlspecialchars($_POST['email'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
-                required
-            >
+                <label for="email">Email Address *</label>
+                <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    value="<?php echo htmlspecialchars($_POST['email'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+                    required>
 
-            <label for="password">Password *</label>
-            <input id="password" type="password" name="password" required>
+                <label for="password">Password *</label>
+                <input id="password" type="password" name="password" required>
 
-            <button type="submit">Login</button>
+                <button type="submit">Login</button>
 
-            <p>
-                Don’t have an account?
-                <a href="register.php">Register here</a>
-            </p>
-        </form>
-    </section>
-</main>
+                <p>
+                    Don’t have an account?
+                    <a href="register.php">Register here</a>
+                </p>
+            </form>
+        </section>
+    </main>
 
-<?php include 'footer.php'; ?>
+    <?php include 'footer.php'; ?>
 
 </body>
+
 </html>

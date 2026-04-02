@@ -3,7 +3,7 @@ session_start();
 require 'db.php';
 
 /* PROTECT PAGE */
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['user']) || !isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
@@ -98,8 +98,8 @@ $finalTotal = $total + $shipping;
     <meta charset="UTF-8">
     <title>Your Cart</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
+    <link rel="stylesheet" href="css/cart.css?v=<?php echo filemtime('css/cart.css'); ?>">
 </head>
 
 <body>

@@ -20,18 +20,20 @@
 /* BUTTON */
 .btn-review {
     display: inline-block;
-    background: #3b6df6;
-    color: white;
+    background: white;
+    color: #3b6df6;
     padding: 12px 24px;
     border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
     transition: 0.3s;
 }
-
 .btn-review:hover {
-    background: #2f5fd0;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(59, 109, 246, 0.4);
+    background: #ffffff;
 }
+
 
 /* GRID */
 .reviews-grid {
@@ -85,6 +87,95 @@
     font-size: 13px;
     color: #999;
     margin-top: 10px;
+}
+
+/* FORM CONTAINER */
+.register-container {
+    max-width: 500px;
+    margin: 40px auto;
+    background: #f5f6f8;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* FORM */
+.register-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* LABELS */
+.register-container label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* INPUTS */
+.register-container input,
+.register-container select,
+.register-container textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+}
+
+/* FOCUS */
+.register-container input:focus,
+.register-container select:focus,
+.register-container textarea:focus {
+    border-color: #3b6df6;
+}
+
+/* BUTTON */
+.register-container button {
+    margin-top: 20px;
+    padding: 12px;
+    background: #3b6df6;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.register-container button:hover {
+    background: #2f5fd0;
+}
+
+/* ERROR */
+.error {
+    background: #ffdddd;
+    color: #b30000;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* SUCCESS */
+.success {
+    background: #ddffdd;
+    color: #006600;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* TEXTAREA */
+textarea {
+    resize: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .register-container {
+        margin: 20px;
+        padding: 20px;
+    }
 }
 
 /* RESPONSIVE */
