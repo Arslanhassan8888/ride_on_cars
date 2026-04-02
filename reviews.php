@@ -51,6 +51,7 @@ $reviews = getReviews($pdo);
 
 <!-- REVIEWS -->
 <section class="reviews-grid">
+    <h2 class="visually-hidden-heading">Customer reviews list</h2>
 
     <?php foreach ($reviews as $review): ?>
 
@@ -64,7 +65,7 @@ $reviews = getReviews($pdo);
             <?= htmlspecialchars($review['message']) ?>
         </p>
 
-        <h3><?= htmlspecialchars($review['name']) ?></h3>
+        <h2><?= htmlspecialchars($review['name']) ?></h2>
 
         <p class="location">
             <?= htmlspecialchars($review['location']) ?>

@@ -230,3 +230,9 @@
         width: 90%;
     }
 }
+
+/* ================= USERS TABLE ================= */
+.admin-table td span {
+    color: #555;
+    font-weight: bold;
+}

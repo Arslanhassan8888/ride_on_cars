@@ -72,8 +72,9 @@ list($error, $success) = handleReview($pdo);
         </section>
 
         <section class="register-container">
+            <h2 class="visually-hidden-heading">Review submission form</h2>
 
-            <form method="POST">
+            <form method="POST" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
 
                 <?php if ($error): ?>
                     <p class="error"><?= htmlspecialchars($error) ?></p>
@@ -83,26 +84,40 @@ list($error, $success) = handleReview($pdo);
                     <p class="success"><?= htmlspecialchars($success) ?></p>
                 <?php endif; ?>
 
-                <label>Name *</label>
-                <input type="text" name="name" required>
+                <label for="review-name">Name *</label>
+                <input
+                    type="text"
+                    id="review-name"
+                    name="name"
+                    required
+                    value="<?= isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '' ?>">
 
-                <label>Location *</label>
-                <input type="text" name="location" required>
+                <label for="review-location">Location *</label>
+                <input
+                    type="text"
+                    id="review-location"
+                    name="location"
+                    required
+                    value="<?= isset($_POST['location']) ? htmlspecialchars($_POST['location']) : '' ?>">
 
-                <label>Rating *</label>
-                <select name="rating" required>
+                <label for="review-rating">Rating *</label>
+                <select id="review-rating" name="rating" required>
                     <option value="">Select rating</option>
-                    <option value="5">⭐⭐⭐⭐⭐</option>
-                    <option value="4">⭐⭐⭐⭐</option>
-                    <option value="3">⭐⭐⭐</option>
-                    <option value="2">⭐⭐</option>
-                    <option value="1">⭐</option>
+                    <option value="5" <?= (isset($_POST['rating']) && $_POST['rating'] == '5') ? 'selected' : '' ?>>⭐⭐⭐⭐⭐</option>
+                    <option value="4" <?= (isset($_POST['rating']) && $_POST['rating'] == '4') ? 'selected' : '' ?>>⭐⭐⭐⭐</option>
+                    <option value="3" <?= (isset($_POST['rating']) && $_POST['rating'] == '3') ? 'selected' : '' ?>>⭐⭐⭐</option>
+                    <option value="2" <?= (isset($_POST['rating']) && $_POST['rating'] == '2') ? 'selected' : '' ?>>⭐⭐</option>
+                    <option value="1" <?= (isset($_POST['rating']) && $_POST['rating'] == '1') ? 'selected' : '' ?>>⭐</option>
                 </select>
 
-                <label>Your Review *</label>
-                <textarea name="message" rows="4" required></textarea>
+                <label for="review-message">Your Review *</label>
+                <textarea
+                    id="review-message"
+                    name="message"
+                    rows="4"
+                    required><?= isset($_POST['message']) ? htmlspecialchars($_POST['message']) : '' ?></textarea>
 
-                <button type="submit">Submit Review</button>
+                <button type="submit" class="btn-review1">Submit Review</button>
 
             </form>
 
