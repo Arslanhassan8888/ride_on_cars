@@ -185,6 +185,21 @@ body {
     font-weight: bold;
     color: #2563eb;
 }
+
+.admin-link {
+    color: rgb(112, 6, 6);
+    font-weight: bold;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+
+    transition: all 0.3s ease;
+}
+
+.admin-link:hover {
+    background: #2563eb; /* your blue */
+    color: white;
+}
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
 

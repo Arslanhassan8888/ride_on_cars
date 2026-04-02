@@ -38,6 +38,10 @@ function isActive($file)
 
             <?php if (isset($_SESSION['user']) && isset($_SESSION['user_id'])): ?>
 
+                <?php if ($_SESSION['role'] === 'admin'): ?>
+                    <a href="admin.php" class="admin-link">Admin</a>
+                <?php endif; ?>
+
                 <span class="welcome">
                     Hi, <?php echo htmlspecialchars($_SESSION['user']); ?>
                 </span>
