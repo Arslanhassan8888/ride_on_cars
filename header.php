@@ -37,7 +37,13 @@ function isActive($file)
                 <span>Hi, <?= htmlspecialchars($_SESSION['user']) ?></span>
                 <a href="logout.php">Logout</a>
 
-                <a href="cart.php" class="cart">Cart</a>
+                <?php
+                $count = isset($_SESSION['cart']) ? array_sum($_SESSION['cart']) : 0;
+                ?>
+
+                <a href="cart.php" class="cart" id="cart-count">
+                    Cart (<?= $count ?>)
+                </a>
 
             <?php else: ?>
 
