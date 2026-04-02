@@ -2,6 +2,12 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+/* ACTIVE PAGE */
+function isActive($file)
+{
+    return basename($_SERVER['PHP_SELF']) == $file ? 'active' : '';
+}
 ?>
 
 <header class="site-header">
@@ -16,41 +22,34 @@ if (session_status() === PHP_SESSION_NONE) {
         <input type="checkbox" id="menu-toggle">
         <label for="menu-toggle" class="menu-icon">☰</label>
 
-        <?php $page = basename($_SERVER['PHP_SELF']); ?>
-
         <ul class="menu">
-            <li><a href="index.php" class="<?= $page == 'index.php' ? 'active' : '' ?>">Home</a></li>
-            <li><a href="about.php" class="<?= $page == 'about.php' ? 'active' : '' ?>">About</a></li>
-            <li><a href="products.php" class="<?= $page == 'products.php' ? 'active' : '' ?>">Products</a></li>
-            <li><a href="contact.php" class="<?= $page == 'contact.php' ? 'active' : '' ?>">Contact</a></li>
-            <li><a href="reviews.php" class="<?= $page == 'reviews.php' ? 'active' : '' ?>">Reviews</a></li>
+            <li><a href="index.php" class="<?= isActive('index.php') ?>">Home</a></li>
+            <li><a href="about.php" class="<?= isActive('about.php') ?>">About</a></li>
+            <li><a href="products.php" class="<?= isActive('products.php') ?>">Products</a></li>
+            <li><a href="contact.php" class="<?= isActive('contact.php') ?>">Contact</a></li>
+            <li><a href="reviews.php" class="<?= isActive('reviews.php') ?>">Reviews</a></li>
         </ul>
 
         <aside class="user">
 
             <?php if (isset($_SESSION['user'])): ?>
 
-                <span>Hi, <?= $_SESSION['user']; ?></span>
+                <span>Hi, <?= htmlspecialchars($_SESSION['user']) ?></span>
                 <a href="logout.php">Logout</a>
+
+                <a href="cart.php" class="cart">Cart</a>
 
             <?php else: ?>
 
                 <a href="login.php">Login</a>
                 <a href="register.php">Register</a>
 
-            <?php endif; ?>
-
-            <?php if (isset($_SESSION['user'])): ?>
-
-                <a href="cart.php" class="cart">Cart</a>
-
-            <?php else: ?>
-
                 <a href="login.php" class="cart disabled">Cart</a>
 
             <?php endif; ?>
 
         </aside>
+
     </nav>
 
 </header>

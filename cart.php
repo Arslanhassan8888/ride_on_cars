@@ -13,7 +13,7 @@ if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-/* GET INPUT */
+/* INPUT */
 $action = $_GET['action'] ?? '';
 $id = (int)($_GET['id'] ?? 0);
 
@@ -22,40 +22,40 @@ function handleCart($action, $id)
 {
     if ($id <= 0) return;
 
-    switch ($action) {
+    // ADD / INCREASE
+    if ($action == 'add' || $action == 'increase') {
+        $_SESSION['cart'][$id] = ($_SESSION['cart'][$id] ?? 0) + 1;
 
-        case 'add':
-        case 'increase':
-            $_SESSION['cart'][$id] = ($_SESSION['cart'][$id] ?? 0) + 1;
-
-            if ($action === 'add') {
-                header("Location: products.php");
-                exit();
-            }
-            break;
-
-        case 'decrease':
-            if (isset($_SESSION['cart'][$id])) {
-                $_SESSION['cart'][$id]--;
-
-                if ($_SESSION['cart'][$id] <= 0) {
-                    unset($_SESSION['cart'][$id]);
-                }
-            }
-            break;
-
-        case 'remove':
-            unset($_SESSION['cart'][$id]);
-            break;
+        if ($action == 'add') {
+            header("Location: products.php");
+            exit();
+        }
     }
 
-    if (in_array($action, ['increase', 'decrease', 'remove'])) {
+    // DECREASE
+    if ($action == 'decrease') {
+        if (isset($_SESSION['cart'][$id])) {
+            $_SESSION['cart'][$id]--;
+
+            if ($_SESSION['cart'][$id] <= 0) {
+                unset($_SESSION['cart'][$id]);
+            }
+        }
+    }
+
+    // REMOVE
+    if ($action == 'remove') {
+        unset($_SESSION['cart'][$id]);
+    }
+
+    // REFRESH PAGE
+    if ($action == 'increase' || $action == 'decrease' || $action == 'remove') {
         header("Location: cart.php");
         exit();
     }
 }
 
-/* GET PRODUCTS FROM DB */
+/* GET CART ITEMS */
 function getCartItems($pdo, $cart)
 {
     if (empty($cart)) return [];
@@ -69,7 +69,7 @@ function getCartItems($pdo, $cart)
     return $stmt->fetchAll();
 }
 
-/* CALCULATE TOTAL */
+/* TOTAL */
 function getTotal($items, $cart)
 {
     $total = 0;
@@ -110,7 +110,6 @@ $finalTotal = $total + $shipping;
 
 <section class="cart-container">
 
-    <!-- CART ITEMS -->
     <section class="cart-items">
 
         <h1>Your Cart</h1>
@@ -141,13 +140,9 @@ $finalTotal = $total + $shipping;
             <p class="price">£<?= number_format($item['price'], 2) ?></p>
 
             <section class="qty">
-
                 <a href="cart.php?action=decrease&id=<?= $item['id'] ?>">−</a>
-
                 <span><?= $qty ?></span>
-
                 <a href="cart.php?action=increase&id=<?= $item['id'] ?>">+</a>
-
             </section>
 
             <p class="subtotal">
@@ -166,7 +161,6 @@ $finalTotal = $total + $shipping;
 
     </section>
 
-    <!-- SUMMARY -->
     <section class="summary">
 
         <h2>Order Summary</h2>

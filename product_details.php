@@ -2,25 +2,26 @@
 session_start();
 require 'db.php';
 
-// Get product ID safely
-$id = $_GET['id'] ?? 0;
+/* GET ID */
+$id = (int)($_GET['id'] ?? 0);
 
-// Function to get single product
-function getProductById($pdo, $id) {
+/* GET PRODUCT */
+function getProduct($pdo, $id)
+{
     $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
-    $stmt->execute([(int)$id]);
+    $stmt->execute([$id]);
     return $stmt->fetch();
 }
 
-// Function for stars
-function renderStars($rating) {
-    return str_repeat("★", (int)$rating);
+/* STARS */
+function stars($rating)
+{
+    return str_repeat("★", $rating);
 }
 
-// Fetch product
-$product = getProductById($pdo, $id);
+/* DATA */
+$product = getProduct($pdo, $id);
 
-// If not found
 if (!$product) {
     die("Product not found.");
 }
@@ -43,68 +44,65 @@ if (!$product) {
 
 <main>
 
-    <!-- PRODUCT DETAILS -->
-    <section class="product-details">
+<section class="product-details">
 
-        <!-- IMAGE -->
-        <figure class="product-image">
-            <img src="images/<?= htmlspecialchars($product['image']) ?>" 
-                 alt="<?= htmlspecialchars($product['name']) ?>">
-        </figure>
+    <!-- IMAGE -->
+    <figure class="product-image">
+        <img src="images/<?= $product['image'] ?>" 
+             alt="<?= htmlspecialchars($product['name']) ?>">
+    </figure>
 
-        <!-- INFO -->
-        <section class="product-info">
+    <!-- INFO -->
+    <section class="product-info">
 
-            <h1><?= htmlspecialchars($product['name']) ?></h1>
+        <h1><?= htmlspecialchars($product['name']) ?></h1>
 
-            <p class="rating">
-                <?= renderStars($product['rating']) ?>
-            </p>
+        <p class="rating">
+            <?= stars($product['rating']) ?>
+        </p>
 
-            <p class="price">
-                £<?= number_format($product['price'], 2) ?>
-            </p>
+        <p class="price">
+            £<?= number_format($product['price'], 2) ?>
+        </p>
 
-            <p class="desc">
-                <?= htmlspecialchars($product['description']) ?>
-            </p>
+        <p class="desc">
+            <?= htmlspecialchars($product['description']) ?>
+        </p>
 
-            <!-- EXTRA INFO -->
-            <section class="extra-info">
-                <p><strong>Age Range:</strong> <?= htmlspecialchars($product['age_range']) ?></p>
-                <p><strong>Stock:</strong> <?= htmlspecialchars($product['stock']) ?></p>
-            </section>
+        <!-- EXTRA INFO -->
+        <section class="extra-info">
+            <p><strong>Age Range:</strong> <?= $product['age_range'] ?></p>
+            <p><strong>Stock:</strong> <?= $product['stock'] ?></p>
+        </section>
 
-            <!-- LONG DESCRIPTION -->
-            <section>
-                <h2>Product Information</h2>
-                <p><?= htmlspecialchars($product['long_description']) ?></p>
-            </section>
+        <!-- LONG DESCRIPTION -->
+        <section>
+            <h2>Product Information</h2>
+            <p><?= htmlspecialchars($product['long_description']) ?></p>
+        </section>
 
-            <!-- ACTIONS -->
-            <section class="actions">
+        <!-- ACTIONS -->
+        <section class="actions">
 
-                <!-- Add to cart (login required) -->
-                <?php if (isset($_SESSION['user'])): ?>
-                    <a href="cart.php?action=add&id=<?= $product['id'] ?>" class="btn-cart">
-                        Add to Cart
-                    </a>
-                <?php else: ?>
-                    <a href="login.php" class="btn-cart">
-                        Login to Buy
-                    </a>
-                <?php endif; ?>
-
-                <!-- Back -->
-                <a href="products.php" class="btn-back">
-                    ← Back to Products
+            <?php if (isset($_SESSION['user'])): ?>
+                <a href="cart.php?action=add&id=<?= $product['id'] ?>" class="btn-cart">
+                    Add to Cart
                 </a>
+            <?php else: ?>
+                <a href="login.php" class="btn-cart">
+                    Login to Buy
+                </a>
+            <?php endif; ?>
 
-            </section>
+            <a href="products.php" class="btn-back">
+                ← Back to Products
+            </a>
 
         </section>
 
     </section>
+
+</section>
 
 </main>
 

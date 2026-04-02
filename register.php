@@ -1,22 +1,14 @@
 <?php
 session_start();
-
 require 'db.php';
 
 $error = "";
 $success = "";
 
-/* ================= FUNCTIONS ================= */
-
-/* Clean input */
-function sanitizeInput($data) {
-    return htmlspecialchars(trim($data));
-}
-
-/* Validate register form */
-function validateRegister($name, $email, $password, $confirm) {
-
-    if (empty($name) || empty($email) || empty($password) || empty($confirm)) {
+/* VALIDATE */
+function validate($name, $email, $password, $confirm)
+{
+    if ($name == "" || $email == "" || $password == "" || $confirm == "") {
         return "All fields are required.";
     }
 
@@ -28,53 +20,58 @@ function validateRegister($name, $email, $password, $confirm) {
         return "Password must be at least 6 characters.";
     }
 
-    if ($password !== $confirm) {
+    if ($password != $confirm) {
         return "Passwords do not match.";
     }
 
     return "";
 }
 
-/* Create user in DB */
-function createUser($pdo, $name, $email, $password) {
-
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+/* CREATE USER */
+function createUser($pdo, $name, $email, $password)
+{
+    $hash = password_hash($password, PASSWORD_DEFAULT);
 
     try {
         $stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
-        $stmt->execute([$name, $email, $hashedPassword]);
+        $stmt->execute([$name, $email, $hash]);
         return "success";
-
     } catch (PDOException $e) {
         return "Email already exists.";
     }
 }
 
-/* ================= MAIN LOGIC ================= */
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $name = sanitizeInput($_POST['name']);
-    $email = sanitizeInput($_POST['email']);
-    $password = trim($_POST['password']);
-    $confirm = trim($_POST['confirm']);
-
-    $validationError = validateRegister($name, $email, $password, $confirm);
-
-    if (!empty($validationError)) {
-        $error = $validationError;
-    } else {
-
-        $result = createUser($pdo, $name, $email, $password);
-
-        if ($result === "success") {
-            $success = "Account created successfully! Redirecting...";
-            header("refresh:2;url=login.php");
-        } else {
-            $error = $result;
-        }
+/* HANDLE REGISTER */
+function handleRegister($pdo)
+{
+    if ($_SERVER["REQUEST_METHOD"] != "POST") {
+        return ["", ""];
     }
+
+    // Sanitize inputs
+    $name = htmlspecialchars(trim($_POST['name']));
+    $email = htmlspecialchars(trim($_POST['email']));
+    $password = htmlspecialchars($_POST['password']);   // added as requested
+    $confirm = htmlspecialchars($_POST['confirm']);     // added as requested
+
+    $error = validate($name, $email, $password, $confirm);
+
+    if ($error != "") {
+        return [$error, ""];
+    }
+
+    $result = createUser($pdo, $name, $email, $password);
+
+    if ($result == "success") {
+        header("refresh:2;url=login.php");
+        return ["", "Account created successfully! Redirecting..."];
+    }
+
+    return [$result, ""];
 }
+
+/* RUN */
+list($error, $success) = handleRegister($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -92,45 +89,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <main>
 
-    <section class="register-hero">
-        <h1>Create Account</h1>
-        <p>Join Ride On Cars today</p>
-    </section>
+<section class="register-hero">
+    <h1>Create Account</h1>
+    <p>Join Ride On Cars today</p>
+</section>
 
-    <section class="register-container">
+<section class="register-container">
 
-        <form method="POST">
+    <form method="POST">
 
-            <?php if (!empty($error)): ?>
-                <p class="error"><?= htmlspecialchars($error) ?></p>
-            <?php endif; ?>
+        <?php if ($error): ?>
+            <p class="error"><?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
 
-            <?php if (!empty($success)): ?>
-                <p class="success"><?= htmlspecialchars($success) ?></p>
-            <?php endif; ?>
+        <?php if ($success): ?>
+            <p class="success"><?= htmlspecialchars($success) ?></p>
+        <?php endif; ?>
 
-            <label for="name">Full Name *</label>
-            <input id="name" type="text" name="name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" required>
+        <label for="name">Full Name *</label>
+        <input id="name" type="text" name="name"
+               value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" required>
 
-            <label for="email">Email Address *</label>
-            <input id="email" type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
+        <label for="email">Email Address *</label>
+        <input id="email" type="email" name="email"
+               value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
 
-            <label for="password">Password *</label>
-            <input id="password" type="password" name="password" required>
+        <label for="password">Password *</label>
+        <input id="password" type="password" name="password" required>
 
-            <label for="confirm">Confirm Password *</label>
-            <input id="confirm" type="password" name="confirm" required>
+        <label for="confirm">Confirm Password *</label>
+        <input id="confirm" type="password" name="confirm" required>
 
-            <button type="submit">Register</button>
+        <button type="submit">Register</button>
 
-            <p>
-                Already have an account?
-                <a href="login.php">Login here</a>
-            </p>
+        <p>
+            Already have an account?
+            <a href="login.php">Login here</a>
+        </p>
 
-        </form>
+    </form>
 
-    </section>
+</section>
 
 </main>
 
