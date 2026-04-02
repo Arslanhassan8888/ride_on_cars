@@ -1,4 +1,3 @@
-/* HERO (keep same) */
 .products-hero {
     background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
     color: white;
@@ -11,33 +10,41 @@
     margin-bottom: 10px;
 }
 
-/* GRID */
+.section-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: #111;
+}
+
+.products-list-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 50px;
+}
+
 .products-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    padding: 50px;
 }
 
-/* CARD */
 .product-card {
-    background: white; 
+    background: white;
     border-radius: 16px;
     padding: 20px;
     text-align: center;
-
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-
     transition: all 0.3s ease;
 }
 
-/* HOVER */
 .product-card:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
 
-/* IMAGE */
 .product-card img {
     width: 100%;
     height: 180px;
@@ -45,28 +52,24 @@
     margin-bottom: 10px;
 }
 
-/* TITLE */
 .product-card h2 {
-    color: #1d4ed8; /* darker blue */
+    color: #1d4ed8;
     font-size: 20px;
     margin-bottom: 5px;
 }
 
-/* RATING  */
 .rating {
-    color: #ab6f08; /* darker orange */
+    color: #654206;
     font-size: 18px;
     margin: 5px 0;
 }
 
-/* DESC */
 .desc {
     font-size: 14px;
-    color: #374151; /* darker grey for readability */
+    color: #374151;
     margin-bottom: 10px;
 }
 
-/* PRICE */
 .price {
     font-size: 22px;
     font-weight: bold;
@@ -74,14 +77,12 @@
     margin: 10px 0;
 }
 
-/* BUTTONS */
 .actions {
     display: flex;
     justify-content: center;
     gap: 10px;
 }
 
-/* ADD TO CART */
 .btn-cart {
     background: #1d4ed8;
     color: white;
@@ -92,7 +93,6 @@
     transition: 0.3s;
 }
 
-/* MORE INFO */
 .btn-info {
     background: #e5e7eb;
     color: #111;
@@ -103,7 +103,6 @@
     transition: 0.3s;
 }
 
-/* HOVER EFFECTS */
 .btn-cart:hover {
     background: #1e40af;
     transform: scale(1.05);
@@ -113,65 +112,53 @@
     background: #d1d5db;
 }
 
-/* ================= FILTERS ================= */
-/* FILTER BOX */
 .filter-box form {
-    background: white;
+    max-width: 1200px;
+    margin: 30px auto;
     padding: 20px 30px;
-    margin: 30px;
+    background: white;
     border-radius: 12px;
-
     display: flex;
-    align-items: center;   
+    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
 }
 
-/* LABEL */
 .filter-box label {
     font-weight: 600;
     font-size: 14px;
 }
 
-/* INPUT + SELECT IMPROVED */
 .filter-box input,
 .filter-box select {
     height: 42px;
     padding: 0 12px;
-
     border-radius: 10px;
-    border: 1px solid #e9ecf0; /* softer gray */
-
-    background: #f5f6f8;       /* subtle background */
-    color: #111827;            /* strong text */
-
+    border: 1px solid #e9ecf0;
+    background: #f5f6f8;
+    color: #111827;
     font-size: 14px;
-
     transition: all 0.25s ease;
 }
 
-/* PLACEHOLDER */
 .filter-box input::placeholder {
     color: #9ca3af;
 }
 
-/* FOCUS STATE (VERY IMPORTANT) */
 .filter-box input:focus,
 .filter-box select:focus {
     outline: none;
     border-color: #2563eb;
-
     background: white;
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
-/* HOVER */
 .filter-box input:hover,
 .filter-box select:hover {
     border-color: #94a3b8;
 }
-/* BUTTON */
+
 .filter-box button {
     height: 40px;
     padding: 0 18px;
@@ -181,11 +168,9 @@
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
-
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
-/* CLEAR BUTTON */
 .clear-btn {
     height: 40px;
     display: inline-flex;
@@ -195,11 +180,9 @@
     color: #111;
     border-radius: 8px;
     text-decoration: none;
-
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
-/* HOVER EFFECTS */
 .filter-box button:hover {
     transform: scale(1.08);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -210,7 +193,17 @@
     transform: scale(1.05);
 }
 
-/* RESPONSIVE */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
+
 @media (max-width: 768px) {
     .products-grid {
         grid-template-columns: 1fr;
