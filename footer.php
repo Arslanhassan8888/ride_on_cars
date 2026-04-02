@@ -1,21 +1,22 @@
 <footer class="site-footer">
 
-    <section>
-        <h3>Ride On Cars</h3>
+    <section class="footer-info">
+        <h2 class="visually-hidden">Footer Information</h2>
+        <p class="footer-title">Ride On Cars</p>
         <p>Safe and fun cars for kids.</p>
     </section>
 
-    <nav class="footer-nav">
+    <nav class="footer-nav" aria-label="Footer navigation">
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="about.php">About</a></li>
-            <li><a href="products.php">Products</a></li>
-            <li><a href="contact.php">Contact</a></li>
-            <li><a href="reviews.php">Reviews</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Reviews</a></li>
         </ul>
     </nav>
 
-    <p>&copy; <?php echo date("Y"); ?> Ride On Cars</p>
+    <p class="footer-copy">&copy; <?php echo date("Y"); ?> Ride On Cars</p>
 
 </footer>
 <script src="js/main.js"></script>

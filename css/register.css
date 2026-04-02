@@ -27,12 +27,14 @@ main {
 
 /* CONTAINER */
 .register-container {
-    flex: 1;
     display: flex;
+    flex-direction: column;   /* STACK */
+    align-items: center;      /* CENTER */
     justify-content: center;
-    align-items: center;
+
     margin-bottom: 80px;
     margin-top: -40px;
+    gap: 20px;                /* SPACE between title & form */
 }
 
 /* FORM */
@@ -105,6 +107,14 @@ form a:hover {
     color: green;
     font-weight: bold;
     text-align: center;
+}
+
+.register-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: black;
 }
 /* RESPONSIVE */
 @media (max-width: 768px) {

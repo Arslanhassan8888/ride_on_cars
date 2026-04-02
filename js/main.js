@@ -50,3 +50,12 @@ function updateCartCount(newCount) {
         cart.textContent = "Cart (" + newCount + ")";
     }
 }
+
+// Confirm delete (for reviews)
+document.querySelectorAll('.btn-delete').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+        if (!confirm("Are you sure you want to remove this item?")) {
+            e.preventDefault();
+        }
+    });
+});

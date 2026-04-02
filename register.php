@@ -95,6 +95,7 @@ list($error, $success) = handleRegister($pdo);
 </section>
 
 <section class="register-container">
+    <h2 class="register-title">Register</h2>
 
     <form method="POST">
 

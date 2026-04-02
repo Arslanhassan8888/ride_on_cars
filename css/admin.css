@@ -1,0 +1,146 @@
+/* ================= ADMIN CONTAINER ================= */
+.admin-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* ================= HEADER ================= */
+.admin-header {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    color: white;
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+}
+
+.admin-header h1 {
+    margin: 0 0 10px 0;
+}
+
+.admin-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+/* ================= BUTTONS ================= */
+.btn-add,
+.btn-users {
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    background: white;
+    color: #2563eb;
+    /* add subtle shadow and smooth animation */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.btn-add:hover,
+.btn-users:hover {
+    /* scale slightly and move up for an elevated feel */
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    background: #f5f7fa;
+}
+
+/* ================= TABLE ================= */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* HEADER */
+.admin-table th {
+    background: #2563eb;
+    color: white;
+    padding: 15px;
+    text-align: left;
+}
+
+/* CELLS */
+.admin-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+/* ROW HOVER */
+.admin-table tr:hover {
+    background: #f1f5f9;
+}
+
+/* IMAGE */
+.admin-table img {
+    width: 60px;
+    border-radius: 8px;
+}
+
+/* PRODUCT TEXT */
+.admin-table td p {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* ================= ACTION BUTTONS ================= */
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* EDIT */
+.btn-edit {
+    background: #2563eb;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    /* subtle shadow and smooth animation */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.btn-edit:hover {
+    background: #1e40af;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* DELETE */
+.btn-delete {
+    background: #dc2626;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    /* subtle shadow and smooth animation */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+    background: #991b1b;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .admin-actions {
+        flex-direction: column;
+    }
+    .admin-table {
+        font-size: 14px;
+    }
+    .admin-table td,
+    .admin-table th {
+        padding: 10px;
+    }
+}

@@ -88,14 +88,12 @@ $error = handleLogin($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
     <link rel="stylesheet" href="css/login.css?v=<?php echo filemtime('css/login.css'); ?>">
 </head>
-
 <body>
 
     <?php include 'header.php'; ?>
@@ -107,6 +105,8 @@ $error = handleLogin($pdo);
         </section>
 
         <section class="login-container">
+            <h2 class="login-title">Login</h2>
+
             <form method="POST" action="login.php">
                 <?php if ($error !== ''): ?>
                     <p class="error"><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></p>
@@ -118,7 +118,8 @@ $error = handleLogin($pdo);
                     type="email"
                     name="email"
                     value="<?php echo htmlspecialchars($_POST['email'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
-                    required>
+                    required
+                >
 
                 <label for="password">Password *</label>
                 <input id="password" type="password" name="password" required>
@@ -136,5 +137,4 @@ $error = handleLogin($pdo);
     <?php include 'footer.php'; ?>
 
 </body>
-
 </html>

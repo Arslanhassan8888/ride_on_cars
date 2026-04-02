@@ -28,12 +28,20 @@ main {
 
 /* LOGIN CONTAINER */
 .login-container {
-    flex: 1;
     display: flex;
+    flex-direction: column;   /* stack vertically */
+    align-items: center;      /* center horizontally */
     justify-content: center;
-    align-items: center;
+
     margin-bottom: 80px;
     margin-top: -40px;
+    gap: 20px;                /* space between title and form */
+}
+
+.login-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
 }
 
 /* FORM */
