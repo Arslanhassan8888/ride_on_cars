@@ -87,7 +87,7 @@ $products = getProducts($pdo);
                                         Edit
                                     </a>
 
-                                    <a href="delete_product.php?id=<?= $product['id'] ?>" class="btn-delete js-delete">
+                                    <a href="delete_product.php?id=<?= $product['id'] ?>" class="btn-delete">
                                         Delete
                                     </a>
 

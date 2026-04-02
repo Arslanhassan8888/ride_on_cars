@@ -19,4 +19,4 @@
     <p class="footer-copy">&copy; <?php echo date("Y"); ?> Ride On Cars</p>
 
 </footer>
-<script src="js/main.js"></script>
+<script src="<?php echo $base; ?>js/main.js"></script>

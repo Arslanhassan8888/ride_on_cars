@@ -13,14 +13,6 @@ window.addEventListener("scroll", function() {
 
 });
 
-// Confirm delete
-document.querySelectorAll('.btn-delete').forEach(btn => {
-    btn.addEventListener('click', function (e) {
-        if (!confirm("Are you sure you want to remove this item?")) {
-            e.preventDefault();
-        }
-    });
-});
 
 // Button click animation
 document.querySelectorAll('.qty a, .btn-delete').forEach(btn => {
@@ -53,9 +45,12 @@ function updateCartCount(newCount) {
 
 // Confirm delete (for reviews)
 document.querySelectorAll('.btn-delete').forEach(btn => {
-    btn.addEventListener('click', function (e) {
-        if (!confirm("Are you sure you want to remove this item?")) {
-            e.preventDefault();
-        }
-    });
+    btn.removeEventListener('click', confirmDelete); // remove old
+    btn.addEventListener('click', confirmDelete);
 });
+
+function confirmDelete(e) {
+    if (!confirm("Are you sure you want to remove this item?")) {
+        e.preventDefault();
+    }
+}

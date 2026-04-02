@@ -195,7 +195,5 @@ $finalTotal = $total + $shipping;
 
 <?php include 'footer.php'; ?>
 
-<script src="js/cart.js"></script>
-
 </body>
 </html>
