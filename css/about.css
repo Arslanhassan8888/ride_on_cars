@@ -105,6 +105,14 @@
     color: #555;
 }
 
+.visually-hidden-heading {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
 

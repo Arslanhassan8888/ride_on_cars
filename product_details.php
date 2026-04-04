@@ -43,81 +43,86 @@ if (!$product) {
 
 <body>
 
-<?php include 'header.php'; ?>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<main>
+    <?php include 'header.php'; ?>
 
-    <!-- PAGE MAIN HEADING (for accessibility) -->
-    <h1 class="sr-only">Product Details</h1>
+    <main id="main-content">
 
-    <section class="product-details">
-        <h2 class="sr-only">Electrical Car</h2>
 
-        <!-- IMAGE -->
-        <figure class="product-image">
-            <img
-                src="images/<?php echo htmlspecialchars($product['image'], ENT_QUOTES, 'UTF-8'); ?>"
-                alt="<?php echo htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8'); ?>">
-        </figure>
 
-        <!-- INFO -->
-        <section class="product-info">
+        <!-- PAGE MAIN HEADING (for accessibility) -->
+        <h1 class="sr-only">Product Details</h1>
 
-            <!-- changed from h1 to h2 -->
-            <h2><?php echo htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8'); ?></h2>
+        <section class="product-details">
+            <h2 class="sr-only">Electrical Car</h2>
 
-            <p class="rating">
-                <?php echo stars($product['rating']); ?>
-            </p>
+            <!-- IMAGE -->
+            <figure class="product-image">
+                <img
+                    src="images/<?php echo htmlspecialchars($product['image'], ENT_QUOTES, 'UTF-8'); ?>"
+                    alt="<?php echo htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8'); ?>">
+            </figure>
 
-            <p class="price">
-                £<?php echo number_format($product['price'], 2); ?>
-            </p>
+            <!-- INFO -->
+            <section class="product-info">
 
-            <p class="desc">
-                <?php echo htmlspecialchars($product['description'], ENT_QUOTES, 'UTF-8'); ?>
-            </p>
+                <!-- changed from h1 to h2 -->
+                <h2><?php echo htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8'); ?></h2>
 
-            <!-- EXTRA INFO -->
-            <section class="extra-info">
-                <h3 class="sr-only">Extra Information</h3>
-                <p><strong>Age Range:</strong> <?php echo htmlspecialchars($product['age_range'], ENT_QUOTES, 'UTF-8'); ?></p>
-                <p><strong>Stock:</strong> <?php echo htmlspecialchars($product['stock'], ENT_QUOTES, 'UTF-8'); ?></p>
-            </section>
+                <p class="rating">
+                    <?php echo stars($product['rating']); ?>
+                </p>
 
-            <!-- LONG DESCRIPTION -->
-            <section>
-                <h3>Product Information</h3>
-                <p><?php echo htmlspecialchars($product['long_description'], ENT_QUOTES, 'UTF-8'); ?></p>
-            </section>
+                <p class="price">
+                    £<?php echo number_format($product['price'], 2); ?>
+                </p>
 
-            <!-- ACTIONS -->
-            <section class="actions">
-                <h3 class="sr-only">Actions</h3>
+                <p class="desc">
+                    <?php echo htmlspecialchars($product['description'], ENT_QUOTES, 'UTF-8'); ?>
+                </p>
 
-                <?php if (isset($_SESSION['user']) && isset($_SESSION['user_id'])): ?>
-                    <a href="cart.php?action=add&amp;id=<?php echo (int)$product['id']; ?>" class="btn-cart">
-                        Add to Cart
+                <!-- EXTRA INFO -->
+                <section class="extra-info">
+                    <h3 class="sr-only">Extra Information</h3>
+                    <p><strong>Age Range:</strong> <?php echo htmlspecialchars($product['age_range'], ENT_QUOTES, 'UTF-8'); ?></p>
+                    <p><strong>Stock:</strong> <?php echo htmlspecialchars($product['stock'], ENT_QUOTES, 'UTF-8'); ?></p>
+                </section>
+
+                <!-- LONG DESCRIPTION -->
+                <section>
+                    <h3>Product Information</h3>
+                    <p><?php echo htmlspecialchars($product['long_description'], ENT_QUOTES, 'UTF-8'); ?></p>
+                </section>
+
+                <!-- ACTIONS -->
+                <section class="actions">
+                    <h3 class="sr-only">Actions</h3>
+
+                    <?php if (isset($_SESSION['user']) && isset($_SESSION['user_id'])): ?>
+                        <a href="cart.php?action=add&amp;id=<?php echo (int)$product['id']; ?>" class="btn-cart">
+                            Add to Cart
+                        </a>
+                    <?php else: ?>
+                        <a href="login.php" class="btn-cart">
+                            Login to Buy
+                        </a>
+                    <?php endif; ?>
+
+                    <a href="products.php" class="btn-back">
+                        ← Back to Products
                     </a>
-                <?php else: ?>
-                    <a href="login.php" class="btn-cart">
-                        Login to Buy
-                    </a>
-                <?php endif; ?>
 
-                <a href="products.php" class="btn-back">
-                    ← Back to Products
-                </a>
+                </section>
 
             </section>
 
         </section>
 
-    </section>
+    </main>
 
-</main>
-
-<?php include 'footer.php'; ?>
+    <?php include 'footer.php'; ?>
 
 </body>
+
 </html>

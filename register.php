@@ -85,10 +85,11 @@ list($error, $success) = handleRegister($pdo);
     <link rel="stylesheet" href="css/register.css?v=<?php echo filemtime('css/register.css'); ?>">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <?php include 'header.php'; ?>
 
-<main>
+<main id="main-content">
 
 <section class="register-hero">
     <h1>Create Account</h1>

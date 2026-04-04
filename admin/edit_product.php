@@ -88,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Edit Product</title>
@@ -99,60 +100,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 
-<?php include '../header.php'; ?>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<main>
+    <?php include '../header.php'; ?>
 
-<section class="admin-container">
+    <main id="main-content">
 
-    <header class="admin-header">
-        <h1>Edit Product</h1>
-        <p>Update product details</p>
-    </header>
+        <section class="admin-container">
 
-    <section class="form-container">
-        <h2 class="visually-hidden-heading">Edit product form</h2>
+            <header class="admin-header">
+                <h1>Edit Product</h1>
+                <p>Update product details</p>
+            </header>
 
-        <form method="POST" enctype="multipart/form-data">
+            <section class="form-container">
+                <h2 class="visually-hidden-heading">Edit product form</h2>
 
-            <label for="name">Product Name</label>
-            <input id="name" type="text" name="name" value="<?= htmlspecialchars($product['name']) ?>" required>
+                <form method="POST" enctype="multipart/form-data">
 
-            <label for="brand">Brand</label>
-            <input id="brand" type="text" name="brand" value="<?= htmlspecialchars($product['brand']) ?>" required>
+                    <label for="name">Product Name</label>
+                    <input id="name" type="text" name="name" value="<?= htmlspecialchars($product['name']) ?>" required>
 
-            <label for="price">Price (£)</label>
-            <input id="price" type="number" step="0.01" name="price" value="<?= $product['price'] ?>" required>
+                    <label for="brand">Brand</label>
+                    <input id="brand" type="text" name="brand" value="<?= htmlspecialchars($product['brand']) ?>" required>
 
-            <label for="age_range">Age Range</label>
-            <input id="age_range" type="text" name="age_range" value="<?= htmlspecialchars($product['age_range']) ?>" required>
+                    <label for="price">Price (£)</label>
+                    <input id="price" type="number" step="0.01" name="price" value="<?= $product['price'] ?>" required>
 
-            <label for="image">Replace Image</label>
-            <input id="image" type="file" name="image">
+                    <label for="age_range">Age Range</label>
+                    <input id="age_range" type="text" name="age_range" value="<?= htmlspecialchars($product['age_range']) ?>" required>
 
-            <label for="rating">Rating</label>
-            <input id="rating" type="number" name="rating" value="<?= $product['rating'] ?>" required>
+                    <label for="image">Replace Image</label>
+                    <input id="image" type="file" name="image">
 
-            <label for="stock">Stock</label>
-            <input id="stock" type="number" name="stock" value="<?= $product['stock'] ?>" required>
+                    <label for="rating">Rating</label>
+                    <input id="rating" type="number" name="rating" value="<?= $product['rating'] ?>" required>
 
-            <label for="description">Short Description</label>
-            <textarea id="description" name="description" required><?= htmlspecialchars($product['description']) ?></textarea>
+                    <label for="stock">Stock</label>
+                    <input id="stock" type="number" name="stock" value="<?= $product['stock'] ?>" required>
 
-            <label for="long_description">Long Description</label>
-            <textarea id="long_description" name="long_description" required><?= htmlspecialchars($product['long_description']) ?></textarea>
+                    <label for="description">Short Description</label>
+                    <textarea id="description" name="description" required><?= htmlspecialchars($product['description']) ?></textarea>
 
-            <button type="submit" class="btn-add">Update Product</button>
+                    <label for="long_description">Long Description</label>
+                    <textarea id="long_description" name="long_description" required><?= htmlspecialchars($product['long_description']) ?></textarea>
 
-        </form>
+                    <button type="submit" class="btn-add">Update Product</button>
 
-    </section>
+                </form>
 
-</section>
+            </section>
 
-</main>
+        </section>
 
-<?php include '../footer.php'; ?>
+    </main>
+
+    <?php include '../footer.php'; ?>
 
 </body>
+
 </html>

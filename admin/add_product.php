@@ -83,9 +83,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 <?php include '../header.php'; ?>
 
-<main>
+<main id="main-content">
 
 <section class="admin-container">
 

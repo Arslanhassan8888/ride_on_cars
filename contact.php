@@ -36,10 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <?php include 'header.php'; ?>
 
-    <main>
+    <main id="main-content">
 
         <!-- HERO (SAME AS ABOUT) -->
         <section class="contact-hero">

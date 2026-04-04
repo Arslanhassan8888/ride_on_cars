@@ -15,7 +15,7 @@ function isActive($file)
 
 <header class="site-header">
 
-    <nav class="nav-bar">
+    <nav class="nav-bar" aria-label="Main navigation">
 
         <!-- LOGO / BRAND -->
         <a href="<?php echo $base; ?>index.php" class="brand">
@@ -25,7 +25,10 @@ function isActive($file)
 
         <!-- MOBILE MENU TOGGLE -->
         <input type="checkbox" id="menu-toggle">
-        <label for="menu-toggle" class="menu-icon">☰</label>
+        <label for="menu-toggle" class="menu-icon">
+            <span aria-hidden="true">☰</span>
+            <span class="visually-hidden">Open menu</span>
+        </label>
 
         <!-- NAVIGATION -->
         <ul class="menu">

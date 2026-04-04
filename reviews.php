@@ -32,59 +32,65 @@ $reviews = getReviews($pdo);
     <link rel="stylesheet" href="css/reviews.css?v=<?php echo filemtime('css/reviews.css'); ?>">
 </head>
 
+
 <body>
 
-<?php include 'header.php'; ?>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<main>
+    <?php include 'header.php'; ?>
 
-<!-- HERO -->
-<section class="reviews-hero">
-    <h1>Customer Reviews</h1>
-    <p>See what families think about RideOn Kids.</p>
+    <main id="main-content">
 
-    <?php if (isset($_SESSION['user']) && isset($_SESSION['user_id'])): ?>
-        <a href="add_review.php" class="btn-review">Leave a Review</a>
-    <?php else: ?>
-        <a href="login.php" class="btn-review">Login to Leave Review</a>
-    <?php endif; ?>
-</section>
 
-<!-- REVIEWS -->
-<section class="reviews-grid">
-    <h2 class="visually-hidden-heading">Customer reviews list</h2>
 
-    <?php foreach ($reviews as $review): ?>
+        <!-- HERO -->
+        <section class="reviews-hero">
+            <h1>Customer Reviews</h1>
+            <p>See what families think about RideOn Kids.</p>
 
-    <article class="review-card">
+            <?php if (isset($_SESSION['user']) && isset($_SESSION['user_id'])): ?>
+                <a href="add_review.php" class="btn-review">Leave a Review</a>
+            <?php else: ?>
+                <a href="login.php" class="btn-review">Login to Leave Review</a>
+            <?php endif; ?>
+        </section>
 
-        <p class="stars">
-            <?= stars($review['rating']) ?>
-        </p>
+        <!-- REVIEWS -->
+        <section class="reviews-grid">
+            <h2 class="visually-hidden-heading">Customer reviews list</h2>
 
-        <p class="text">
-            <?= htmlspecialchars($review['message']) ?>
-        </p>
+            <?php foreach ($reviews as $review): ?>
 
-        <h2><?= htmlspecialchars($review['name']) ?></h2>
+                <article class="review-card">
 
-        <p class="location">
-            <?= htmlspecialchars($review['location']) ?>
-        </p>
+                    <p class="stars">
+                        <?= stars($review['rating']) ?>
+                    </p>
 
-        <p class="date">
-            <?= date("d M Y", strtotime($review['created_at'])) ?>
-        </p>
+                    <p class="text">
+                        <?= htmlspecialchars($review['message']) ?>
+                    </p>
 
-    </article>
+                    <h2><?= htmlspecialchars($review['name']) ?></h2>
 
-    <?php endforeach; ?>
+                    <p class="location">
+                        <?= htmlspecialchars($review['location']) ?>
+                    </p>
 
-</section>
+                    <p class="date">
+                        <?= date("d M Y", strtotime($review['created_at'])) ?>
+                    </p>
 
-</main>
+                </article>
 
-<?php include 'footer.php'; ?>
+            <?php endforeach; ?>
+
+        </section>
+
+    </main>
+
+    <?php include 'footer.php'; ?>
 
 </body>
+
 </html>

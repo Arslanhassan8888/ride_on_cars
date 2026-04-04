@@ -104,10 +104,11 @@ $finalTotal = $total + $shipping;
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <?php include 'header.php'; ?>
 
-<main>
+<main id="main-content">
 
 <section class="cart-container">
     <h2 class="visually-hidden-heading">Shopping Cart Layout</h2>

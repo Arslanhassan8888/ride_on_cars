@@ -11,10 +11,11 @@
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <?php include 'header.php'; ?>
 
-    <main>
+    <main id="main-content">
 
         <section class="hero">
             <h1>Welcome to Ride On Cars</h1>
@@ -47,6 +48,5 @@
 
     <?php include 'footer.php'; ?>
 
-</body>
 
 </html>

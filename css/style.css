@@ -200,6 +200,20 @@ body {
     background: #2563eb;
     color: white;
 }
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 10px;
+}
+
+.skip-link:focus {
+    top: 10px;
+    background: #2563eb;
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+}
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
 

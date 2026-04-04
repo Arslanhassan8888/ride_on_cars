@@ -63,9 +63,13 @@ list($error, $success) = handleReview($pdo);
 
 <body>
 
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <?php include 'header.php'; ?>
 
-    <main>
+    <main id="main-content">
+
+
 
         <section class="reviews-hero">
             <h1>Leave a Review</h1>

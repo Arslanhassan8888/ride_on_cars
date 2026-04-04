@@ -64,10 +64,11 @@ $products = getProducts($pdo, $search, $min, $max, $sort);
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <?php include 'header.php'; ?>
 
-    <main>
+    <main id="main-content">
 
         <section class="products-hero">
             <h1>Electric Ride-On Cars</h1>
