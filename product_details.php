@@ -35,6 +35,7 @@ if (!$product) {
 <head>
     <meta charset="UTF-8">
     <title><?php echo htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8'); ?></title>
+    <link rel="icon" type="image/png" href="images/car_logo.png">
 
     <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
     <link rel="stylesheet" href="css/product_details.css?v=<?php echo filemtime('css/product_details.css'); ?>">

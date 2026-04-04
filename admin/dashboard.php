@@ -22,6 +22,7 @@ $products = getProducts($pdo);
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
+    <link rel="icon" type="image/png" href="../images/car_logo.png">
 
     <link rel="stylesheet" href="../css/style.css?v=<?php echo filemtime('../css/style.css'); ?>">
     <link rel="stylesheet" href="../css/admin.css?v=<?php echo filemtime('../css/admin.css'); ?>">
@@ -46,6 +47,7 @@ $products = getProducts($pdo);
             </header>
 
             <section class="admin-table-section">
+                <h2 class="visually-hidden-heading">Products management table</h2>
 
                 <table class="admin-table">
 

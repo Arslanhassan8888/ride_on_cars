@@ -97,6 +97,7 @@ $finalTotal = $total + $shipping;
 <head>
     <meta charset="UTF-8">
     <title>Your Cart</title>
+    <link rel="icon" type="image/png" href="images/car_logo.png">
 
     <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
     <link rel="stylesheet" href="css/cart.css?v=<?php echo filemtime('css/cart.css'); ?>">

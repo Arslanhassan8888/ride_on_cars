@@ -75,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Add Product</title>
+    <link rel="icon" type="image/png" href="../images/car_logo.png">
 
     <link rel="stylesheet" href="../css/style.css?v=<?php echo filemtime('../css/style.css'); ?>">
     <link rel="stylesheet" href="../css/admin.css?v=<?php echo filemtime('../css/admin.css'); ?>">
@@ -94,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header>
 
     <section class="form-container">
+        <h2 class="visually-hidden-heading">Add product form</h2>
 
         <form method="POST" enctype="multipart/form-data">
 

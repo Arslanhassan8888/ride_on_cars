@@ -20,6 +20,7 @@ $users = getUsers($pdo);
 <head>
     <meta charset="UTF-8">
     <title>Manage Users</title>
+    <link rel="icon" type="image/png" href="../images/car_logo.png">
 
     <link rel="stylesheet" href="../css/style.css?v=<?php echo filemtime('../css/style.css'); ?>">
     <link rel="stylesheet" href="../css/admin.css?v=<?php echo filemtime('../css/admin.css'); ?>">
@@ -39,6 +40,7 @@ $users = getUsers($pdo);
     </header>
 
     <section class="admin-table-section">
+        <h2 class="visually-hidden-heading">Users management table</h2>
 
         <table class="admin-table">
 

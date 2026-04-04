@@ -9,6 +9,8 @@ if (session_status() === PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <title>About</title>
+    <link rel="icon" type="image/png" href="images/car_logo.png">
+
 
     <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
     <link rel="stylesheet" href="css/about.css?v=<?php echo filemtime('css/about.css'); ?>">

@@ -79,6 +79,7 @@ list($error, $success) = handleRegister($pdo);
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <link rel="icon" type="image/png" href="images/car_logo.png">
 
     <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
     <link rel="stylesheet" href="css/register.css?v=<?php echo filemtime('css/register.css'); ?>">

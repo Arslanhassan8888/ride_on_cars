@@ -208,6 +208,13 @@
     font-weight: bold;
     text-align: center;
 }
+.visually-hidden-heading {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+}
 /* ================= RESPONSIVE ================= */
 /* TABLE RESPONSIVE */
 

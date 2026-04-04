@@ -91,6 +91,7 @@ $error = handleLogin($pdo);
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="icon" type="image/png" href="images/car_logo.png">
     <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
     <link rel="stylesheet" href="css/login.css?v=<?php echo filemtime('css/login.css'); ?>">
 </head>
