@@ -116,7 +116,8 @@ http://localhost/phpmyadmin
 2. Create a new database named:
 ride_on_cars
 
-3. Import the provided SQL file 
+3. Import the provided SQL file
+Remember to uncomment the entire file before use.
 
 ---
 
