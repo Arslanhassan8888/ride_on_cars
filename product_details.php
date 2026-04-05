@@ -1,14 +1,20 @@
 <?php
+// Start session if not already active
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 require 'db.php';
 
-/* GET ID */
+/*
+    Get product ID from URL.
+    Cast to integer to prevent invalid input.
+*/
 $id = (int)($_GET['id'] ?? 0);
 
-/* GET PRODUCT */
+/*
+    Retrieve a single product from the database.
+*/
 function getProduct($pdo, $id)
 {
     $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
@@ -16,15 +22,18 @@ function getProduct($pdo, $id)
     return $stmt->fetch();
 }
 
-/* STARS */
+/*
+    Convert rating value into star symbols.
+*/
 function stars($rating)
 {
     return str_repeat("★", (int)$rating);
 }
 
-/* DATA */
+/* Fetch product */
 $product = getProduct($pdo, $id);
 
+/* Stop execution if product not found */
 if (!$product) {
     die("Product not found.");
 }
@@ -34,73 +43,67 @@ if (!$product) {
 
 <head>
     <meta charset="UTF-8">
-    <title><?php echo htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8'); ?></title>
-    <link rel="icon" type="image/png" href="images/car_logo.png">
+    <title><?= htmlspecialchars($product['name']) ?></title>
 
-    <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
-    <link rel="stylesheet" href="css/product_details.css?v=<?php echo filemtime('css/product_details.css'); ?>">
+    <!-- Favicon -->
+    <link rel="icon" href="images/car_logo.png">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css?v=<?= filemtime('css/style.css'); ?>">
+    <link rel="stylesheet" href="css/product_details.css?v=<?= filemtime('css/product_details.css'); ?>">
 </head>
 
 <body>
 
+    <!-- Accessibility link -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <?php include 'header.php'; ?>
 
     <main id="main-content">
 
-
-
-        <!-- PAGE MAIN HEADING (for accessibility) -->
+        <!-- Hidden main heading -->
         <h1 class="sr-only">Product Details</h1>
 
         <section class="product-details">
-            <h2 class="sr-only">Electrical Car</h2>
 
-            <!-- IMAGE -->
+            <!-- Product image -->
             <figure class="product-image">
-                <img
-                    src="images/<?php echo htmlspecialchars($product['image'], ENT_QUOTES, 'UTF-8'); ?>"
-                    alt="<?php echo htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8'); ?>">
+                <img src="images/<?= htmlspecialchars($product['image']) ?>"
+                     alt="<?= htmlspecialchars($product['name']) ?>">
             </figure>
 
-            <!-- INFO -->
+            <!-- Product information -->
             <section class="product-info">
 
-                <!-- changed from h1 to h2 -->
-                <h2><?php echo htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8'); ?></h2>
+                <h2><?= htmlspecialchars($product['name']) ?></h2>
 
-                <p class="rating">
-                    <?php echo stars($product['rating']); ?>
-                </p>
+                <!-- Rating -->
+                <p class="rating"><?= stars($product['rating']) ?></p>
 
-                <p class="price">
-                    £<?php echo number_format($product['price'], 2); ?>
-                </p>
+                <!-- Price -->
+                <p class="price">£<?= number_format($product['price'], 2) ?></p>
 
-                <p class="desc">
-                    <?php echo htmlspecialchars($product['description'], ENT_QUOTES, 'UTF-8'); ?>
-                </p>
+                <!-- Description -->
+                <p class="desc"><?= htmlspecialchars($product['description']) ?></p>
 
-                <!-- EXTRA INFO -->
+                <!-- Extra details -->
                 <section class="extra-info">
-                    <h3 class="sr-only">Extra Information</h3>
-                    <p><strong>Age Range:</strong> <?php echo htmlspecialchars($product['age_range'], ENT_QUOTES, 'UTF-8'); ?></p>
-                    <p><strong>Stock:</strong> <?php echo htmlspecialchars($product['stock'], ENT_QUOTES, 'UTF-8'); ?></p>
+                    <p><strong>Age Range:</strong> <?= htmlspecialchars($product['age_range']) ?></p>
+                    <p><strong>Stock:</strong> <?= htmlspecialchars($product['stock']) ?></p>
                 </section>
 
-                <!-- LONG DESCRIPTION -->
+                <!-- Long description -->
                 <section>
                     <h3>Product Information</h3>
-                    <p><?php echo htmlspecialchars($product['long_description'], ENT_QUOTES, 'UTF-8'); ?></p>
+                    <p><?= htmlspecialchars($product['long_description']) ?></p>
                 </section>
 
-                <!-- ACTIONS -->
+                <!-- Actions -->
                 <section class="actions">
-                    <h3 class="sr-only">Actions</h3>
 
                     <?php if (isset($_SESSION['user']) && isset($_SESSION['user_id'])): ?>
-                        <a href="cart.php?action=add&amp;id=<?php echo (int)$product['id']; ?>" class="btn-cart">
+                        <a href="cart.php?action=add&id=<?= (int)$product['id'] ?>" class="btn-cart">
                             Add to Cart
                         </a>
                     <?php else: ?>
@@ -124,5 +127,4 @@ if (!$product) {
     <?php include 'footer.php'; ?>
 
 </body>
-
 </html>

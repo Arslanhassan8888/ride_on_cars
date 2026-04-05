@@ -1,4 +1,5 @@
-/* ================= HERO ================= */
+/* --ABOUT PAGE STYLES-- */
+/* --HERO-- */
 .about-hero {
     background: linear-gradient(to right, #2f5fd0, #2b4a9e);
     color: white;
@@ -6,18 +7,19 @@
     padding: 60px 20px;
     margin-bottom: 40px;
 }
-
+/* Hero heading */
 .about-hero h1 {
     font-size: 40px;
     margin-bottom: 10px;
 }
+/* Hero subtext */
 .about-hero p {
     font-size: 18px;
     margin-bottom: 20px;
 }
 
 
-/* ================= STORY ================= */
+/* --STORY SECTION-- */
 .about-story {
     display: flex;
     align-items: center;
@@ -25,48 +27,57 @@
     padding: 50px 40px;
 }
 
+/* Text content */
 .story-text {
     flex: 1;
 }
-
+/* Story heading */
 .story-text h2 {
     margin-bottom: 15px;
     font-size: 28px;
 }
-
+/* Story paragraphs */
 .story-text p {
     margin-bottom: 12px;
     color: #444;
     line-height: 1.6;
 }
 
+/* Image */
 .story-image {
     flex: 1;
 }
 
 .story-image img {
-    width: 100%;
+    width: 90%;        /* smaller image */
+    max-width: 500px;  /* prevents it getting too large */
+    display: block;
+    margin: 0 auto;    /* centres the image */
+
     border-radius: 20px;
     border: 3px solid #dbeafe;
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* ================= VALUES ================= */
+
+/* --VALUES SECTION-- */
+/* Container for the values section, with centered text and spacing */
 .about-values {
     padding: 50px 20px;
     text-align: center;
 }
-
+/* Values heading */
 .about-values header h2 {
     margin-bottom: 8px;
 }
-
+/* Values subtext */
 .about-values header p {
     color: #666;
     margin-bottom: 25px;
 }
 
-/* GRID */
+
+/* Values layout */
 .values-grid {
     display: flex;
     justify-content: center;
@@ -74,7 +85,8 @@
     flex-wrap: wrap;
 }
 
-/* CARD (PROFESSIONAL LOOK) */
+
+/* --CARD-- */
 .card {
     background: white;
     padding: 20px;
@@ -87,24 +99,27 @@
     transition: all 0.3s ease;
 }
 
-/* HOVER */
+/* Hover effect */
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 25px rgba(0,0,0,0.2);
 }
 
-/* TITLE */
+/* Title */
 .card h3 {
     margin-bottom: 8px;
     color: #1e3a8a;
 }
 
-/* TEXT */
+/* Text */
 .card p {
     font-size: 14px;
     color: #555;
 }
 
+
+/* --ACCESSIBILITY-- */
+/* Hidden headings for screen readers */
 .visually-hidden-heading {
     position: absolute;
     width: 1px;
@@ -113,16 +128,18 @@
     white-space: nowrap;
 }
 
-/* ================= RESPONSIVE ================= */
+
+/* --RESPONSIVE-- */
 @media (max-width: 768px) {
 
+    /* Stack layout vertically on smaller screens */
     .about-story {
         flex-direction: column;
         text-align: center;
     }
 
+    /* Limit image width */
     .story-image img {
         max-width: 90%;
     }
-
 }

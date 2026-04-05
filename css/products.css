@@ -1,3 +1,6 @@
+/* --products.css-- */
+/* --HERO SECTION-- */
+/* Top banner introducing the products page */
 .products-hero {
     background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
     color: white;
@@ -5,11 +8,15 @@
     padding: 60px 20px;
 }
 
+/* Main heading */
 .products-hero h1 {
     font-size: 42px;
     margin-bottom: 10px;
 }
 
+
+/* --SECTION TITLES-- */
+/* Used for headings such as "Product Filters" and "Product List" */
 .section-title {
     text-align: center;
     font-size: 28px;
@@ -19,32 +26,42 @@
     color: #111;
 }
 
+
+/* --PRODUCT LIST SECTION-- */
+/* Container for the full product grid */
 .products-list-section {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px 50px;
 }
 
+/* Grid layout for product cards */
 .products-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
 }
 
+
+/* --PRODUCT CARD-- */
+/* Individual product display */
 .product-card {
     background: white;
     border-radius: 16px;
     padding: 20px;
     text-align: center;
+
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     transition: all 0.3s ease;
 }
 
+/* Hover interaction */
 .product-card:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
 
+/* Product image */
 .product-card img {
     width: 100%;
     height: 180px;
@@ -52,24 +69,28 @@
     margin-bottom: 10px;
 }
 
+/* Product name */
 .product-card h2 {
     color: #1d4ed8;
     font-size: 20px;
     margin-bottom: 5px;
 }
 
+/* Rating stars */
 .rating {
     color: #654206;
     font-size: 18px;
     margin: 5px 0;
 }
 
+/* Short description */
 .desc {
     font-size: 14px;
     color: #374151;
     margin-bottom: 10px;
 }
 
+/* Price */
 .price {
     font-size: 22px;
     font-weight: bold;
@@ -77,12 +98,15 @@
     margin: 10px 0;
 }
 
+
+/* --ACTION BUTTONS-- */
 .actions {
     display: flex;
     justify-content: center;
     gap: 10px;
 }
 
+/* Add to cart button */
 .btn-cart {
     background: #1d4ed8;
     color: white;
@@ -93,6 +117,7 @@
     transition: 0.3s;
 }
 
+/* More info button */
 .btn-info {
     background: #e5e7eb;
     color: #111;
@@ -103,6 +128,7 @@
     transition: 0.3s;
 }
 
+/* Button hover effects */
 .btn-cart:hover {
     background: #1e40af;
     transform: scale(1.05);
@@ -112,12 +138,16 @@
     background: #d1d5db;
 }
 
+
+/* --FILTER BOX-- */
+/* Container for search and filter inputs */
 .filter-box form {
     max-width: 1200px;
     margin: 30px auto;
     padding: 20px 30px;
     background: white;
     border-radius: 12px;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -125,11 +155,13 @@
     gap: 15px;
 }
 
+/* Labels */
 .filter-box label {
     font-weight: 600;
     font-size: 14px;
 }
 
+/* Inputs and select fields */
 .filter-box input,
 .filter-box select {
     height: 42px;
@@ -139,26 +171,17 @@
     background: #f5f6f8;
     color: #111827;
     font-size: 14px;
-    transition: all 0.25s ease;
 }
 
-.filter-box input::placeholder {
-    color: #9ca3af;
-}
-
+/* Focus state */
 .filter-box input:focus,
 .filter-box select:focus {
     outline: none;
     border-color: #2563eb;
     background: white;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
-.filter-box input:hover,
-.filter-box select:hover {
-    border-color: #94a3b8;
-}
-
+/* Filter button */
 .filter-box button {
     height: 40px;
     padding: 0 18px;
@@ -168,9 +191,9 @@
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
 }
 
+/* Clear filters button */
 .clear-btn {
     height: 40px;
     display: inline-flex;
@@ -180,30 +203,22 @@
     color: #111;
     border-radius: 8px;
     text-decoration: none;
-    transition: 0.3s;
 }
 
-.filter-box button:hover {
-    transform: scale(1.08);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
 
-.clear-btn:hover {
-    background: #d1d5db;
-    transform: scale(1.05);
-}
-
+/* --ACCESSIBILITY-- */
+/* Hide content visually but keep it for screen readers */
 .visually-hidden {
     position: absolute;
     width: 1px;
     height: 1px;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0,0,0,0);
-    white-space: nowrap;
-    border: 0;
 }
 
+
+/* --RESPONSIVE-- */
+/* Stack products on smaller screens */
 @media (max-width: 768px) {
     .products-grid {
         grid-template-columns: 1fr;

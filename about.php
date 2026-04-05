@@ -1,4 +1,5 @@
 <?php
+// Start session only if not already active
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -10,21 +11,25 @@ if (session_status() === PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <title>About</title>
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/car_logo.png">
 
+    <!-- Main styles + page-specific styles -->
     <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
     <link rel="stylesheet" href="css/about.css?v=<?php echo filemtime('css/about.css'); ?>">
 </head>
 
 <body>
 
+    <!-- Skip link for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <?php include 'header.php'; ?>
 
     <main id="main-content">
 
-        <!-- HERO -->
+        <!-- Intro section -->
         <section class="about-hero">
             <h1>About RideOn Kids</h1>
             <p>
@@ -33,55 +38,58 @@ if (session_status() === PHP_SESSION_NONE) {
             </p>
         </section>
 
-        <!-- STORY -->
+        <!-- Company story -->
         <section class="about-story">
+
+            <!-- Hidden heading for accessibility -->
             <h2 class="visually-hidden-heading">About our story</h2>
 
+            <!-- Text content -->
             <article class="story-text">
                 <h2>Our Story</h2>
 
                 <p>
-                    RideOn Kids was founded in 2020 with a clear vision:
-                    to create high-quality electric ride-on cars that combine
-                    fun, safety, and durability. What started as a small idea
-                    quickly grew into a trusted brand for families across the UK.
+                    RideOn Kids was founded in 2020 with a simple idea — to bring safe,
+                    reliable and exciting ride-on cars to families across the UK. What
+                    began as a small project quickly grew as more parents trusted our
+                    products for their children.
                 </p>
 
                 <p>
-                    From the very beginning, our focus has been on delivering
-                    products that children love and parents can rely on. Every
-                    ride-on car is carefully selected, tested, and designed to
-                    meet strict safety standards while offering an exciting
-                    driving experience.
+                    From the beginning, our focus has always been on quality and safety.
+                    Every vehicle is carefully selected and tested to ensure it meets
+                    high standards, giving parents confidence and children a fun
+                    experience.
                 </p>
 
                 <p>
-                    We understand that toys are more than just products — they
-                    are part of childhood memories. That’s why we pay attention
-                    to every detail, from design and performance to comfort and
-                    ease of use.
+                    We believe that toys are more than just products — they are part of
+                    childhood memories. Whether it is a first drive around the garden
+                    or a fun afternoon with friends, our ride-on cars are designed to
+                    create moments that last.
                 </p>
 
                 <p>
-                    Over the years, our collection has expanded to include a wide
-                    range of vehicles — from luxury sports cars to rugged SUVs —
-                    ensuring there is something perfect for every child.
+                    As the business grew, so did our range. We introduced different
+                    styles, from sporty cars to larger off-road vehicles, ensuring there
+                    is something suitable for every age and preference.
                 </p>
 
                 <p>
-                    Today, RideOn Kids continues to grow, proudly serving thousands
-                    of families and building a reputation for quality, trust, and
-                    excellent customer experience.
+                    Today, RideOn Kids continues to develop, focusing on innovation,
+                    customer satisfaction, and long-term quality. We are proud to serve
+                    families and remain committed to improving our products year after year.
                 </p>
             </article>
 
+            <!-- Supporting image -->
             <figure class="story-image">
                 <img src="images/about.jpg" alt="Ride On Car">
             </figure>
 
         </section>
 
-        <!-- VALUES -->
+        <!-- Company values -->
         <section class="about-values">
 
             <header>
@@ -90,6 +98,8 @@ if (session_status() === PHP_SESSION_NONE) {
             </header>
 
             <section class="values-grid">
+
+                <!-- Hidden heading for structure -->
                 <h3 class="visually-hidden-heading">Company values list</h3>
 
                 <article class="card">

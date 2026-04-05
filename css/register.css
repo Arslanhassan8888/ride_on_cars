@@ -1,3 +1,4 @@
+/* --REGISTER.CSS-- */
 /* HERO */
 .register-hero {
     background: linear-gradient(135deg, #2563eb, #1e3a8a);
@@ -5,7 +6,7 @@
     text-align: center;
     padding: 50px 20px;
 }
-
+/* Hero heading */
 .register-hero h1 {
     font-size: 46px;
     margin-bottom: 10px;
@@ -26,15 +27,16 @@ main {
 }
 
 /* CONTAINER */
+/* Container for the registration form, centered and spaced appropriately */
 .register-container {
     display: flex;
-    flex-direction: column;   /* STACK */
-    align-items: center;      /* CENTER */
+    flex-direction: column;   
+    align-items: center;      
     justify-content: center;
 
     margin-bottom: 80px;
     margin-top: -40px;
-    gap: 20px;                /* SPACE between title & form */
+    gap: 20px;                
 }
 
 /* FORM */
@@ -102,13 +104,13 @@ form a {
 form a:hover {
     text-decoration: underline;
 }
-
+/* SUCCESS */
 .success {
     color: green;
     font-weight: bold;
     text-align: center;
 }
-
+/* REGISTER TITLE */
 .register-title {
     text-align: center;
     font-size: 28px;

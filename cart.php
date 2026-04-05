@@ -2,74 +2,82 @@
 session_start();
 require 'db.php';
 
-/* PROTECT PAGE */
+/* --PROTECT PAGE-- */
 if (!isset($_SESSION['user']) || !isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-/* INIT CART */
+/* --INIT CART-- */
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-/* INPUT */
+/* --INPUT-- */
 $action = $_GET['action'] ?? '';
 $id = (int)($_GET['id'] ?? 0);
 
-/* HANDLE CART */
+
+/* --HANDLE CART-- */
+/* Add, remove, increase, decrease items */
 function handleCart($action, $id)
-{
+{   /* --VALIDATE ID-- */
     if ($id <= 0) return;
 
-    // ADD / INCREASE
+    /* --ADD / INCREASE-- */
     if ($action == 'add' || $action == 'increase') {
         $_SESSION['cart'][$id] = ($_SESSION['cart'][$id] ?? 0) + 1;
-
+        /* After adding, redirect to products page to prevent multiple additions on refresh */
         if ($action == 'add') {
             header("Location: products.php");
             exit();
         }
     }
 
-    // DECREASE
+    /* --DECREASE-- */
+    /* Decrease quantity or remove if it reaches zero */
     if ($action == 'decrease') {
         if (isset($_SESSION['cart'][$id])) {
             $_SESSION['cart'][$id]--;
-
+            /* Remove from cart if quantity is zero or less */
             if ($_SESSION['cart'][$id] <= 0) {
                 unset($_SESSION['cart'][$id]);
             }
         }
     }
 
-    // REMOVE
+    /* --REMOVE-- */
     if ($action == 'remove') {
         unset($_SESSION['cart'][$id]);
     }
 
-    // REFRESH PAGE
+    /* --REFRESH-- */
+    /* Redirect back to cart page after any action to prevent form resubmission issues */
     if ($action == 'increase' || $action == 'decrease' || $action == 'remove') {
         header("Location: cart.php");
         exit();
     }
 }
 
-/* GET CART ITEMS */
-function getCartItems($pdo, $cart)
-{
-    if (empty($cart)) return [];
 
+/* --GET CART ITEMS-- */
+/* Fetch product details for items in the cart based on their IDs */
+function getCartItems($pdo, $cart)
+{   /* If cart is empty, return an empty array to avoid unnecessary database query */
+    if (empty($cart)) return [];
+    /* Prepare a query with placeholders for each product ID in the cart */
     $ids = array_keys($cart);
     $placeholders = implode(',', array_fill(0, count($ids), '?'));
-
+    /* Execute the query and fetch the product details */
     $stmt = $pdo->prepare("SELECT * FROM products WHERE id IN ($placeholders)");
     $stmt->execute($ids);
-
+    /*  Return the fetched products as an array */
     return $stmt->fetchAll();
 }
 
-/* TOTAL */
+
+/* --TOTAL CALCULATION-- */
+/* Calculate the total cost of items in the cart by multiplying price and quantity */
 function getTotal($items, $cart)
 {
     $total = 0;
@@ -82,9 +90,11 @@ function getTotal($items, $cart)
     return $total;
 }
 
-/* RUN */
-handleCart($action, $id);
 
+/* --RUN-- */
+/*  Handle cart actions based on URL parameters, then fetch cart items and calculate totals for display */
+handleCart($action, $id);
+/* Fetch product details for items currently in the cart */
 $cartItems = getCartItems($pdo, $_SESSION['cart']);
 $total = getTotal($cartItems, $_SESSION['cart']);
 
@@ -94,108 +104,133 @@ $finalTotal = $total + $shipping;
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- META -->
     <meta charset="UTF-8">
     <title>Your Cart</title>
+
+    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="images/car_logo.png">
 
+    <!-- STYLES -->
     <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
     <link rel="stylesheet" href="css/cart.css?v=<?php echo filemtime('css/cart.css'); ?>">
 </head>
 
 <body>
+
+    <!-- SKIP LINK -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<?php include 'header.php'; ?>
+    <!-- HEADER -->
+    <?php include 'header.php'; ?>
 
-<main id="main-content">
+    <!-- MAIN -->
+    <main id="main-content">
 
-<section class="cart-container">
-    <h2 class="visually-hidden-heading">Shopping Cart Layout</h2>
+        <!-- CART CONTAINER -->
+        <section class="cart-container">
+            <h2 class="visually-hidden-heading">Shopping Cart Layout</h2>
 
-    <section class="cart-items">
-        <h2 class="visually-hidden-heading">Cart Items</h2>
-        <h2>Your Cart</h2>
+            <!-- CART ITEMS -->
+            <section class="cart-items">
 
-        <?php if (empty($cartItems)): ?>
+                <h2 class="visually-hidden-heading">Cart Items</h2>
+                <h2>Your Cart</h2>
 
-            <p>Your cart is empty.</p>
-            <a href="products.php">Go to products</a>
+                <!-- EMPTY CART -->
+                <?php if (empty($cartItems)): ?>
 
-        <?php else: ?>
+                    <p>Your cart is empty.</p>
+                    <a href="products.php">Go to products</a>
 
-        <?php foreach ($cartItems as $item): ?>
+                <?php else: ?>
 
-        <?php
-        $qty = $_SESSION['cart'][$item['id']];
-        $subtotal = $item['price'] * $qty;
-        ?>
+                <!-- PRODUCT LOOP -->
+                <?php foreach ($cartItems as $item): ?>
 
-        <article class="cart-row">
+                <?php
+                $qty = $_SESSION['cart'][$item['id']];
+                $subtotal = $item['price'] * $qty;
+                ?>
 
-            <figure>
-                <img src="images/<?= htmlspecialchars($item['image']) ?>"
-                     alt="<?= htmlspecialchars($item['name']) ?>">
-            </figure>
+                <article class="cart-row">
 
-            <h2><?= htmlspecialchars($item['name']) ?></h2>
+                    <!-- IMAGE -->
+                    <figure>
+                        <img src="images/<?= htmlspecialchars($item['image']) ?>"
+                             alt="<?= htmlspecialchars($item['name']) ?>">
+                    </figure>
 
-            <p class="price">£<?= number_format($item['price'], 2) ?></p>
+                    <!-- NAME -->
+                    <h2><?= htmlspecialchars($item['name']) ?></h2>
 
-            <section class="qty">
-                <h3 class="visually-hidden-heading">Quantity controls</h3>
+                    <!-- PRICE -->
+                    <p class="price">£<?= number_format($item['price'], 2) ?></p>
 
-                <a href="cart.php?action=decrease&id=<?= $item['id'] ?>" aria-label="Decrease quantity of <?= htmlspecialchars($item['name']) ?>">−</a>
-                <span><?= $qty ?></span>
-                <a href="cart.php?action=increase&id=<?= $item['id'] ?>" aria-label="Increase quantity of <?= htmlspecialchars($item['name']) ?>">+</a>
+                    <!-- QUANTITY -->
+                    <section class="qty">
+                        <h3 class="visually-hidden-heading">Quantity controls</h3>
+
+                        <a href="cart.php?action=decrease&id=<?= $item['id'] ?>">−</a>
+                        <span><?= $qty ?></span>
+                        <a href="cart.php?action=increase&id=<?= $item['id'] ?>">+</a>
+                    </section>
+
+                    <!-- SUBTOTAL -->
+                    <p class="subtotal">£<?= number_format($subtotal, 2) ?></p>
+
+                    <!-- DELETE -->
+                    <a href="cart.php?action=remove&id=<?= $item['id'] ?>" class="btn-delete">
+                        Delete
+                    </a>
+
+                </article>
+
+                <?php endforeach; ?>
+                <?php endif; ?>
+
             </section>
 
-            <p class="subtotal">
-                £<?= number_format($subtotal, 2) ?>
-            </p>
+            <!-- SUMMARY -->
+            <section class="summary">
 
-            <a href="cart.php?action=remove&id=<?= $item['id'] ?>" class="btn-delete">
-                Delete
-            </a>
+                <h2>Order Summary</h2>
 
-        </article>
+                <!-- SUBTOTAL -->
+                <p>
+                    Subtotal
+                    <span>£<?= number_format($total, 2) ?></span>
+                </p>
 
-        <?php endforeach; ?>
+                <!-- SHIPPING -->
+                <p>
+                    Shipping
+                    <span>£<?= number_format($shipping, 2) ?></span>
+                </p>
 
-        <?php endif; ?>
+                <hr>
 
-    </section>
+                <!-- TOTAL -->
+                <p class="total">
+                    Total
+                    <span>£<?= number_format($finalTotal, 2) ?></span>
+                </p>
 
-    <section class="summary">
-        <h2>Order Summary</h2>
+                <!-- CHECKOUT -->
+                <button type="button" <?= empty($cartItems) ? 'disabled' : '' ?>>
+                    Checkout (Coming Soon)
+                </button>
 
-        <p>
-            Subtotal
-            <span>£<?= number_format($total, 2) ?></span>
-        </p>
+            </section>
 
-        <p>
-            Shipping
-            <span>£<?= number_format($shipping, 2) ?></span>
-        </p>
+        </section>
 
-        <hr>
+    </main>
 
-        <p class="total">
-            Total
-            <span>£<?= number_format($finalTotal, 2) ?></span>
-        </p>
-
-        <button type="button" <?= empty($cartItems) ? 'disabled' : '' ?>>
-            Checkout (Coming Soon)
-        </button>
-    </section>
-
-</section>
-
-</main>
-
-<?php include 'footer.php'; ?>
+    <!-- FOOTER -->
+    <?php include 'footer.php'; ?>
 
 </body>
 </html>

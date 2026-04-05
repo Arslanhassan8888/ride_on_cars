@@ -1,8 +1,4 @@
-/* =========================================
-   ACCESSIBILITY: Visually Hidden Headings
-   Keeps content available to screen readers
-   without changing page layout or design
-========================================= */
+/* --CART.CSS-- */
 .visually-hidden-heading {
     position: absolute;
     width: 1px;

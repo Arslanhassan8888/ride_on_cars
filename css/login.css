@@ -1,23 +1,26 @@
+/* LOGIN PAGE STYLESHEET */
 /* HERO */
+/* Styles for the hero section of the login page, including background, text color, and layout */
 .login-hero {
     background: linear-gradient(135deg, #2563eb, #1e3a8a);
     color: white;
     text-align: center;
     padding: 50px 20px;
 }
-
+/* Main heading in the hero section */
 .login-hero h1 {
     font-size: 46px;
     margin-bottom: 10px;
 }
 
 /* PAGE STRUCTURE */
+/* Set up the overall page layout using flexbox */
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
-
+/* Main content area that will grow to fill available space */
 main {
     flex: 1;
     display: flex;
@@ -27,17 +30,19 @@ main {
 }
 
 /* LOGIN CONTAINER */
+/* Container for the login form, centered and spaced appropriately */
 .login-container {
     display: flex;
-    flex-direction: column;   /* stack vertically */
-    align-items: center;      /* center horizontally */
+    flex-direction: column;  
+    align-items: center;     
     justify-content: center;
 
     margin-bottom: 80px;
     margin-top: -40px;
-    gap: 20px;                /* space between title and form */
+    gap: 20px;               
 }
-
+/* LOGIN TITLE */
+/* Styles for the title above the login form */
 .login-title {
     font-size: 28px;
     font-weight: bold;

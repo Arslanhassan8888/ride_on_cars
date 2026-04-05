@@ -1,6 +1,6 @@
 /* Main JavaScript for Ride On Cars
 */
-/* 1. Header scroll effect*/
+/* --HEADER SCROLL EFFECT-- */
 window.addEventListener("scroll", function() {
 
     const header = document.querySelector(".site-header");
@@ -15,6 +15,7 @@ window.addEventListener("scroll", function() {
 
 
 // Button click animation
+/* Add click animation to quantity buttons and delete buttons */
 document.querySelectorAll('.qty a, .btn-delete').forEach(btn => {
     btn.addEventListener('click', function () {
         btn.style.transform = "scale(0.9)";

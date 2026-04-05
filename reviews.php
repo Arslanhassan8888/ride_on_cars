@@ -2,21 +2,26 @@
 session_start();
 require 'db.php';
 
-/* GET REVIEWS */
+/* --GET REVIEWS-- */
+/* Retrieve latest reviews */
 function getReviews($pdo)
 {
+    /* Fetch latest 9 reviews ordered by creation date */
     $stmt = $pdo->prepare("SELECT * FROM reviews ORDER BY created_at DESC LIMIT 9");
+    /* Execute query and return results as an array */
     $stmt->execute();
+    /* Fetch all reviews and return as associative array */
     return $stmt->fetchAll();
 }
 
-/* STARS */
+/* --STARS-- */
+/* Convert rating into star symbols */
 function stars($rating)
 {
     return str_repeat("★", $rating);
 }
 
-/* DATA */
+/* --FETCH DATA-- */
 $reviews = getReviews($pdo);
 ?>
 
@@ -32,7 +37,6 @@ $reviews = getReviews($pdo);
     <link rel="stylesheet" href="css/reviews.css?v=<?php echo filemtime('css/reviews.css'); ?>">
 </head>
 
-
 <body>
 
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -40,8 +44,6 @@ $reviews = getReviews($pdo);
     <?php include 'header.php'; ?>
 
     <main id="main-content">
-
-
 
         <!-- HERO -->
         <section class="reviews-hero">
@@ -55,7 +57,7 @@ $reviews = getReviews($pdo);
             <?php endif; ?>
         </section>
 
-        <!-- REVIEWS -->
+        <!-- REVIEWS GRID -->
         <section class="reviews-grid">
             <h2 class="visually-hidden-heading">Customer reviews list</h2>
 
@@ -63,20 +65,25 @@ $reviews = getReviews($pdo);
 
                 <article class="review-card">
 
+                    <!-- STARS -->
                     <p class="stars">
                         <?= stars($review['rating']) ?>
                     </p>
 
+                    <!-- MESSAGE -->
                     <p class="text">
                         <?= htmlspecialchars($review['message']) ?>
                     </p>
 
+                    <!-- NAME -->
                     <h2><?= htmlspecialchars($review['name']) ?></h2>
 
+                    <!-- LOCATION -->
                     <p class="location">
                         <?= htmlspecialchars($review['location']) ?>
                     </p>
 
+                    <!-- DATE -->
                     <p class="date">
                         <?= date("d M Y", strtotime($review['created_at'])) ?>
                     </p>

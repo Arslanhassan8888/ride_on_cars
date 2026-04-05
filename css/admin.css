@@ -1,52 +1,60 @@
-/* ================= ADMIN CONTAINER ================= */
+/*--ADMIN CSS-- */
+/* --ADMIN CONTAINER-- */
 .admin-container {
     max-width: 1200px;
     margin: 40px auto;
     padding: 20px;
 }
 
-/* ================= HEADER ================= */
+
+/* --HEADER-- */
+/* Admin header with title and actions */
 .admin-header {
+    padding: 30px;
+    margin-bottom: 30px;
+
     background: linear-gradient(135deg, #2563eb, #1e40af);
     color: white;
-    padding: 30px;
     border-radius: 16px;
-    margin-bottom: 30px;
 }
-
+/* Admin header title */
 .admin-header h1 {
     margin: 0 0 10px 0;
 }
-
+/* Admin header actions (buttons) */
 .admin-actions {
     margin-top: 15px;
+
     display: flex;
     gap: 10px;
 }
 
-/* ================= BUTTONS ================= */
+
+/* --BUTTONS-- */
+/* Add product and manage users buttons */
 .btn-add,
 .btn-users {
     padding: 10px 16px;
+    background: white;
+    color: #2563eb;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    background: white;
-    color: #2563eb;
-    /* add subtle shadow and smooth animation */
+
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
-
+/* Hover effects for buttons */
 .btn-add:hover,
 .btn-users:hover {
-    /* scale slightly and move up for an elevated feel */
     transform: translateY(-3px) scale(1.05);
+
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     background: #f5f7fa;
 }
 
-/* ================= TABLE ================= */
+
+/* --TABLE-- */
 .admin-table {
     width: 100%;
     border-collapse: collapse;
@@ -56,71 +64,78 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* HEADER */
+/* Header */
+/* Table header */
 .admin-table th {
     background: #2563eb;
     color: white;
+
     padding: 15px;
     text-align: left;
 }
 
-/* CELLS */
+/* Cells */
 .admin-table td {
     padding: 15px;
     border-bottom: 1px solid #eee;
     vertical-align: middle;
 }
 
-/* ROW HOVER */
+/* Hover */
 .admin-table tr:hover {
     background: #f1f5f9;
 }
 
-/* IMAGE */
+/* Image */
 .admin-table img {
     width: 60px;
     border-radius: 8px;
 }
 
-/* PRODUCT TEXT */
+/* Product text */
 .admin-table td p {
     margin: 5px 0 0 0;
     font-size: 14px;
     color: #555;
 }
 
-/* ================= ACTION BUTTONS ================= */
+
+/* --ACTIONS-- */
 .actions {
     display: flex;
     gap: 8px;
 }
 
-/* EDIT */
+/* Edit */
+/* Edit button */
 .btn-edit {
+    padding: 6px 10px;
+
     background: #2563eb;
     color: white;
-    padding: 6px 10px;
     border-radius: 6px;
     text-decoration: none;
-    /* subtle shadow and smooth animation */
+
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
-
+/* Edit button hover */
 .btn-edit:hover {
     background: #1e40af;
     transform: translateY(-3px) scale(1.05);
+
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* DELETE */
+/* Delete */
 .btn-delete {
+    padding: 6px 10px;
+
     background: #dc2626;
     color: white;
-    padding: 6px 10px;
     border-radius: 6px;
     text-decoration: none;
-    /* subtle shadow and smooth animation */
+
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
@@ -128,118 +143,133 @@
 .btn-delete:hover {
     background: #991b1b;
     transform: translateY(-3px) scale(1.05);
+
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 
-/* ================= EDIT PRODUCT FORM CONTAINER ================= */
+/* --FORM CONTAINER-- */
 .form-container {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
 
-/* FORM */
+/* Form */
 .form-container form {
-    background: #f1f5f9;
-    padding: 30px;
-    border-radius: 15px;
     width: 400px;
+    padding: 30px;
 
     display: flex;
     flex-direction: column;
     gap: 15px;
 
+    background: #f1f5f9;
+    border-radius: 15px;
+
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
-/* LABEL */
+/* Label */
 .form-container label {
     font-weight: bold;
 }
 
-/* INPUT */
+/* Input */
 .form-container input,
 .form-container textarea {
     padding: 12px;
+
     border-radius: 8px;
     border: 1px solid #ccc;
+
     font-size: 14px;
 }
 
-/* FOCUS */
+/* Focus */
 .form-container input:focus,
 .form-container textarea:focus {
     outline: none;
     border-color: #2563eb;
 }
 
-/* TEXTAREA */
+/* Textarea */
 .form-container textarea {
     resize: none;
     min-height: 80px;
 }
 
-/* BUTTON */
+/* Button */
 .form-container button {
     margin-top: 10px;
     padding: 12px;
+
     background: linear-gradient(135deg, #2563eb, #1e3a8a);
     color: white;
+
     border: none;
     border-radius: 10px;
+
     font-weight: bold;
     cursor: pointer;
 
     transition: all 0.3s ease;
 }
 
-/* BUTTON HOVER */
 .form-container button:hover {
     transform: translateY(-3px) scale(1.05);
+
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    color: white;   
     background: linear-gradient(135deg, #2563eb);
 }
 
 
+/* --ERROR-- */
 .error {
     color: red;
     font-weight: bold;
     text-align: center;
 }
+
+
+/* --ACCESSIBILITY-- */
 .visually-hidden-heading {
     position: absolute;
     width: 1px;
     height: 1px;
+
     overflow: hidden;
     white-space: nowrap;
 }
-/* ================= RESPONSIVE ================= */
-/* TABLE RESPONSIVE */
 
+
+/* --USERS TABLE-- */
+.admin-table td span {
+    color: #555;
+    font-weight: bold;
+}
+
+
+/* --RESPONSIVE-- */
 @media (max-width: 768px) {
+
     .admin-actions {
         flex-direction: column;
     }
+
     .admin-table {
         font-size: 14px;
     }
+
     .admin-table td,
     .admin-table th {
         padding: 10px;
     }
 }
 
-/* FORM RESPONSIVE  */
 @media (max-width: 768px) {
+
     .form-container form {
         width: 90%;
     }
-}
-
-/* ================= USERS TABLE ================= */
-.admin-table td span {
-    color: #555;
-    font-weight: bold;
 }

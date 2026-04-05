@@ -3,26 +3,35 @@
 require 'auth.php';
 require '../db.php';
 
-/* DELETE PRODUCT */
+
+/* --GET ID-- */
+/* Retrieve product ID from URL */
+$id = (int)($_GET['id'] ?? 0);
+
+
+/* --VALIDATE-- */
+/* Ensure valid ID */
+if ($id <= 0) {
+    header("Location: dashboard.php");
+    exit();
+}
+
+
+/* --DELETE PRODUCT-- */
+/* Remove product from database */
 function deleteProduct($pdo, $id)
 {
     $stmt = $pdo->prepare("DELETE FROM products WHERE id = ?");
     return $stmt->execute([$id]);
 }
 
-/* GET ID */
-$id = (int)($_GET['id'] ?? 0);
 
-/* VALIDATE */
-if ($id <= 0) {
-    header("Location: dashboard.php");
-    exit();
-}
-
-/* DELETE */
+/* --EXECUTE DELETE-- */
 deleteProduct($pdo, $id);
 
-/* REDIRECT */
+
+/* --REDIRECT-- */
+/* Return to dashboard */
 header("Location: dashboard.php");
 exit();
 

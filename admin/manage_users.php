@@ -3,7 +3,9 @@
 require 'auth.php';
 require '../db.php';
 
-/* GET USERS */
+
+/* --GET USERS-- */
+/* Retrieve all users (latest first) */
 function getUsers($pdo)
 {
     $stmt = $pdo->prepare("SELECT * FROM users ORDER BY id DESC");
@@ -11,6 +13,8 @@ function getUsers($pdo)
     return $stmt->fetchAll();
 }
 
+
+/* --DATA-- */
 $users = getUsers($pdo);
 
 ?>
@@ -19,33 +23,46 @@ $users = getUsers($pdo);
 <html lang="en">
 
 <head>
+    <!-- META -->
     <meta charset="UTF-8">
     <title>Manage Users</title>
+
+    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="../images/car_logo.png">
 
+    <!-- STYLES -->
     <link rel="stylesheet" href="../css/style.css?v=<?php echo filemtime('../css/style.css'); ?>">
     <link rel="stylesheet" href="../css/admin.css?v=<?php echo filemtime('../css/admin.css'); ?>">
 </head>
 
 <body>
+
+    <!-- SKIP LINK -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
+    <!-- HEADER -->
     <?php include '../header.php'; ?>
 
+    <!-- MAIN -->
     <main id="main-content">
 
+        <!-- ADMIN CONTAINER -->
         <section class="admin-container">
 
+            <!-- HEADER -->
             <header class="admin-header">
                 <h1>Manage Users</h1>
                 <p>Delete users from the system</p>
             </header>
 
+            <!-- TABLE SECTION -->
             <section class="admin-table-section">
                 <h2 class="visually-hidden-heading">Users management table</h2>
 
+                <!-- TABLE -->
                 <table class="admin-table">
 
+                    <!-- TABLE HEADER -->
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -56,28 +73,42 @@ $users = getUsers($pdo);
                         </tr>
                     </thead>
 
+                    <!-- TABLE BODY -->
                     <tbody>
 
+                        <!-- USER LOOP -->
                         <?php foreach ($users as $user): ?>
 
                             <tr>
 
+                                <!-- ID -->
                                 <td><?= $user['id'] ?></td>
 
+                                <!-- NAME -->
                                 <td><?= htmlspecialchars($user['name']) ?></td>
 
+                                <!-- EMAIL -->
                                 <td><?= htmlspecialchars($user['email']) ?></td>
 
+                                <!-- ROLE -->
                                 <td><?= htmlspecialchars($user['role']) ?></td>
 
+                                <!-- ACTIONS -->
                                 <td class="actions">
 
                                     <?php if ($user['role'] !== 'admin'): ?>
-                                        <a href="delete_user.php?id=<?= $user['id'] ?>" class="btn-delete js-delete">
+
+                                        <!-- DELETE -->
+                                        <a href="delete_user.php?id=<?= $user['id'] ?>"
+                                           class="btn-delete js-delete">
                                             Delete
                                         </a>
+
                                     <?php else: ?>
+
+                                        <!-- PROTECTED -->
                                         <span>Protected</span>
+
                                     <?php endif; ?>
 
                                 </td>
@@ -96,6 +127,7 @@ $users = getUsers($pdo);
 
     </main>
 
+    <!-- FOOTER -->
     <?php include '../footer.php'; ?>
 
 </body>

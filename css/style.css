@@ -1,4 +1,6 @@
-/* ================= RESET ================= */
+/* --style.css-- */
+/* --RESET-- */
+/* Apply consistent box model and remove default spacing */
 * {
     box-sizing: border-box;
 }
@@ -9,21 +11,25 @@ body {
     background: #eef2f7;
 }
 
-/* ================= HEADER ================= */
+
+/* --HEADER-- */
+/* Main site header */
 .site-header {
     background: white;
     border-bottom: 1px solid #ddd;
     position: sticky;
     top: 0;
     z-index: 1000;
-    transition: all 0.3s ease; 
+    transition: all 0.3s ease;
 }
 
+/* Slight blur effect when the page is scrolled */
 .site-header.scrolled {
-    background: rgba(255, 255, 255, 0.85); /* transparent */
-    backdrop-filter: blur(6px);            /* smooth glass effect */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
 }
 
+/* Navigation bar layout */
 .nav-bar {
     display: flex;
     justify-content: space-between;
@@ -31,33 +37,38 @@ body {
     padding: 15px 20px;
 }
 
-/* BRAND */
+
+/* --BRAND-- */
+/* Logo and site name container */
 .brand {
-    text-decoration: none;
     display: flex;
     align-items: center;
     gap: 10px;
-    
+    text-decoration: none;
 }
 
+/* Icon styling */
 .logo {
     font-size: 40px;
 }
 
+/* Site title */
 .brand-name {
     font-size: 24px;
     font-weight: bold;
     color: black;
-    text-decoration: none;
 }
 
+/* Maintain consistent appearance across link states */
 .brand:visited,
 .brand:hover,
 .brand:active {
-    text-decoration: none;   /* ensures no underline in all states */
+    text-decoration: none;
 }
 
-/* ================= MENU ================= */
+
+/* --MENU-- */
+/* Navigation menu container */
 .menu {
     display: flex;
     list-style: none;
@@ -66,6 +77,7 @@ body {
     margin: 0;
 }
 
+/* Navigation links */
 .menu a {
     font-size: 18px;
     font-weight: 600;
@@ -76,69 +88,98 @@ body {
     transition: all 0.3s ease;
 }
 
-/* HOVER */
-.menu a:hover {
+/* Hover and active states */
+.menu a:hover,
+.menu a.active {
     background: black;
     color: white;
 }
 
-/* ================= USER ================= */
+
+/* --USER SECTION-- */
+/* Container for login, user info, and cart */
 .user {
     display: flex;
+    align-items: center;
     gap: 10px;
-    font-size: 20px;      /* makes everything bigger */
-    font-weight: 600
+    white-space: nowrap;
+    font-size: 20px;
+    font-weight: 600;
 }
 
+/* User action links */
 .user a {
     text-decoration: none;
     color: black;
     padding: 6px 10px;
     border-radius: 6px;
+    font-size: 14px;
     transition: all 0.3s ease;
 }
 
-/* HOVER EFFECT */
+/* Hover effect for user links */
 .user a:hover {
     background: #2563eb;
     color: white;
 }
 
-/* CART STYLE */
+/* Highlight logged-in username */
+.user span {
+    font-weight: bold;
+    color: #2563eb;
+}
+
+/* Cart styling */
 .cart {
     background: #eee;
 }
 
-/* ================= MOBILE MENU ================= */
+/* Admin link styling */
+.admin-link {
+    color: rgb(112, 6, 6);
+    font-weight: bold;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for admin link */
+.admin-link:hover {
+    background: #2563eb;
+    color: white;
+}
+
+
+/* --MOBILE MENU-- */
+/* Hide checkbox used for menu toggle */
 #menu-toggle {
     display: none;
 }
 
+/* Hamburger icon */
 .menu-icon {
     display: none;
     font-size: 26px;
     cursor: pointer;
 }
 
-/* ================= FOOTER ================= */
-.site-footer {
-    background: black;
-    color: white;
-    padding: 30px 20px;
-}
 
+/* --FOOTER-- */
+/* Footer container */
 .site-footer {
     background: black;
     color: white;
     padding: 30px 20px;
 
-    display: flex;              /* IMPORTANT */
-    flex-direction: column;     /* stack */
-    align-items: center;        /* center everything */
-    text-align: center;         /* center text */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 15px;
 }
 
+/* Footer navigation list */
 .footer-nav ul {
     display: flex;
     justify-content: center;
@@ -146,67 +187,33 @@ body {
     padding: 0;
     list-style: none;
 }
+
+/* Footer links */
 .site-footer a {
     color: white;
     text-decoration: none;
-    text-align: center;
 }
 
+/* Hover effect for footer links */
 .site-footer a:hover {
     text-decoration: underline;
 }
 
+/* Footer spacing */
 .footer-bottom {
-    text-align: center;
     margin-top: 20px;
 }
 
-.menu a.active {
-    background: black;
-    color: white;
-}
 
-    /* KEEP USER VISIBLE */
-    .user {
-    display: flex;
-    align-items: center;   /* keeps everything aligned */
-    gap: 10px;
-    white-space: nowrap;   /* prevents line break */
-}
-
-    .user a {
-        font-size: 14px;
-
-    display: inline-block;
-}
-    
-
-    .user span {
-    font-weight: bold;
-    color: #2563eb;
-}
-
-.admin-link {
-    color: rgb(112, 6, 6);
-    font-weight: bold;
-    padding: 6px 10px;
-    border-radius: 6px;
-    text-decoration: none;
-
-    transition: all 0.3s ease;
-}
-
-.admin-link:hover {
-    background: #2563eb;
-    color: white;
-}
-
+/* --ACCESSIBILITY-- */
+/* Skip link for keyboard navigation */
 .skip-link {
     position: absolute;
     top: -40px;
     left: 10px;
 }
 
+/* Make skip link visible when focused */
 .skip-link:focus {
     top: 10px;
     background: #2563eb;
@@ -214,9 +221,21 @@ body {
     padding: 8px;
     border-radius: 5px;
 }
-/* ================= RESPONSIVE ================= */
+
+/* --ACCESSIBILITY-- */
+/* Hide content visually but keep it for screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip: rect(0, 0, 0, 0);
+}
+/* --RESPONSIVE-- */
 @media (max-width: 768px) {
 
+    /* Mobile menu layout */
     .menu {
         display: none;
         flex-direction: column;
@@ -228,13 +247,13 @@ body {
         padding: 10px;
     }
 
+    /* Show menu when toggled */
     #menu-toggle:checked + .menu-icon + .menu {
         display: flex;
     }
 
+    /* Show hamburger icon */
     .menu-icon {
         display: block;
     }
-
-
 }

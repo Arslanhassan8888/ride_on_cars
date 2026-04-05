@@ -1,25 +1,26 @@
 <?php
 session_start();
 
-/* HANDLE LOGOUT */
+/* --HANDLE LOGOUT-- */
+/* Clears session, destroys it, and redirects user */
 function logout()
 {
-    // Clear session data
+    /* --CLEAR SESSION DATA-- */
     $_SESSION = [];
 
-    // Destroy session
+    /* --DESTROY SESSION-- */
     session_destroy();
 
-    // Delete session cookie
+    /* --DELETE SESSION COOKIE-- */
     if (ini_get("session.use_cookies")) {
         setcookie(session_name(), '', time() - 3600, '/');
     }
 
-    // Redirect
+    /* --REDIRECT-- */
     header("Location: index.php");
     exit();
 }
 
-/* RUN */
+/* --RUN-- */
 logout();
 ?>
