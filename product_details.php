@@ -65,7 +65,8 @@ if (!$product) {
         <!-- Hidden main heading -->
         <h1 class="sr-only">Product Details</h1>
 
-        <section class="product-details">
+        <section class="product-details" aria-labelledby="product-details-heading">
+            <h2 id="product-details-heading" class="sr-only">Product details section</h2>
 
             <!-- Product image -->
             <figure class="product-image">
@@ -74,9 +75,9 @@ if (!$product) {
             </figure>
 
             <!-- Product information -->
-            <section class="product-info">
+            <section class="product-info" aria-labelledby="product-info-heading">
 
-                <h2><?= htmlspecialchars($product['name']) ?></h2>
+                <h2 id="product-info-heading"><?= htmlspecialchars($product['name']) ?></h2>
 
                 <!-- Rating -->
                 <p class="rating"><?= stars($product['rating']) ?></p>
@@ -88,19 +89,21 @@ if (!$product) {
                 <p class="desc"><?= htmlspecialchars($product['description']) ?></p>
 
                 <!-- Extra details -->
-                <section class="extra-info">
+                <section class="extra-info" aria-labelledby="extra-info-heading">
+                    <h3 id="extra-info-heading" class="sr-only">Additional product information</h3>
                     <p><strong>Age Range:</strong> <?= htmlspecialchars($product['age_range']) ?></p>
                     <p><strong>Stock:</strong> <?= htmlspecialchars($product['stock']) ?></p>
                 </section>
 
                 <!-- Long description -->
-                <section>
-                    <h3>Product Information</h3>
+                <section aria-labelledby="product-information-heading">
+                    <h3 id="product-information-heading">Product Information</h3>
                     <p><?= htmlspecialchars($product['long_description']) ?></p>
                 </section>
 
                 <!-- Actions -->
-                <section class="actions">
+                <section class="actions" aria-labelledby="actions-heading">
+                    <h3 id="actions-heading" class="sr-only">Product actions</h3>
 
                     <?php if (isset($_SESSION['user']) && isset($_SESSION['user_id'])): ?>
                         <a href="cart.php?action=add&id=<?= (int)$product['id'] ?>" class="btn-cart">
