@@ -99,10 +99,10 @@ $users = getUsers($pdo);
                                     <?php if ($user['role'] !== 'admin'): ?>
 
                                         <!-- DELETE -->
-                                        <a href="delete_user.php?id=<?= $user['id'] ?>"
-                                           class="btn-delete js-delete">
-                                            Delete
-                                        </a>
+                                        <form method="POST" action="delete_user.php" style="display:inline;">
+                                            <input type="hidden" name="id" value="<?= $user['id'] ?>">
+                                            <button type="submit" class="btn-delete js-delete">Delete</button>
+                                        </form>
 
                                     <?php else: ?>
 

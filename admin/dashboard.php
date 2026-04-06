@@ -93,7 +93,7 @@ $products = getProducts($pdo);
                                 <!-- IMAGE -->
                                 <td>
                                     <img src="../images/<?= htmlspecialchars($product['image']) ?>"
-                                         alt="<?= htmlspecialchars($product['name']) ?>">
+                                        alt="<?= htmlspecialchars($product['name']) ?>">
                                 </td>
 
                                 <!-- PRODUCT INFO -->
@@ -119,10 +119,10 @@ $products = getProducts($pdo);
                                         Edit
                                     </a>
 
-                                    <!-- DELETE -->
-                                    <a href="delete_product.php?id=<?= $product['id'] ?>" class="btn-delete">
-                                        Delete
-                                    </a>
+                                    <form method="POST" action="delete_product.php" style="display:inline;">
+                                        <input type="hidden" name="id" value="<?= $product['id'] ?>">
+                                        <button type="submit" class="btn-delete">Delete</button>
+                                    </form>
 
                                 </td>
 

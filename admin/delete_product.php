@@ -6,12 +6,12 @@ require '../db.php';
 
 /* --GET ID-- */
 /* Retrieve product ID from URL */
-$id = (int)($_GET['id'] ?? 0);
+$id = (int)($_POST['id'] ?? 0);
 
 
 /* --VALIDATE-- */
 /* Ensure valid ID */
-if ($id <= 0) {
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' || $id <= 0) {
     header("Location: dashboard.php");
     exit();
 }

@@ -6,7 +6,7 @@ require '../db.php';
 
 /* --GET ID-- */
 /* Retrieve user ID from URL */
-$id = (int)($_GET['id'] ?? 0);
+$id = (int)($_POST['id'] ?? 0);
 
 
 /* --VALIDATE-- */
