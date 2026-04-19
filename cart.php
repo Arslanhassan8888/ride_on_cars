@@ -127,7 +127,7 @@ $finalTotal = $total + $shipping;
     <?php include 'header.php'; ?>
 
     <!-- MAIN -->
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
 
         <!-- CART CONTAINER -->
         <section class="cart-container">
@@ -173,16 +173,22 @@ $finalTotal = $total + $shipping;
                             <section class="qty">
                                 <h3 class="visually-hidden-heading">Quantity controls</h3>
 
-                                <a href="cart.php?action=decrease&id=<?= $item['id'] ?>">−</a>
-                                <span><?= $qty ?></span>
-                                <a href="cart.php?action=increase&id=<?= $item['id'] ?>">+</a>
+                                <a href="cart.php?action=decrease&id=<?= $item['id'] ?>"
+                                    aria-label="Decrease quantity of <?= htmlspecialchars($item['name']) ?>">−</a>
+
+                                <span>
+                                    <span class="visually-hidden-heading">Current quantity </span><?= $qty ?>
+                                </span>
+
+                                <a href="cart.php?action=increase&id=<?= $item['id'] ?>"
+                                    aria-label="Increase quantity of <?= htmlspecialchars($item['name']) ?>">+</a>
                             </section>
 
                             <!-- SUBTOTAL -->
                             <p class="subtotal">£<?= number_format($subtotal, 2) ?></p>
 
                             <!-- DELETE -->
-                            <a href="cart.php?action=remove&id=<?= $item['id'] ?>" class="btn-delete">
+                            <a href="cart.php?action=remove&id=<?= $item['id'] ?>" class="btn-delete" aria-label="Remove <?= htmlspecialchars($item['name']) ?> from cart">
                                 Delete
                             </a>
 

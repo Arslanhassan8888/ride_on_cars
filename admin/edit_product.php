@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include '../header.php'; ?>
 
     <!-- MAIN -->
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
 
         <!-- ADMIN CONTAINER -->
         <section class="admin-container">
@@ -142,10 +142,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- FORM CONTAINER -->
             <section class="form-container">
 
-                <h2 class="visually-hidden-heading">Edit product form</h2>
+                <h2 id="edit-product-form-title" class="visually-hidden">Edit product form</h2>
 
                 <!-- FORM -->
-                <form method="POST" enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data" aria-labelledby="edit-product-form-title">
 
                     <!-- NAME -->
                     <label for="name">Product Name</label>

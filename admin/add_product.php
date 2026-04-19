@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include '../header.php'; ?>
 
     <!-- MAIN -->
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
 
         <!-- ADMIN CONTAINER -->
         <section class="admin-container">
@@ -126,14 +126,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- FORM CONTAINER -->
             <section class="form-container">
 
-                <h2 class="visually-hidden-heading">Add product form</h2>
+                <h2 class="visually-hidden">Add product form</h2>
 
                 <!-- FORM -->
                 <form method="POST" enctype="multipart/form-data">
 
                     <!-- ERROR -->
                     <?php if ($error): ?>
-                        <p class="error"><?= htmlspecialchars($error) ?></p>
+                        <p class="error" aria-live="assertive"><?= htmlspecialchars($error) ?></p>
                     <?php endif; ?>
 
                     <!-- NAME -->

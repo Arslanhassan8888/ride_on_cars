@@ -46,7 +46,7 @@ $products = getProducts($pdo);
     <?php include '../header.php'; ?>
 
     <!-- MAIN -->
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
 
         <!-- ADMIN CONTAINER -->
         <section class="admin-container">
@@ -65,7 +65,7 @@ $products = getProducts($pdo);
 
             <!-- TABLE SECTION -->
             <section class="admin-table-section">
-                <h2 class="visually-hidden-heading">Products management table</h2>
+                <h2 class="visually-hidden">Products management table</h2>
 
                 <!-- TABLE -->
                 <table class="admin-table">
@@ -115,13 +115,12 @@ $products = getProducts($pdo);
                                 <td class="actions">
 
                                     <!-- EDIT -->
-                                    <a href="edit_product.php?id=<?= $product['id'] ?>" class="btn-edit">
-                                        Edit
-                                    </a>
+                                    <a href="edit_product.php?id=<?= $product['id'] ?>" class="btn-edit"
+                                        aria-label="Edit <?= htmlspecialchars($product['name']) ?>">Edit</a>
 
                                     <form method="POST" action="delete_product.php" style="display:inline;">
                                         <input type="hidden" name="id" value="<?= $product['id'] ?>">
-                                        <button type="submit" class="btn-delete">Delete</button>
+                                        <button type="submit" class="btn-delete" aria-label="Delete <?= htmlspecialchars($product['name']) ?>">Delete</button>
                                     </form>
 
                                 </td>

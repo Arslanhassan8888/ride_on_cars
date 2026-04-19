@@ -78,6 +78,7 @@ $products = getProducts($pdo, $search, $min, $max, $sort);
 
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Browse electric ride-on cars for kids, compare prices, ratings and features, and find the perfect model for your child.">
     <title>Products</title>
 
     <!-- Website icon -->
@@ -95,7 +96,7 @@ $products = getProducts($pdo, $search, $min, $max, $sort);
 
     <?php include 'header.php'; ?>
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
 
         <!-- Page introduction -->
         <section class="products-hero">
@@ -127,11 +128,15 @@ $products = getProducts($pdo, $search, $min, $max, $sort);
                 </select>
 
                 <!-- Price filters -->
-                <input type="number" name="min" placeholder="Min Price" value="<?= htmlspecialchars($min) ?>">
-                <input type="number" name="max" placeholder="Max Price" value="<?= htmlspecialchars($max) ?>">
+                <label for="min" class="visually-hidden">Minimum price</label>
+                <input id="min" type="number" name="min" placeholder="Min Price" value="<?= htmlspecialchars($min) ?>">
+
+                <label for="max" class="visually-hidden">Maximum price</label>
+                <input id="max" type="number" name="max" placeholder="Max Price" value="<?= htmlspecialchars($max) ?>">
 
                 <!-- Search -->
-                <input type="text" name="search" placeholder="Type product name..." value="<?= htmlspecialchars($search) ?>">
+                <label for="search" class="visually-hidden">Search products</label>
+                <input id="search" type="text" name="search" placeholder="Type product name..." value="<?= htmlspecialchars($search) ?>">
 
                 <!-- Actions -->
                 <button type="submit">Apply Filter</button>
@@ -150,7 +155,7 @@ $products = getProducts($pdo, $search, $min, $max, $sort);
 
                 <!-- No results message -->
                 <?php if (empty($products)): ?>
-                    <p>No products found.</p>
+                    <p aria-live="polite">No products found.</p>
                 <?php endif; ?>
 
                 <!-- Loop through products -->
@@ -167,7 +172,10 @@ $products = getProducts($pdo, $search, $min, $max, $sort);
                         <h2><?= htmlspecialchars($product['name']) ?></h2>
 
                         <!-- Rating -->
-                        <p class="rating"><?= stars($product['rating']) ?></p>
+                        <p class="rating">
+                            <span class="visually-hidden"><?= (int)$product['rating'] ?> out of 5 stars</span>
+                            <span aria-hidden="true"><?= stars($product['rating']) ?></span>
+                        </p>
 
                         <!-- Short description -->
                         <p class="desc"><?= htmlspecialchars($product['description']) ?></p>
@@ -194,7 +202,7 @@ $products = getProducts($pdo, $search, $min, $max, $sort);
 
                             <!-- Link to details page -->
                             <a href="product_details.php?id=<?= (int)$product['id'] ?>" class="btn-info">
-                                More Info
+                                View <?= htmlspecialchars($product['name']) ?>
                             </a>
 
                         </section>

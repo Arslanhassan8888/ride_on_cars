@@ -18,7 +18,7 @@ function getReviews($pdo)
 /* Convert rating into star symbols */
 function stars($rating)
 {
-    return str_repeat("★", $rating);
+    return str_repeat("★", (int)$rating);
 }
 
 /* --FETCH DATA-- */
@@ -43,7 +43,7 @@ $reviews = getReviews($pdo);
 
     <?php include 'header.php'; ?>
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
 
         <!-- HERO -->
         <section class="reviews-hero">
@@ -51,9 +51,9 @@ $reviews = getReviews($pdo);
             <p>See what families think about RideOn Kids.</p>
 
             <?php if (isset($_SESSION['user']) && isset($_SESSION['user_id'])): ?>
-                <a href="add_review.php" class="btn-review">Leave a Review</a>
+                <a href="add_review.php" class="btn-review" aria-label="Write a product review">Leave a Review</a>
             <?php else: ?>
-                <a href="login.php" class="btn-review">Login to Leave Review</a>
+                <a href="login.php" class="btn-review" aria-label="Login to leave a review">Login to Leave Review</a>
             <?php endif; ?>
         </section>
 
@@ -67,7 +67,8 @@ $reviews = getReviews($pdo);
 
                     <!-- STARS -->
                     <p class="stars">
-                        <?= stars($review['rating']) ?>
+                        <span class="visually-hidden-heading"><?= (int)$review['rating'] ?> out of 5 stars</span>
+                        <span aria-hidden="true"><?= stars($review['rating']) ?></span>
                     </p>
 
                     <!-- MESSAGE -->

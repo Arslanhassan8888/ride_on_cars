@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include 'header.php'; ?>
 
     <!-- MAIN -->
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
 
         <!-- HERO -->
         <section class="contact-hero">
@@ -74,19 +74,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <section class="contact-form">
 
                 <header>
-                    <h2>Send us a Message</h2>
+                    <h2 id="contact-form-title">Send us a Message</h2>
                 </header>
 
-                <form method="POST">
+                <form method="POST" aria-labelledby="contact-form-title">
 
                     <!-- SUCCESS -->
                     <?php if ($success): ?>
-                        <p class="success"><?= $success ?></p>
+                        <p class="success" aria-live="polite"><?= htmlspecialchars($success) ?></p>
                     <?php endif; ?>
 
                     <!-- ERROR -->
                     <?php if ($error): ?>
-                        <p class="error"><?= $error ?></p>
+                        <p class="error" role="alert"><?= htmlspecialchars($error) ?></p>
                     <?php endif; ?>
 
                     <!-- NAME -->

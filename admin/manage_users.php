@@ -44,7 +44,7 @@ $users = getUsers($pdo);
     <?php include '../header.php'; ?>
 
     <!-- MAIN -->
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
 
         <!-- ADMIN CONTAINER -->
         <section class="admin-container">
@@ -56,8 +56,8 @@ $users = getUsers($pdo);
             </header>
 
             <!-- TABLE SECTION -->
-            <section class="admin-table-section">
-                <h2 class="visually-hidden-heading">Users management table</h2>
+            <section class="admin-table-section" aria-labelledby="user-table-title">
+                <h2 id="user-table-title" class="visually-hidden">Users management table</h2>
 
                 <!-- TABLE -->
                 <table class="admin-table">
@@ -107,7 +107,9 @@ $users = getUsers($pdo);
                                     <?php else: ?>
 
                                         <!-- PROTECTED -->
-                                        <span>Protected</span>
+                                        <span>
+                                            <span class="visually-hidden">Admin account protected from deletion </span>Protected
+                                        </span>
 
                                     <?php endif; ?>
 

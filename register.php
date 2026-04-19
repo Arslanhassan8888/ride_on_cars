@@ -68,9 +68,6 @@ function handleRegister($pdo)
     $error = validate($name, $email, $password, $confirm);
     /* If validation fails, return error message */
     if ($error != "") {
-        return ["", ""];
-    }/* Create user and return success or error message */
-    if ($error != "") {
         return [$error, ""];
     }
     /* Create user and return success or error message */
@@ -114,7 +111,7 @@ list($error, $success) = handleRegister($pdo);
     <?php include 'header.php'; ?>
 
     <!-- MAIN -->
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
 
         <!-- HERO -->
         <section class="register-hero">
@@ -126,19 +123,19 @@ list($error, $success) = handleRegister($pdo);
         <section class="register-container">
 
             <!-- TITLE -->
-            <h2 class="register-title">Register</h2>
+            <h2 id="register-form-title" class="register-title">Register</h2>
 
             <!-- FORM -->
-            <form method="POST">
+            <form method="POST" aria-labelledby="register-form-title">
 
                 <!-- ERROR -->
                 <?php if ($error): ?>
-                    <p class="error"><?= htmlspecialchars($error) ?></p>
+                    <p class="error" role="alert"><?= htmlspecialchars($error) ?></p>
                 <?php endif; ?>
 
                 <!-- SUCCESS -->
                 <?php if ($success): ?>
-                    <p class="success"><?= htmlspecialchars($success) ?></p>
+                    <p class="success" aria-live="polite"><?= htmlspecialchars($success) ?></p>
                 <?php endif; ?>
 
                 <!-- NAME -->

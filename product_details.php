@@ -60,7 +60,7 @@ if (!$product) {
 
     <?php include 'header.php'; ?>
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
 
         <!-- Hidden main heading -->
         <h1 class="sr-only">Product Details</h1>
@@ -80,46 +80,49 @@ if (!$product) {
                 <h2 id="product-info-heading"><?= htmlspecialchars($product['name']) ?></h2>
 
                 <!-- Rating -->
-                <p class="rating"><?= stars($product['rating']) ?></p>
+                <p class="rating">
+                    <span class="sr-only"><?= (int)$product['rating'] ?> out of 5 stars</span>
+                    <span aria-hidden="true"><?= stars($product['rating']) ?></span>
+                    </p>
 
-                <!-- Price -->
-                <p class="price">£<?= number_format($product['price'], 2) ?></p>
+                    <!-- Price -->
+                    <p class="price">£<?= number_format($product['price'], 2) ?></p>
 
-                <!-- Description -->
-                <p class="desc"><?= htmlspecialchars($product['description']) ?></p>
+                    <!-- Description -->
+                    <p class="desc"><?= htmlspecialchars($product['description']) ?></p>
 
-                <!-- Extra details -->
-                <section class="extra-info" aria-labelledby="extra-info-heading">
-                    <h3 id="extra-info-heading" class="sr-only">Additional product information</h3>
-                    <p><strong>Age Range:</strong> <?= htmlspecialchars($product['age_range']) ?></p>
-                    <p><strong>Stock:</strong> <?= htmlspecialchars($product['stock']) ?></p>
-                </section>
+                    <!-- Extra details -->
+                    <section class="extra-info" aria-labelledby="extra-info-heading">
+                        <h3 id="extra-info-heading" class="sr-only">Additional product information</h3>
+                        <p><strong>Age Range:</strong> <?= htmlspecialchars($product['age_range']) ?></p>
+                        <p><strong>Stock:</strong> <?= htmlspecialchars($product['stock']) ?></p>
+                    </section>
 
-                <!-- Long description -->
-                <section aria-labelledby="product-information-heading">
-                    <h3 id="product-information-heading">Product Information</h3>
-                    <p><?= htmlspecialchars($product['long_description']) ?></p>
-                </section>
+                    <!-- Long description -->
+                    <section aria-labelledby="product-information-heading">
+                        <h3 id="product-information-heading">Product Information</h3>
+                        <p><?= htmlspecialchars($product['long_description']) ?></p>
+                    </section>
 
-                <!-- Actions -->
-                <section class="actions" aria-labelledby="actions-heading">
-                    <h3 id="actions-heading" class="sr-only">Product actions</h3>
+                    <!-- Actions -->
+                    <section class="actions" aria-labelledby="actions-heading">
+                        <h3 id="actions-heading" class="sr-only">Product actions</h3>
 
-                    <?php if (isset($_SESSION['user']) && isset($_SESSION['user_id'])): ?>
-                        <a href="cart.php?action=add&id=<?= (int)$product['id'] ?>" class="btn-cart">
-                            Add to Cart
+                        <?php if (isset($_SESSION['user']) && isset($_SESSION['user_id'])): ?>
+                            <a href="cart.php?action=add&id=<?= (int)$product['id'] ?>" class="btn-cart" aria-label="Add <?= htmlspecialchars($product['name']) ?> to cart">
+                                Add to Cart
+                            </a>
+                        <?php else: ?>
+                            <a href="login.php" class="btn-cart" aria-label="Login to buy <?= htmlspecialchars($product['name']) ?>">
+                                Login to Buy
+                            </a>
+                        <?php endif; ?>
+
+                        <a href="products.php" class="btn-back" aria-label="Back to Products">
+                            ← Back to Products
                         </a>
-                    <?php else: ?>
-                        <a href="login.php" class="btn-cart">
-                            Login to Buy
-                        </a>
-                    <?php endif; ?>
 
-                    <a href="products.php" class="btn-back">
-                        ← Back to Products
-                    </a>
-
-                </section>
+                    </section>
 
             </section>
 

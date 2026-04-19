@@ -124,7 +124,7 @@ $error = handleLogin($pdo);
     <?php include 'header.php'; ?>
 
     <!-- MAIN CONTENT -->
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
 
         <!-- HERO -->
         <section class="login-hero">
@@ -143,7 +143,7 @@ $error = handleLogin($pdo);
 
                 <!-- ERROR -->
                 <?php if ($error !== ''): ?>
-                    <p class="error"><?php echo htmlspecialchars($error); ?></p>
+                    <p class="error" role="alert"><?php echo htmlspecialchars($error); ?></p>
                 <?php endif; ?>
 
                 <!-- EMAIL -->

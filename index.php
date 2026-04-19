@@ -18,13 +18,13 @@
 <body>
 
     <!-- Accessibility: Skip link for keyboard and screen reader users -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content"  class="skip-link">Skip to main content</a>
 
     <!-- Site header -->
     <?php include 'header.php'; ?>
 
     <!-- Main content area -->
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
 
         <!-- HERO SECTION -->
         <section class="hero">

@@ -90,7 +90,7 @@ list($error, $success) = handleReview($pdo);
 
     <?php include 'header.php'; ?>
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
 
         <!-- HERO -->
         <section class="reviews-hero">
@@ -107,12 +107,12 @@ list($error, $success) = handleReview($pdo);
 
                 <!-- ERROR MESSAGE -->
                 <?php if ($error): ?>
-                    <p class="error"><?= htmlspecialchars($error) ?></p>
+                    <p class="error" role="alert"><?= htmlspecialchars($error) ?></p>
                 <?php endif; ?>
 
                 <!-- SUCCESS MESSAGE -->
                 <?php if ($success): ?>
-                    <p class="success"><?= htmlspecialchars($success) ?></p>
+                    <p class="success" aria-live="polite"><?= htmlspecialchars($success) ?></p>
                 <?php endif; ?>
 
                 <!-- NAME -->
