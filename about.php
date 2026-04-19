@@ -27,7 +27,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <?php include 'header.php'; ?>
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
 
         <!-- Intro section -->
         <section class="about-hero">

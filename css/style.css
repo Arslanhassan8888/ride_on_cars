@@ -216,12 +216,27 @@ body {
 /* Make skip link visible when focused */
 .skip-link:focus {
     top: 10px;
-    background: #2563eb;
+    background: #4965a2;
     color: white;
     padding: 8px;
     border-radius: 5px;
+    z-index: 2000;
 }
 
+#main-content:focus,
+#main-content:target {
+    outline: 3px solid #000;
+    outline-offset: 4px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #000;
+    outline-offset: 3px;
+}
 /* --ACCESSIBILITY-- */
 /* Hide content visually but keep it for screen readers */
 .visually-hidden {

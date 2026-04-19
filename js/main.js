@@ -55,3 +55,13 @@ function confirmDelete(e) {
         e.preventDefault();
     }
 }
+
+// Skip link: move keyboard focus to main content
+const skipLink = document.querySelector('.skip-link');
+const mainContent = document.getElementById('main-content');
+
+if (skipLink && mainContent) {
+    skipLink.addEventListener('click', function () {
+        mainContent.focus();
+    });
+}

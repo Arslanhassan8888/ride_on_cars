@@ -27,6 +27,7 @@ $isAdmin = $isLoggedIn && isset($_SESSION['role']) && $_SESSION['role'] === 'adm
 $cartCount = isset($_SESSION['cart']) ? array_sum($_SESSION['cart']) : 0;
 ?>
 
+
 <header class="site-header">
 
     <nav class="nav-bar" aria-label="Main navigation">
