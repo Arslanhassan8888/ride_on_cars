@@ -1,143 +1,165 @@
-# RideOn Cars – Database-Driven Website
+# RideOn Cars – Database-Driven E-Commerce Website
+
+## Demo Accounts (For Testing)
+
+You can use the following accounts to test the system:
+
+**Admin Account**
+- Email: arslan@gmail.com  
+- Password: ciao123  
+
+**User Account**
+- Email: usman@gmail.com  
+- Password: ciao123  
+
+---
 
 ## Project Overview
 
-RideOn Cars is a database-driven e-commerce website developed as part of the **Database Driven Websites Project**.
+RideOn Cars is a database-driven e-commerce web application developed using PHP and MySQL. The system allows users to browse, search, and interact with a catalogue of ride-on cars for children, while providing administrative tools for managing products and users.
 
-The application demonstrates the design and implementation of a dynamic web system using **PHP, MySQL, HTML5, CSS3, and JavaScript**. It enables users to browse and interact with a catalogue of ride-on cars for children, while also providing administrative functionality for managing products and users.
+The project was developed and tested locally using **WAMP Server**, with data stored in a **MySQL database**.
 
-A live version of the website is available at:  
+---
+
+## Live Website
+
 http://rideoncars.infinityfreeapp.com
-
----
-
-## Objectives
-
-The purpose of this project is to:
-
-- Develop a fully functional database-driven website
-- Apply server-side scripting to interact with a relational database
-- Implement user authentication and session management
-- Demonstrate awareness of web accessibility and security principles
-- Produce a maintainable and structured web application
-
----
-
-## Key Features
-
-### User Functionality
-
-- User registration and login system
-- Secure password storage using hashing
-- Product browsing and filtering (search, price range, sorting)
-- Individual product detail pages
-- Session-based shopping cart
-- Customer reviews system (submission and display)
-- Contact form for enquiries
-
-### Administrative Functionality
-
-- Restricted admin access via authentication
-- Add new products with image upload
-- Edit and update existing products
-- Delete products from the database
-- Manage user accounts (including deletion)
 
 ---
 
 ## Technologies Used
 
-- **Frontend:** HTML5, CSS3, JavaScript  
-- **Backend:** PHP  
-- **Database:** MySQL (using PDO)  
-- **Server Environment:** Apache (WAMP recommended)
+### Backend
+- PHP
+- MySQL (PDO)
+
+### Frontend
+- HTML5
+- CSS3
+- JavaScript
+
+### Environment & Tools
+- WAMP Server (Apache + MySQL)
+- phpMyAdmin
+- Visual Studio Code
+- Git & GitHub
+
+---
+
+## Key Features
+
+### User Features
+- User registration and login system
+- Secure password hashing
+- Product browsing and filtering
+  - Search by name
+  - Price range filtering
+  - Sorting (price, rating, name)
+- Product details page
+- Session-based shopping cart
+- Customer reviews system
+- Contact form with validation
+
+### Admin Features
+- Admin authentication and access control
+- Add new products (with image upload)
+- Edit existing products
+- Delete products
+- Manage users (view and delete accounts)
 
 ---
 
 ## Database Structure
 
-The system is built on a relational database consisting of the following core tables:
+The application uses a relational database with the following tables:
 
-- `users` – stores user credentials and roles (admin/user)
-- `products` – stores product details including pricing, descriptions and images
-- `reviews` – stores customer reviews linked to users
+- `users` – user accounts and roles (admin/user)
+- `products` – product details (name, price, image, description)
+- `reviews` – customer reviews linked to users
 
 ---
 
-## Security Considerations
+## Security Features
 
-The application incorporates several security practices:
-
-- Use of **PDO prepared statements** to prevent SQL injection
+- PDO prepared statements (SQL injection protection)
 - Password hashing using `password_hash()` and `password_verify()`
-- Output sanitisation using `htmlspecialchars()` to mitigate XSS attacks
-- Session-based authentication and role-based access control for admin features
+- Output sanitisation using `htmlspecialchars()`
+- Session-based authentication
+- Role-based access control (admin vs user)
 
 ---
 
-## Accessibility and Usability
+## Accessibility
 
-The website has been developed with accessibility in mind:
+The project has been tested using:
 
-- Use of semantic HTML elements
-- Proper labelling of form inputs
-- Skip navigation links for keyboard users
-- Alternative text for images
-- Responsive design for different screen sizes
+- W3C Validator  
+- WAVE  
+- AXE DevTools  
+- Google Lighthouse  
+
+Accessibility features include:
+
+- Semantic HTML structure
+- Keyboard navigation support
+- Skip navigation links
+- Screen reader-friendly labels
+- Accessible forms and error messages
+- Hidden headings for assistive technologies
 
 ---
 
-## Installation and Setup (Local Environment – WAMP)
+## Installation (Local Setup using WAMP)
 
 ### 1. Install WAMP Server
-
-Download and install WAMP Server from:  
+Download from:  
 https://www.wampserver.com/
 
-Ensure that:
-- Apache and MySQL services are running
-- The WAMP icon is green
+Ensure:
+- Apache is running
+- MySQL is running
+- WAMP icon is green
 
 ---
 
-### 2. Place Project in Web Directory
+### 2. Place Project Folder
+Copy the project into:
 
-Copy the project folder into:
 C:\wamp64\www\
 
 
 ---
 
 ### 3. Create Database
-
-1. Open your browser and go to:
+Go to:
 http://localhost/phpmyadmin
 
-2. Create a new database named:
-ride_on_cars
-
-3. Import the provided SQL file
-Remember to uncomment the entire file before use.
+- Create database: `ride_on_cars`
+- Import the provided `.sql` file  
+- (Ensure the file is fully uncommented before importing)
 
 ---
 
 ### 4. Configure Database Connection
 
-Open `db.php` and ensure the connection is correct:
+Open `db.php`:
 
 ```php
 $pdo = new PDO(
- "mysql:host=localhost;dbname=ride_on_cars;charset=utf8",
- "root",
- ""
+    "mysql:host=localhost;dbname=ride_on_cars;charset=utf8",
+    "root",
+    ""
 );
 ```
-### 5. Run Website
+### 5. Run the Project
 
-Open: http://localhost/project-folder/
+Open in browser:
+http://localhost/project-folder/
+
 
 ## Project Structure
-
+```
 /project-root
 │
 ├── index.php
@@ -160,24 +182,46 @@ Open: http://localhost/project-folder/
 ├── css/
 ├── js/
 ├── images/
+│
 ├── db.php
 ├── header.php
 ├── footer.php
+```
 
 ## Learning Outcomes
-- LO1: Database-driven content using PHP and MySQL
-- LO2: Accessible and secure web development
-- LO3: Evaluation of usability, accessibility, and security
+- Building a dynamic website using PHP and MySQL
+- Implementing authentication and session management
+- Applying web security best practices
+- Developing accessible web interfaces
+- Structuring a maintainable project
 
-## Limitations and Future Improvements
+----
 
+## Limitations
 - No payment or checkout system
-- Limited file upload validation
 - No CSRF protection
-- UI/UX improvements possible
+- Limited file upload validation
+- No email verification system
+  
+---
+
+## Future Improvements
+- Security
+- Add CSRF protection
+- Implement password reset system
+- Add email verification
+  
+---
+
+## Features
+- Full checkout and payment system
+- Order history for users
+- Product categories and filtering improvements
+- UI/UX
+- Improve mobile responsiveness
+- Add dark mode
+- Enhance user interface design
 
 ## Author
 
-Arslan Hassan
-
-
+## Arslan Hassan
