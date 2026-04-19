@@ -160,7 +160,7 @@ $products = getProducts($pdo, $search, $min, $max, $sort);
                         <!-- Product image -->
                         <figure>
                             <img src="images/<?= htmlspecialchars($product['image']) ?>"
-                                 alt="<?= htmlspecialchars($product['name']) ?>">
+                                alt="<?= htmlspecialchars($product['name']) ?>">
                         </figure>
 
                         <!-- Product name -->
@@ -211,4 +211,5 @@ $products = getProducts($pdo, $search, $min, $max, $sort);
     <?php include 'footer.php'; ?>
 
 </body>
+
 </html>

@@ -27,8 +27,8 @@ function secureSession()
 function isAdmin()
 {
     return isset($_SESSION['user_id']) &&
-           isset($_SESSION['role']) &&
-           $_SESSION['role'] === 'admin';
+        isset($_SESSION['role']) &&
+        $_SESSION['role'] === 'admin';
 }
 
 
@@ -48,5 +48,3 @@ function protectAdmin()
 startSession();
 secureSession();
 protectAdmin();
-
-?>

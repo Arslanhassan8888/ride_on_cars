@@ -71,7 +71,7 @@ if (!$product) {
             <!-- Product image -->
             <figure class="product-image">
                 <img src="images/<?= htmlspecialchars($product['image']) ?>"
-                     alt="<?= htmlspecialchars($product['name']) ?>">
+                    alt="<?= htmlspecialchars($product['name']) ?>">
             </figure>
 
             <!-- Product information -->
@@ -130,4 +130,5 @@ if (!$product) {
     <?php include 'footer.php'; ?>
 
 </body>
+
 </html>

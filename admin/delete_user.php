@@ -34,5 +34,3 @@ deleteUser($pdo, $id);
 /* Return to user management page */
 header("Location: manage_users.php");
 exit();
-
-?>

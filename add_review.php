@@ -45,7 +45,7 @@ function handleReview($pdo)
 
     /* --VALIDATION-- */
     /* Check for empty fields and valid rating */
-     if ($name == "" || $location == "" || $message == "") {
+    if ($name == "" || $location == "" || $message == "") {
         return ["All fields are required.", ""];
     }/* Validate rating is between 1 and 5 */
     if ($name == "" || $location == "" || $message == "") {

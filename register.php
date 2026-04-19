@@ -10,7 +10,7 @@ $success = "";
 /* Validates registration inputs and returns error message if invalid */
 function validate($name, $email, $password, $confirm)
 {   /* Check for empty fields */
-     if ($name == "" || $email == "" || $password == "" || $confirm == "") {
+    if ($name == "" || $email == "" || $password == "" || $confirm == "") {
         return "All fields are required.";
     }/* Validate email format */
     if ($name == "" || $email == "" || $password == "" || $confirm == "") {
@@ -21,7 +21,7 @@ function validate($name, $email, $password, $confirm)
         return "Invalid email format.";
     }
     /* Validate password length */
-     if (strlen($password) < 6) {
+    if (strlen($password) < 6) {
         return "Password must be at least 6 characters.";
     }/* Validate password confirmation */
     if (strlen($password) < 6) {
@@ -67,7 +67,7 @@ function handleRegister($pdo)
     /* Validate inputs and return error if invalid */
     $error = validate($name, $email, $password, $confirm);
     /* If validation fails, return error message */
-     if ($error != "") {
+    if ($error != "") {
         return ["", ""];
     }/* Create user and return success or error message */
     if ($error != "") {
@@ -144,12 +144,12 @@ list($error, $success) = handleRegister($pdo);
                 <!-- NAME -->
                 <label for="name">Full Name *</label>
                 <input id="name" type="text" name="name"
-                       value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" required>
+                    value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" required>
 
                 <!-- EMAIL -->
                 <label for="email">Email Address *</label>
                 <input id="email" type="email" name="email"
-                       value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
+                    value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
 
                 <!-- PASSWORD -->
                 <label for="password">Password *</label>
@@ -178,4 +178,5 @@ list($error, $success) = handleRegister($pdo);
     <?php include 'footer.php'; ?>
 
 </body>
+
 </html>

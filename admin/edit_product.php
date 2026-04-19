@@ -121,91 +121,91 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 
-<!-- SKIP LINK -->
-<a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- SKIP LINK -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- HEADER -->
-<?php include '../header.php'; ?>
+    <!-- HEADER -->
+    <?php include '../header.php'; ?>
 
-<!-- MAIN -->
-<main id="main-content">
+    <!-- MAIN -->
+    <main id="main-content">
 
-    <!-- ADMIN CONTAINER -->
-    <section class="admin-container">
+        <!-- ADMIN CONTAINER -->
+        <section class="admin-container">
 
-        <!-- HEADER -->
-        <header class="admin-header">
-            <h1>Edit Product</h1>
-            <p>Update product details</p>
-        </header>
+            <!-- HEADER -->
+            <header class="admin-header">
+                <h1>Edit Product</h1>
+                <p>Update product details</p>
+            </header>
 
-        <!-- FORM CONTAINER -->
-        <section class="form-container">
+            <!-- FORM CONTAINER -->
+            <section class="form-container">
 
-            <h2 class="visually-hidden-heading">Edit product form</h2>
+                <h2 class="visually-hidden-heading">Edit product form</h2>
 
-            <!-- FORM -->
-            <form method="POST" enctype="multipart/form-data">
+                <!-- FORM -->
+                <form method="POST" enctype="multipart/form-data">
 
-                <!-- NAME -->
-                <label for="name">Product Name</label>
-                <input id="name" type="text" name="name"
-                       value="<?= htmlspecialchars($product['name']) ?>" required>
+                    <!-- NAME -->
+                    <label for="name">Product Name</label>
+                    <input id="name" type="text" name="name"
+                        value="<?= htmlspecialchars($product['name']) ?>" required>
 
-                <!-- BRAND -->
-                <label for="brand">Brand</label>
-                <input id="brand" type="text" name="brand"
-                       value="<?= htmlspecialchars($product['brand']) ?>" required>
+                    <!-- BRAND -->
+                    <label for="brand">Brand</label>
+                    <input id="brand" type="text" name="brand"
+                        value="<?= htmlspecialchars($product['brand']) ?>" required>
 
-                <!-- PRICE -->
-                <label for="price">Price (£)</label>
-                <input id="price" type="number" step="0.01" name="price"
-                       value="<?= $product['price'] ?>" required>
+                    <!-- PRICE -->
+                    <label for="price">Price (£)</label>
+                    <input id="price" type="number" step="0.01" name="price"
+                        value="<?= $product['price'] ?>" required>
 
-                <!-- AGE RANGE -->
-                <label for="age_range">Age Range</label>
-                <input id="age_range" type="text" name="age_range"
-                       value="<?= htmlspecialchars($product['age_range']) ?>" required>
+                    <!-- AGE RANGE -->
+                    <label for="age_range">Age Range</label>
+                    <input id="age_range" type="text" name="age_range"
+                        value="<?= htmlspecialchars($product['age_range']) ?>" required>
 
-                <!-- IMAGE -->
-                <label for="image">Replace Image</label>
-                <input id="image" type="file" name="image">
+                    <!-- IMAGE -->
+                    <label for="image">Replace Image</label>
+                    <input id="image" type="file" name="image">
 
-                <!-- RATING -->
-                <label for="rating">Rating</label>
-                <input id="rating" type="number" name="rating"
-                       value="<?= $product['rating'] ?>" required>
+                    <!-- RATING -->
+                    <label for="rating">Rating</label>
+                    <input id="rating" type="number" name="rating"
+                        value="<?= $product['rating'] ?>" required>
 
-                <!-- STOCK -->
-                <label for="stock">Stock</label>
-                <input id="stock" type="number" name="stock"
-                       value="<?= $product['stock'] ?>" required>
+                    <!-- STOCK -->
+                    <label for="stock">Stock</label>
+                    <input id="stock" type="number" name="stock"
+                        value="<?= $product['stock'] ?>" required>
 
-                <!-- SHORT DESCRIPTION -->
-                <label for="description">Short Description</label>
-                <textarea id="description" name="description" required>
+                    <!-- SHORT DESCRIPTION -->
+                    <label for="description">Short Description</label>
+                    <textarea id="description" name="description" required>
 <?= htmlspecialchars($product['description']) ?>
 </textarea>
 
-                <!-- LONG DESCRIPTION -->
-                <label for="long_description">Long Description</label>
-                <textarea id="long_description" name="long_description" required>
+                    <!-- LONG DESCRIPTION -->
+                    <label for="long_description">Long Description</label>
+                    <textarea id="long_description" name="long_description" required>
 <?= htmlspecialchars($product['long_description']) ?>
 </textarea>
 
-                <!-- SUBMIT -->
-                <button type="submit" class="btn-add">Update Product</button>
+                    <!-- SUBMIT -->
+                    <button type="submit" class="btn-add">Update Product</button>
 
-            </form>
+                </form>
+
+            </section>
 
         </section>
 
-    </section>
+    </main>
 
-</main>
-
-<!-- FOOTER -->
-<?php include '../footer.php'; ?>
+    <!-- FOOTER -->
+    <?php include '../footer.php'; ?>
 
 </body>
 

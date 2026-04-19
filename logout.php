@@ -23,4 +23,3 @@ function logout()
 
 /* --RUN-- */
 logout();
-?>

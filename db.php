@@ -12,5 +12,3 @@ $pdo = new PDO(
 /* --ERROR MODE-- */
 /* Enable exception handling for database errors */
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-?>

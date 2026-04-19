@@ -147,48 +147,48 @@ $finalTotal = $total + $shipping;
 
                 <?php else: ?>
 
-                <!-- PRODUCT LOOP -->
-                <?php foreach ($cartItems as $item): ?>
+                    <!-- PRODUCT LOOP -->
+                    <?php foreach ($cartItems as $item): ?>
 
-                <?php
-                $qty = $_SESSION['cart'][$item['id']];
-                $subtotal = $item['price'] * $qty;
-                ?>
+                        <?php
+                        $qty = $_SESSION['cart'][$item['id']];
+                        $subtotal = $item['price'] * $qty;
+                        ?>
 
-                <article class="cart-row">
+                        <article class="cart-row">
 
-                    <!-- IMAGE -->
-                    <figure>
-                        <img src="images/<?= htmlspecialchars($item['image']) ?>"
-                             alt="<?= htmlspecialchars($item['name']) ?>">
-                    </figure>
+                            <!-- IMAGE -->
+                            <figure>
+                                <img src="images/<?= htmlspecialchars($item['image']) ?>"
+                                    alt="<?= htmlspecialchars($item['name']) ?>">
+                            </figure>
 
-                    <!-- NAME -->
-                    <h2><?= htmlspecialchars($item['name']) ?></h2>
+                            <!-- NAME -->
+                            <h2><?= htmlspecialchars($item['name']) ?></h2>
 
-                    <!-- PRICE -->
-                    <p class="price">£<?= number_format($item['price'], 2) ?></p>
+                            <!-- PRICE -->
+                            <p class="price">£<?= number_format($item['price'], 2) ?></p>
 
-                    <!-- QUANTITY -->
-                    <section class="qty">
-                        <h3 class="visually-hidden-heading">Quantity controls</h3>
+                            <!-- QUANTITY -->
+                            <section class="qty">
+                                <h3 class="visually-hidden-heading">Quantity controls</h3>
 
-                        <a href="cart.php?action=decrease&id=<?= $item['id'] ?>">−</a>
-                        <span><?= $qty ?></span>
-                        <a href="cart.php?action=increase&id=<?= $item['id'] ?>">+</a>
-                    </section>
+                                <a href="cart.php?action=decrease&id=<?= $item['id'] ?>">−</a>
+                                <span><?= $qty ?></span>
+                                <a href="cart.php?action=increase&id=<?= $item['id'] ?>">+</a>
+                            </section>
 
-                    <!-- SUBTOTAL -->
-                    <p class="subtotal">£<?= number_format($subtotal, 2) ?></p>
+                            <!-- SUBTOTAL -->
+                            <p class="subtotal">£<?= number_format($subtotal, 2) ?></p>
 
-                    <!-- DELETE -->
-                    <a href="cart.php?action=remove&id=<?= $item['id'] ?>" class="btn-delete">
-                        Delete
-                    </a>
+                            <!-- DELETE -->
+                            <a href="cart.php?action=remove&id=<?= $item['id'] ?>" class="btn-delete">
+                                Delete
+                            </a>
 
-                </article>
+                        </article>
 
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
                 <?php endif; ?>
 
             </section>
@@ -233,4 +233,5 @@ $finalTotal = $total + $shipping;
     <?php include 'footer.php'; ?>
 
 </body>
+
 </html>

@@ -34,5 +34,3 @@ deleteProduct($pdo, $id);
 /* Return to dashboard */
 header("Location: dashboard.php");
 exit();
-
-?>

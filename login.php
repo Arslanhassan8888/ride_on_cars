@@ -174,4 +174,5 @@ $error = handleLogin($pdo);
     <?php include 'footer.php'; ?>
 
 </body>
+
 </html>

@@ -105,86 +105,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 
-<!-- SKIP LINK -->
-<a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- SKIP LINK -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- HEADER -->
-<?php include '../header.php'; ?>
+    <!-- HEADER -->
+    <?php include '../header.php'; ?>
 
-<!-- MAIN -->
-<main id="main-content">
+    <!-- MAIN -->
+    <main id="main-content">
 
-    <!-- ADMIN CONTAINER -->
-    <section class="admin-container">
+        <!-- ADMIN CONTAINER -->
+        <section class="admin-container">
 
-        <!-- HEADER -->
-        <header class="admin-header">
-            <h1>Add Product</h1>
-            <p>Create a new product</p>
-        </header>
+            <!-- HEADER -->
+            <header class="admin-header">
+                <h1>Add Product</h1>
+                <p>Create a new product</p>
+            </header>
 
-        <!-- FORM CONTAINER -->
-        <section class="form-container">
+            <!-- FORM CONTAINER -->
+            <section class="form-container">
 
-            <h2 class="visually-hidden-heading">Add product form</h2>
+                <h2 class="visually-hidden-heading">Add product form</h2>
 
-            <!-- FORM -->
-            <form method="POST" enctype="multipart/form-data">
+                <!-- FORM -->
+                <form method="POST" enctype="multipart/form-data">
 
-                <!-- ERROR -->
-                <?php if ($error): ?>
-                    <p class="error"><?= htmlspecialchars($error) ?></p>
-                <?php endif; ?>
+                    <!-- ERROR -->
+                    <?php if ($error): ?>
+                        <p class="error"><?= htmlspecialchars($error) ?></p>
+                    <?php endif; ?>
 
-                <!-- NAME -->
-                <label for="name">Product Name</label>
-                <input id="name" type="text" name="name" required>
+                    <!-- NAME -->
+                    <label for="name">Product Name</label>
+                    <input id="name" type="text" name="name" required>
 
-                <!-- BRAND -->
-                <label for="brand">Brand</label>
-                <input id="brand" type="text" name="brand" required>
+                    <!-- BRAND -->
+                    <label for="brand">Brand</label>
+                    <input id="brand" type="text" name="brand" required>
 
-                <!-- PRICE -->
-                <label for="price">Price (£)</label>
-                <input id="price" type="number" step="0.01" name="price" required>
+                    <!-- PRICE -->
+                    <label for="price">Price (£)</label>
+                    <input id="price" type="number" step="0.01" name="price" required>
 
-                <!-- AGE RANGE -->
-                <label for="age_range">Age Range</label>
-                <input id="age_range" type="text" name="age_range" required>
+                    <!-- AGE RANGE -->
+                    <label for="age_range">Age Range</label>
+                    <input id="age_range" type="text" name="age_range" required>
 
-                <!-- IMAGE -->
-                <label for="image">Upload Image</label>
-                <input id="image" type="file" name="image">
+                    <!-- IMAGE -->
+                    <label for="image">Upload Image</label>
+                    <input id="image" type="file" name="image">
 
-                <!-- RATING -->
-                <label for="rating">Rating</label>
-                <input id="rating" type="number" name="rating" required>
+                    <!-- RATING -->
+                    <label for="rating">Rating</label>
+                    <input id="rating" type="number" name="rating" required>
 
-                <!-- STOCK -->
-                <label for="stock">Stock</label>
-                <input id="stock" type="number" name="stock" required>
+                    <!-- STOCK -->
+                    <label for="stock">Stock</label>
+                    <input id="stock" type="number" name="stock" required>
 
-                <!-- SHORT DESCRIPTION -->
-                <label for="description">Short Description</label>
-                <textarea id="description" name="description" required></textarea>
+                    <!-- SHORT DESCRIPTION -->
+                    <label for="description">Short Description</label>
+                    <textarea id="description" name="description" required></textarea>
 
-                <!-- LONG DESCRIPTION -->
-                <label for="long_description">Long Description</label>
-                <textarea id="long_description" name="long_description" required></textarea>
+                    <!-- LONG DESCRIPTION -->
+                    <label for="long_description">Long Description</label>
+                    <textarea id="long_description" name="long_description" required></textarea>
 
-                <!-- SUBMIT -->
-                <button type="submit">Add Product</button>
+                    <!-- SUBMIT -->
+                    <button type="submit">Add Product</button>
 
-            </form>
+                </form>
+
+            </section>
 
         </section>
 
-    </section>
+    </main>
 
-</main>
-
-<!-- FOOTER -->
-<?php include '../footer.php'; ?>
+    <!-- FOOTER -->
+    <?php include '../footer.php'; ?>
 
 </body>
+
 </html>
