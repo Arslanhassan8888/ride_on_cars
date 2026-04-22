@@ -1,167 +1,188 @@
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+/* --contact.css-- */
+/* --HERO-- */
+.contact-hero {
+    /* Layout */
+    padding: 60px 20px;
+    margin-bottom: 40px;
+
+    /* Appearance */
+    background: linear-gradient(to right, #2f5fd0, #2b4a9e);
+    color: white;
+    text-align: center;
+}
+/* Hero heading */
+.contact-hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+/* Hero subtext */
+.contact-hero p {
+    font-size: 18px;
 }
 
-/* --STATE-- */
-$success = "";
-$error = "";
 
-/* --HANDLE FORM-- */
-/* Process form submission and validate inputs */
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+/* --LAYOUT-- */
+.contact-layout {
+    display: flex;
+    gap: 40px;
+    padding: 40px;
+}
 
-    /* INPUT */
-    $name = htmlspecialchars(trim($_POST['name']));
-    $email = htmlspecialchars(trim($_POST['email']));
-    $subject = htmlspecialchars(trim($_POST['subject']));
-    $message = htmlspecialchars(trim($_POST['message']));
 
-    /* VALIDATION */
-    /* Check for empty fields */
-    if ($name && $email && $subject && $message) {
+/* --FORM SECTION-- */
+.contact-form {
+    flex: 2;
+}
 
-        // future: insert into database
-        /* For now, just set success message */
-        $success = "Your message has been sent successfully.";
-    } else {
-        $error = "Please fill all fields.";
+/* FORM */
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* LABEL */
+.contact-form label {
+    font-weight: bold;
+}
+
+/* INPUTS */
+.contact-form input,
+.contact-form textarea {
+    padding: 12px;
+
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+/* TEXTAREA */
+.contact-form textarea {
+    min-height: 120px;
+    resize: none;
+}
+
+/* BUTTON */
+.contact-form button {
+    margin-top: 10px;
+    padding: 14px;
+
+    background: linear-gradient(to right, #2f5fd0, #2b4a9e);
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.contact-form button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+
+/* --INFO SECTION-- */
+/* Container for the contact info section */
+.contact-info {
+    flex: 1;
+}
+/* Contact info header */
+.contact-info header {
+    margin-bottom: 20px;
+}
+/* Contact info heading */
+.contact-info header p {
+    color: #666;
+}
+
+
+/* --GRID-- */
+.info-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+
+/* --CARD-- */
+/* Same style as about page */
+.card {
+    /* Layout */
+    width: 180px;
+    padding: 20px;
+
+    /* Appearance */
+    background: white;
+    border-radius: 12px;
+    border-top: 4px solid #2563eb;
+
+    /* Effects */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+/* Card hover effect */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+/* Card title */
+.card h3 {
+    margin-bottom: 10px;
+    color: #1e3a8a;
+}
+/* Card text */
+.card p {
+    font-size: 14px;
+    color: #555;
+}
+
+
+/* --SUCCESS MESSAGE-- */
+.success {
+    background: #d1fae5;
+    color: #065f46;
+    padding: 12px;
+    border-radius: 8px;
+
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* --ERROR MESSAGE-- */
+.error {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 12px;
+    border-radius: 8px;
+
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* --ACCESSIBILITY-- */
+.visually-hidden-heading {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+/* --RESPONSIVE-- */
+@media (max-width: 768px) {
+
+    .contact-layout {
+        flex-direction: column;
+    }
+
+    .info-grid {
+        justify-content: center;
     }
 }
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <!-- META -->
-    <meta charset="UTF-8">
-    <title>Contact</title>
-
-    <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="images/car_logo.png">
-
-    <!-- STYLES -->
-    <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>">
-    <link rel="stylesheet" href="css/contact.css?v=<?php echo filemtime('css/contact.css'); ?>">
-</head>
-
-<body>
-
-    <!-- SKIP LINK -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <!-- HEADER -->
-    <?php include 'header.php'; ?>
-
-    <!-- MAIN -->
-    <main id="main-content" tabindex="-1">
-
-        <!-- HERO -->
-        <section class="contact-hero">
-            <h1>Contact Us</h1>
-            <p>
-                Have questions? We’d love to hear from you.
-                Send us a message and we’ll respond as soon as possible.
-            </p>
-        </section>
-
-        <!-- CONTACT LAYOUT -->
-        <section class="contact-layout">
-            <h2 class="visually-hidden-heading">Contact page content</h2>
-
-            <!-- FORM SECTION -->
-            <section class="contact-form">
-
-                <header>
-                    <h2 id="contact-form-title">Send us a Message</h2>
-                </header>
-
-                <form method="POST" aria-labelledby="contact-form-title">
-
-                    <!-- SUCCESS -->
-                    <?php if ($success): ?>
-                        <p class="success" aria-live="polite"><?= htmlspecialchars($success) ?></p>
-                    <?php endif; ?>
-
-                    <!-- ERROR -->
-                    <?php if ($error): ?>
-                        <p class="error" role="alert"><?= htmlspecialchars($error) ?></p>
-                    <?php endif; ?>
-
-                    <!-- NAME -->
-                    <label for="name">Full Name *</label>
-                    <input id="name" type="text" name="name" required>
-
-                    <!-- EMAIL -->
-                    <label for="email">Email *</label>
-                    <input id="email" type="email" name="email" required>
-
-                    <!-- SUBJECT -->
-                    <label for="subject">Subject *</label>
-                    <input id="subject" type="text" name="subject" required>
-
-                    <!-- MESSAGE -->
-                    <label for="message">Message *</label>
-                    <textarea id="message" name="message" required></textarea>
-
-                    <!-- SUBMIT -->
-                    <button type="submit">Send Message</button>
-
-                </form>
-
-            </section>
-
-            <!-- INFO SECTION -->
-            <section class="contact-info">
-
-                <header>
-                    <h2>Get in Touch</h2>
-                    <p>Our team is here to help you anytime.</p>
-                </header>
-
-                <section class="info-grid">
-                    <h3 class="visually-hidden-heading">Contact information cards</h3>
-
-                    <!-- EMAIL -->
-                    <article class="card">
-                        <h3>Email</h3>
-                        <p>support@rideonkids.com</p>
-                        <p>sales@rideonkids.com</p>
-                    </article>
-
-                    <!-- PHONE -->
-                    <article class="card">
-                        <h3>Phone</h3>
-                        <p>+44 161 123 4567</p>
-                        <p>+44 074 5466 8005</p>
-                    </article>
-
-                    <!-- ADDRESS -->
-                    <article class="card">
-                        <h3>Address</h3>
-                        <p>45 Market Street</p>
-                        <p>Manchester, M1 1AA</p>
-                    </article>
-
-                    <!-- HOURS -->
-                    <article class="card">
-                        <h3>Hours</h3>
-                        <p>Mon - Fri: 9am - 6pm</p>
-                        <p>Sat: 10am - 4pm</p>
-                    </article>
-
-                </section>
-
-            </section>
-
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <?php include 'footer.php'; ?>
-
-</body>
-
-</html>
